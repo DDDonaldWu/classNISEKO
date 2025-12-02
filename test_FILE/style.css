@@ -1,10 +1,10 @@
 :root {
-    --bg: #0b0b0b;
-    --surface: #fff;
-    --accent: #8b0000;      /* 調整點：可改紅色 */
+    --bg: #0b0b0b;        /* 黑色背景 */
+    --surface: #fff;       /* 白色文字 / 元素 */
+    --accent: #8b0000;     /* 紅色 */
     --muted: #7a7a7a;
     --radius: 12px;
-    --header-h: 64px;       /* 調整點：header 高度 */
+    --header-h: 64px;
 }
 
 /* Reset & Base */
@@ -15,15 +15,15 @@
 html, body {
     height: 100%;
     margin: 0;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans TC', sans-serif;
     background: var(--surface);
     color: #111;
     scroll-behavior: smooth;
 }
 
 a {
-    text-decoration: none;
     color: inherit;
+    text-decoration: none;
 }
 
 main {
@@ -36,29 +36,38 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    height: var(--header-h);     /* 調整點 */
+    height: var(--header-h);
     display: flex;
     align-items: center;
     padding: 0 28px;
     background: linear-gradient(90deg, rgba(11,11,11,0.95), rgba(11,11,11,0.95));
     color: var(--surface);
     z-index: 1200;
+    transition: backdrop-filter 0.3s ease, background 0.3s ease, box-shadow 0.25s;
+}
+
+header.scrolled {
+    backdrop-filter: blur(6px);
+    background: linear-gradient(90deg, rgba(11,11,11,0.85), rgba(11,11,11,0.85));
+    box-shadow: 0 6px 24px rgba(0,0,0,0.35);
 }
 
 .logo {
     font-weight: 700;
+    letter-spacing: 0.06em;
     font-size: 20px;
 }
 
 .nav-links {
     display: flex;
-    gap: 28px;                  /* 調整點：連結間距 */
+    gap: 28px;
+    align-items: center;
     margin-left: auto;
 }
 
 .nav-links a {
     font-weight: 600;
-    opacity: .95;
+    opacity: 0.95;
     color: var(--surface);
 }
 
@@ -69,13 +78,13 @@ header {
 /* Hamburger */
 .hamburger {
     position: absolute;
-    right: 0;                     /* 調整點：貼右邊 */
+    right: 0;               /* 貼右側 */
     top: 50%;
     transform: translateY(-50%);
-    display: none;
+    display: flex;
     flex-direction: column;
-    width: 44px;                  /* 調整點：漢堡容器寬度 */
-    height: 24px;                 /* 調整點：漢堡容器高度 */
+    width: 44px;
+    height: 24px;
     justify-content: space-between;
     cursor: pointer;
     z-index: 1100;
@@ -83,24 +92,22 @@ header {
 
 .hamburger span {
     display: block;
-    height: 3px;                  /* 調整點：橫線高度 */
-    width: 35px;                  /* 調整點：橫線長度 */
-    background: #fff;             /* 調整點：X 線顏色 */
+    height: 3px;
+    width: 35px;            /* 橫線長度 */
+    background: #fff;        /* X 白色 */
     border-radius: 3px;
     transition: all 0.3s ease;
 }
 
 .hamburger.active span:nth-child(1) {
-    transform: translateY(10px) rotate(45deg); /* 調整點：X 線斜度與位移 */
+    transform: translateY(10px) rotate(45deg);
     background: #fff;
 }
-
 .hamburger.active span:nth-child(2) {
     opacity: 0;
 }
-
 .hamburger.active span:nth-child(3) {
-    transform: translateY(-10px) rotate(-45deg); /* 調整點：X 線斜度與位移 */
+    transform: translateY(-10px) rotate(-45deg);
     background: #fff;
 }
 
@@ -109,7 +116,7 @@ header {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 70%;                   /* 調整點：選單寬度 */
+    width: 70%;
     max-width: 320px;
     height: 100vh;
     background: var(--bg);
@@ -130,7 +137,7 @@ header {
     right: 0;
 }
 
-/* Hero */
+/* Hero Section */
 .hero {
     margin-top: var(--header-h);
     height: calc(100vh - var(--header-h));
@@ -153,11 +160,25 @@ header {
 
 .hero-buttons {
     display: flex;
-    gap: 14px;                     /* 調整點：按鈕間距 */
+    gap: 14px;
     justify-content: center;
     flex-wrap: wrap;
     position: relative;
-    z-index: 5;                     /* 調整點：避免被背景遮蓋 */
+    z-index: 5;
+}
+
+.hero h1 {
+    font-size: 48px;
+    font-weight: 800;
+    margin: 0 0 10px;
+    letter-spacing: 0.04em;
+    text-shadow: 0 6px 30px rgba(0,0,0,0.6);
+}
+
+.hero p {
+    font-size: 18px;
+    margin: 0 0 22px;
+    color: rgba(255,255,255,0.9);
 }
 
 /* Buttons */
@@ -166,9 +187,9 @@ header {
     padding: 12px 26px;
     border-radius: 10px;
     font-weight: 700;
-    cursor: pointer;
     text-decoration: none;
-    transition: transform .18s ease, box-shadow .18s;
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s;
 }
 
 .btn-primary {
@@ -183,17 +204,12 @@ header {
     color: var(--surface);
 }
 
-.btn:hover {
-    transform: translateY(-3px);
-}
-
-.btn-outline:hover {
-    background: rgba(255,255,255,0.06);
-}
+.btn:hover { transform: translateY(-3px); }
+.btn-outline:hover { background: rgba(255,255,255,0.06); }
 
 /* Sections */
 section {
-    padding: 72px 20px;             /* 調整點：區塊上下距 */
+    padding: 72px 20px;
 }
 
 .container {
@@ -201,6 +217,7 @@ section {
     margin: 0 auto;
 }
 
+/* Courses */
 .course-cards {
     display: flex;
     gap: 20px;
@@ -213,7 +230,7 @@ section {
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 10px 30px rgba(10,10,10,0.06);
-    transition: transform .28s, box-shadow .28s;
+    transition: transform 0.28s, box-shadow 0.28s;
 }
 
 .card:hover {
@@ -221,20 +238,23 @@ section {
     box-shadow: 0 20px 50px rgba(10,10,10,0.12);
 }
 
+/* Coaches */
 .coaches {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
 }
 
+/* Pricing */
 .price-box {
-    background: linear-gradient(180deg,#fff,#fbfbfb);
+    background: linear-gradient(180deg, #fff, #fbfbfb);
     padding: 18px;
     border-radius: 12px;
     border: 1px solid #eee;
     display: inline-block;
 }
 
+/* CTA */
 .cta {
     background: var(--bg);
     color: var(--surface);
@@ -242,6 +262,7 @@ section {
     border-top: 6px solid var(--accent);
 }
 
+/* Form */
 .reservation .card-form {
     background: var(--surface);
     padding: 22px;
@@ -269,14 +290,8 @@ section {
     margin-bottom: 10px;
 }
 
-.two-col {
-    display: flex;
-    gap: 12px;
-}
-
-.two-col .col {
-    flex: 1;
-}
+.two-col { display: flex; gap: 12px; }
+.two-col .col { flex: 1; }
 
 .btn-submit {
     padding: 14px 18px;
@@ -289,55 +304,33 @@ section {
     font-size: 18px;
 }
 
-.thankyou {
-    display: none;
-    padding: 36px;
+.thankyou { display: none; padding: 36px; text-align: center; color: var(--bg); }
+
+/* Footer */
+footer {
+    background: #080808;
+    color: rgba(255,255,255,0.9);
+    padding: 30px 20px;
     text-align: center;
-    color: var(--bg);
 }
 
 /* Fade-up animation */
 .fade-up {
     opacity: 0;
     transform: translateY(18px);
-    transition: opacity .6s ease, transform .6s ease;
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
-
 .fade-up.in {
     opacity: 1;
     transform: none;
 }
 
-/* Footer */
-footer {
-    background: #080808;
-    color: rgba(255,255,255,.9);
-    padding: 30px 20px;
-    text-align: center;
-}
-
 /* Responsive */
 @media(max-width:900px) {
-    .course-cards,
-    .coaches {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .nav-links {
-        display: none;
-    }
-
-    .hamburger {
-        display: flex;
-    }
-
-    .hero h1 {
-        font-size: 36px;            /* 調整點：HERO 字體大小 */
-    }
-
-    .hero-buttons {
-        flex-direction: column;      /* 調整點：按鈕垂直排列 */
-        gap: 12px;
-    }
+    .course-cards, .coaches { flex-direction: column; align-items: center; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    header { padding: 0 16px; }
+    .hero h1 { font-size: 36px; }
+    .hero-buttons { flex-direction: column; gap: 12px; }
 }

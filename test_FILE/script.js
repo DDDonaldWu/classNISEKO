@@ -1,7 +1,6 @@
-/* Hamburger & Mobile nav */
+/* Hamburger */
 const hamburger = document.querySelector('.hamburger');
 const mobileNav = document.querySelector('.mobile-nav');
-
 hamburger.addEventListener('click', () => {
   hamburger.classList.toggle('active');
   mobileNav.classList.toggle('active');
@@ -9,8 +8,8 @@ hamburger.addEventListener('click', () => {
 });
 
 /* Close mobile when clicking link */
-mobileNav.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => {
+mobileNav.querySelectorAll('a').forEach(a=>{
+  a.addEventListener('click', ()=>{
     mobileNav.classList.remove('active');
     hamburger.classList.remove('active');
   });
@@ -18,22 +17,9 @@ mobileNav.querySelectorAll('a').forEach(a => {
 
 /* Header scroll effect */
 const header = document.querySelector('header');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 30) header.classList.add('scrolled');
-  else header.classList.remove('scrolled');
+window.addEventListener('scroll', ()=> {
+  if(window.scrollY > 30) header.classList.add('scrolled'); else header.classList.remove('scrolled');
 });
-
-/* Fade-up on scroll */
-const faders = document.querySelectorAll('.fade-up');
-const appearOptions = { threshold: 0.12, rootMargin: "0px 0px -60px 0px" };
-const appearOnScroll = new IntersectionObserver(function(entries, observer){
-  entries.forEach(entry => {
-    if(!entry.isIntersecting) return;
-    entry.target.classList.add('in');
-    observer.unobserve(entry.target);
-  });
-}, appearOptions);
-faders.forEach(f => appearOnScroll.observe(f));
 
 /* Form handling */
 const form = document.getElementById('reservationForm');
@@ -57,28 +43,11 @@ form.addEventListener('submit', function(e){
     alert('請完整填寫所有必填欄位');
     return;
   }
-  loading.style.display = 'inline-block';
-  setTimeout(() => {
-    loading.style.display = 'none';
-    form.style.display = 'none';
-    thankyou.style.display = 'block';
-    console.log('Reservation data (client only):', data);
-  }, 900);
-});
-
-/* Smooth scroll */
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e){
-    const href = this.getAttribute('href');
-    if(!href || href === '#') return;
-    const target = document.querySelector(href);
-    if(target){
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      if(mobileNav.classList.contains('active')){
-        mobileNav.classList.remove('active');
-        hamburger.classList.remove('active');
-      }
-    }
-  });
+  loading.style.display='inline-block';
+  setTimeout(()=> {
+    loading.style.display='none';
+    form.style.display='none';
+    thankyou.style.display='block';
+    console.log('Reservation data:', data);
+  },900);
 });
