@@ -1,88 +1,56 @@
-// 載入 main.html
-fetch('main.html')
-  .then(response => response.text())
-  .then(html => {
-    document.getElementById('main-container').innerHTML = html;
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CLASS NISEKO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header id="siteHeader">
+    <div class="logo">CLASS NISEKO</div>
+    <div class="nav-wrap">
+      <nav class="nav-links">
+        <a href="#hero">首頁</a>
+        <a href="#courses">課程</a>
+        <a href="#about">關於</a>
+        <a href="#service">授課區域</a>
+        <a href="#coaches">教練</a>
+        <a href="#pricing">價格</a>
+        <a href="#faq">FAQ</a>
+        <a href="#reservation">預約</a>
+      </nav>
+      <div class="hamburger" aria-label="menu" role="button" tabindex="0">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </header>
 
-    // --- 重要：載入後要重新初始化事件 ---
-    // Hamburger & mobile nav
-    const hamburger = document.querySelector('.hamburger');
-    const mobileNav = document.getElementById('mobileNav');
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      mobileNav.classList.toggle('active');
-      mobileNav.setAttribute('aria-hidden', mobileNav.classList.contains('active') ? 'false' : 'true');
-    });
-    mobileNav.querySelectorAll('a').forEach(a=>{
-      a.addEventListener('click', ()=> {
-        mobileNav.classList.remove('active');
-        hamburger.classList.remove('active');
-      });
-    });
+  <!-- Mobile slide nav -->
+  <nav class="mobile-nav" id="mobileNav" aria-hidden="true">
+    <a href="#hero">首頁</a>
+    <a href="#courses">課程</a>
+    <a href="#about">關於</a>
+    <a href="#service">授課區域</a>
+    <a href="#coaches">教練</a>
+    <a href="#pricing">價格</a>
+    <a href="#faq">FAQ</a>
+    <a href="#reservation">預約</a>
+  </nav>
 
-    // Smooth scroll & close mobile
-    document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
-      anchor.addEventListener('click',function(e){
-        const href = this.getAttribute('href');
-        if(!href || href === '#') return;
-        const target = document.querySelector(href);
-        if(target){
-          e.preventDefault();
-          target.scrollIntoView({behavior:'smooth', block:'start'});
-          if(mobileNav.classList.contains('active')){
-            mobileNav.classList.remove('active');
-            hamburger.classList.remove('active');
-          }
-        }
-      });
-    });
+  <!-- main 內容 -->
+  <div id="main-container"></div>
 
-    // Header scroll effect
-    const header = document.getElementById('siteHeader');
-    window.addEventListener('scroll', ()=> {
-      if(window.scrollY > 30) header.classList.add('scrolled');
-      else header.classList.remove('scrolled');
-    });
+  <footer>
+    <div style="max-width:1100px;margin:0 auto;padding:8px 18px;color:rgba(255,255,255,0.9)">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+        <div>© Class NISEKO 2025</div>
+        <div style="color:rgba(255,255,255,0.6)">Contact | Instagram | LINE</div>
+      </div>
+    </div>
+  </footer>
 
-    // Fade-in animation
-    const faders = document.querySelectorAll('.fade-up');
-    const appearOptions = {threshold: 0.12, rootMargin: "0px 0px -60px 0px"};
-    const appearOnScroll = new IntersectionObserver(function(entries, observer){
-      entries.forEach(entry=>{
-        if(!entry.isIntersecting) return;
-        entry.target.classList.add('in');
-        observer.unobserve(entry.target);
-      });
-    }, appearOptions);
-    faders.forEach(f => appearOnScroll.observe(f));
-
-    // Form handling
-    const form = document.getElementById('reservationForm');
-    const thankyou = document.getElementById('thankyou');
-    const loading = document.getElementById('loading');
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-      const data = {
-        name: document.getElementById('r_name').value.trim(),
-        email: document.getElementById('r_email').value.trim(),
-        board: document.getElementById('r_board').value,
-        resort: document.getElementById('r_resort').value,
-        people: document.getElementById('r_people').value,
-        startDate: document.getElementById('r_start').value,
-        contactMethod: document.getElementById('r_contactMethod').value,
-        contactID: document.getElementById('r_contactID').value.trim(),
-        remarks: document.getElementById('r_remarks').value.trim()
-      };
-      if(!data.name || !data.email || !data.board || !data.resort || !data.people || !data.startDate || !data.contactMethod || !data.contactID){
-        alert('請完整填寫所有必填欄位');
-        return;
-      }
-      loading.style.display = 'inline-block';
-      setTimeout(()=> {
-        loading.style.display = 'none';
-        form.style.display = 'none';
-        thankyou.style.display = 'block';
-        console.log('Reservation data (client only):', data);
-      }, 900);
-    });
-  });
+  <script src="script.js"></script>
+</body>
+</html>
