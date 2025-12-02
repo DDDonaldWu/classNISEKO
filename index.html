@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CLASS NISEKO</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0b0b;            /* 黑 */
+    --surface:#ffffff;       /* 白 */
+    --accent:#c41e3a;        /* 紅（高級感） */
+    --muted:#7a7a7a;
+    --radius:12px;
+    --header-h:64px;
+  }
+
+  /* Reset & base */
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Noto Sans TC',sans-serif;background:var(--surface);color:#111;scroll-behavior:smooth}
+  a{color:inherit}
+  main{overflow-x:hidden}
+
+  /* Header */
+  header{
+    position:fixed;left:0;top:0;width:100%;height:var(--header-h);
+    display:flex;align-items:center;padding:0 28px;
+    background:linear-gradient(90deg, rgba(11,11,11,0.95), rgba(11,11,11,0.95));
+    color:var(--surface);z-index:1200;transition:backdrop-filter .3s ease, background .3s ease, box-shadow .25s;
+  }
+  header.scrolled{ backdrop-filter: blur(6px); background: linear-gradient(90deg, rgba(11,11,11,0.85), rgba(11,11,11,0.85)); box-shadow:0 6px 24px rgba(0,0,0,0.35) }
+
+  .logo{font-weight:700;letter-spacing:0.06em;font-size:20px}
+  .nav-wrap{margin-left:auto;display:flex;align-items:center;gap:20px}
+  nav.nav-links{display:flex;gap:28px;align-items:center}
+  nav.nav-links a{color:var(--surface);text-decoration:none;font-weight:600;opacity:.95}
+  nav.nav-links a:hover{color:var(--accent)}
+
+  /* Hamburger */
+  .hamburger{display:none;flex-direction:column;width:44px;height:26px;justify-content:space-between;cursor:pointer;margin-left:12px}
+  .hamburger span{display:block;height:3px;background:var(--surface);border-radius:3px;transition:all .28s ease}
+  .hamburger.active span:nth-child(1){transform:translateY(10px) rotate(45deg);background:var(--accent)}
+  .hamburger.active span:nth-child(2){opacity:0}
+  .hamburger.active span:nth-child(3){transform:translateY(-10px) rotate(-45deg);background:var(--accent)}
+
+  /* Mobile slide menu */
+  .mobile-nav{position:fixed;right:-100%;top:0;height:100vh;width:78%;max-width:320px;background:var(--bg);color:var(--surface);padding:84px 20px;display:flex;flex-direction:column;gap:18px;z-index:1150;transition:right .35s ease}
+  .mobile-nav a{color:var(--surface);text-decoration:none;font-size:18px}
+  .mobile-nav.active{right:0}
+
+  /* Hero */
+  .hero{position:relative;height:calc(100vh - var(--header-h));margin-top:var(--header-h);display:flex;align-items:center;justify-content:center;text-align:center;background-image:linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,.48)),url('https://images.unsplash.com/photo-1674297026373-6e2b74da47b6?fm=jpg&q=80&w=2400');background-size:cover;background-position:center}
+  .hero .inner{z-index:5;max-width:980px;padding:28px}
+  .hero h1{color:var(--surface);font-size:48px;margin:0 0 10px;font-weight:800;letter-spacing:0.04em;text-shadow:0 6px 30px rgba(0,0,0,0.6)}
+  .hero p{color:rgba(255,255,255,0.9);margin:0 0 22px;font-size:18px}
+  .hero .hero-buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-block;padding:12px 26px;border-radius:10px;font-weight:700;text-decoration:none;cursor:pointer;transition:transform .18s ease, box-shadow .18s}
+  .btn-primary{background:var(--accent);color:var(--surface);box-shadow:0 8px 30px rgba(196,30,58,0.12)}
+  .btn-outline{background:transparent;border:2px solid rgba(255,255,255,0.95);color:var(--surface)}
+  .btn:hover{transform:translateY(-3px)}
+  .btn-outline:hover{background:rgba(255,255,255,0.06)}
+
+  /* Sections layout */
+  section{padding:72px 20px}
+  .container{max-width:1100px;margin:0 auto}
+
+  /* Courses */
+  .courses h2{font-size:28px;margin-bottom:18px;color:#111}
+  .course-cards{display:flex;gap:20px;flex-wrap:wrap}
+  .card{flex:1 1 300px;background:var(--surface);border-radius:12px;padding:20px;box-shadow:0 10px 30px rgba(10,10,10,0.06);transition:transform .28s, box-shadow .28s}
+  .card:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(10,10,10,0.12)}
+  .card h3{margin:0 0 8px;color:var(--bg)}
+  .card p{margin:0 0 12px;color:var(--muted)}
+  .card ul{margin:0;padding-left:18px;color:#333}
+
+  /* About */
+  .about p{color:#222;line-height:1.6}
+
+  /* Service area (styled list) */
+  .service-list{display:flex;flex-wrap:wrap;gap:12px}
+  .service-item{background:linear-gradient(180deg,#fff,#fafafa);padding:12px 16px;border-radius:10px;border:1px solid #eee;color:#111;box-shadow:0 6px 20px rgba(0,0,0,0.03)}
+
+  /* Coaches */
+  .coaches{display:flex;gap:16px;flex-wrap:wrap}
+  .coach{background:var(--surface);padding:14px;border-radius:12px;flex:1 1 240px;box-shadow:0 8px 24px rgba(0,0,0,0.06)}
+  .coach h4{margin:0 0 6px}
+
+  /* Pricing */
+  .price-box{background:linear-gradient(180deg,#fff,#fbfbfb);padding:18px;border-radius:12px;border:1px solid #eee;display:inline-block}
+
+  /* FAQ */
+  .faq-item{margin-bottom:12px}
+  .faq-item summary{cursor:pointer;font-weight:600;padding:10px 12px;border-radius:8px;background:#fff;border:1px solid #eee}
+  .faq-item p{margin:8px 12px;color:#333}
+
+  /* CTA */
+  .cta{background:var(--bg);color:var(--surface);padding:56px 20px;border-top:6px solid var(--accent)}
+  .cta h2{margin:0 0 12px;color:var(--surface)}
+  .cta p{color:rgba(255,255,255,0.9)}
+
+  /* Reservation (form) */
+  .reservation .card-form{background:var(--surface);padding:22px;border-radius:12px;max-width:720px;margin:0 auto;box-shadow:0 18px 50px rgba(10,10,10,0.08)}
+  .reservation label{display:block;margin-bottom:6px;font-weight:600;color:#222}
+  .reservation input,.reservation select,.reservation textarea{width:100%;padding:12px;border-radius:8px;border:1px solid #ddd;font-size:15px;margin-bottom:10px}
+  .reservation .two-col{display:flex;gap:12px}
+  .reservation .two-col .col{flex:1}
+
+  .btn-submit{display:inline-block;padding:14px 18px;border-radius:10px;background:var(--accent);color:var(--surface);font-weight:700;border:none;cursor:pointer;font-size:18px}
+  .thankyou{display:none;padding:36px;text-align:center;color:var(--bg)}
+
+  /* Footer */
+  footer{background:#080808;color:rgba(255,255,255,0.9);padding:30px 20px;text-align:center}
+
+  /* Animations */
+  .fade-up{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}
+  .fade-up.in{opacity:1;transform:none}
+
+  /* Responsive */
+  @media(max-width:900px){
+    .course-cards{flex-direction:column;align-items:center}
+    .coaches{flex-direction:column}
+    .nav-links{display:none}
+    .hamburger{display:flex}
+    header{padding:0 16px}
+    .hero h1{font-size:36px}
+  }
+</style>
+</head>
+<body>
+<header id="siteHeader">
+  <div class="logo">CLASS NISEKO</div>
+  <div class="nav-wrap">
+    <nav class="nav-links">
+      <a href="#hero">首頁</a>
+      <a href="#courses">課程</a>
+      <a href="#about">關於</a>
+      <a href="#service">授課區域</a>
+      <a href="#coaches">教練</a>
+      <a href="#pricing">價格</a>
+      <a href="#faq">FAQ</a>
+      <a href="#reservation">預約</a>
+    </nav>
+    <div class="hamburger" aria-label="menu" role="button" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile slide nav -->
+<nav class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <a href="#hero">首頁</a>
+  <a href="#courses">課程</a>
+  <a href="#about">關於</a>
+  <a href="#service">授課區域</a>
+  <a href="#coaches">教練</a>
+  <a href="#pricing">價格</a>
+  <a href="#faq">FAQ</a>
+  <a href="#reservation">預約</a>
+</nav>
+
+<main>
+  <!-- HERO -->
+  <section class="hero" id="hero" aria-label="Hero">
+    <div class="inner">
+      <h1 class="fade-up">CLASS NISEKO</h1>
+      <p class="fade-up" style="transition-delay:.08s">Private ski lessons in Niseko — personalized coaching for confidence on the snow.</p>
+      <div class="hero-buttons fade-up" style="transition-delay:.12s">
+        <a class="btn btn-primary" href="#reservation">立即預約</a>
+        <a class="btn btn-outline" href="#courses">了解課程</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- COURSES -->
+  <section id="courses" class="container courses">
+    <h2 class="fade-up">課程介紹</h2>
+    <div class="course-cards">
+      <article class="card fade-up" style="transition-delay:.05s">
+        <h3>入門課程</h3>
+        <p>適合第一次上雪或想重新建立基礎的學員。</p>
+        <ul>
+          <li>裝備適應</li>
+          <li>基本姿勢與平衡</li>
+          <li>初階滑行與方向控制</li>
+        </ul>
+        <p><strong>建議時數：3 小時起</strong></p>
+      </article>
+
+      <article class="card fade-up" style="transition-delay:.12s">
+        <h3>進階課程</h3>
+        <p>適合已能穩定滑行、希望提升技巧的學員。</p>
+        <ul>
+          <li>平行轉彎技巧</li>
+          <li>速度控制與地形適應</li>
+          <li>動作分析與修正</li>
+        </ul>
+        <p><strong>建議時數：3 小時起</strong></p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="container about">
+    <h2 class="fade-up">關於我們</h2>
+    <p class="fade-up">Class NISEKO 是一群熟悉二世谷雪況與地形的滑雪教練團隊。我們專注於入門至中級的教學，以溫和、清楚、循序的方式建立你的滑行自信。</p>
+  </section>
+
+  <!-- SERVICE AREA -->
+  <section id="service" class="container">
+    <h2 class="fade-up">授課區域</h2>
+    <div class="service-list fade-up" style="transition-delay:.06s">
+      <div class="service-item">Hirafu</div>
+      <div class="service-item">Niseko Village</div>
+      <div class="service-item">Annupuri</div>
+      <div class="service-item">Moiwa</div>
+    </div>
+    <p style="color:var(--muted);margin-top:12px;font-style:italic">※ 不包含 Hanazono 與 Hilton 區域（如需包含請事先聯絡）</p>
+  </section>
+
+  <!-- COACHES -->
+  <section id="coaches" class="container">
+    <h2 class="fade-up">教練團隊</h2>
+    <div class="coaches">
+      <div class="coach fade-up" style="transition-delay:.04s">
+        <h4>Head Coach — Takumi</h4>
+        <p>資深教練，熟悉二世谷各單元與教學法。</p>
+      </div>
+      <div class="coach fade-up" style="transition-delay:.08s">
+        <h4>Coach — Emi</h4>
+        <p>兒童與成人教學經驗豐富，善於建立信心。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="container">
+    <h2 class="fade-up">價格資訊</h2>
+    <div class="price-box fade-up" style="margin-top:12px">
+      <p>課程建議時數：<strong>3 小時起</strong></p>
+      <p style="color:var(--muted)">價格會依淡旺季和人數有所調整，請在預約時註明日期與人數以便報價。</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta container">
+    <h2>準備啟程了嗎？</h2>
+    <p>點擊下方「立即預約」填寫需求，我們會盡快回覆您。</p>
+    <div style="margin-top:18px">
+      <a class="btn btn-primary" href="#reservation">立即預約</a>
+    </div>
+  </section>
+
+
+  <!-- FAQ -->
+  <section id="faq" class="container">
+    <h2 class="fade-up">常見問題（FAQ）</h2>
+    <div class="faq-item fade-up" style="margin-top:14px">
+      <details>
+        <summary>Q：課程需要自備裝備嗎？</summary>
+        <p>可自備或租借。我們可協助租借流程或在預約時提供建議。</p>
+      </details>
+    </div>
+    <div class="faq-item fade-up">
+      <details>
+        <summary>Q：如何取消或改期？</summary>
+        <p>請至少於預定前 48 小時通知，我們會依情況協助改期或退款安排。</p>
+      </details>
+    </div>
+  </section>
+
+
+  <!-- Reservation Form -->
+  <section id="reservation" class="reservation" style="padding-top:36px;padding-bottom:84px">
+    <div class="container">
+      <h2>預約課程</h2>
+      <div class="card-form fade-up" style="margin-top:12px">
+        <form id="reservationForm">
+          <label for="r_name">姓名</label>
+          <input id="r_name" name="name" required>
+
+          <label for="r_email">Email</label>
+          <input id="r_email" type="email" name="email" required>
+
+          <div class="two-col">
+            <div class="col">
+              <label for="r_board">課程選擇</label>
+              <select id="r_board" name="board" required>
+                <option value="">請選擇</option>
+                <option value="ski">雙板</option>
+                <option value="snowboard">單板</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="r_resort">滑雪場</label>
+              <select id="r_resort" name="resort" required>
+                <option value="">請選擇</option>
+                <option value="Hirafu">Hirafu</option>
+                <option value="Niseko Village">Niseko Village</option>
+                <option value="Annupuri">Annupuri</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="two-col">
+            <div class="col">
+              <label for="r_people">人數（1–4）</label>
+              <select id="r_people" name="people" required>
+                <option value="">請選擇</option>
+                <option value="1">1 人</option>
+                <option value="2">2 人</option>
+                <option value="3">3 人</option>
+                <option value="4">4 人</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="r_start">開始日期</label>
+              <input id="r_start" type="date" name="startDate" required>
+            </div>
+          </div>
+
+          <label for="r_contactMethod">聯絡方式</label>
+          <select id="r_contactMethod" name="contactMethod" required>
+            <option value="">請選擇</option>
+            <option value="LINE">LINE</option>
+            <option value="WeChat">WeChat</option>
+            <option value="WhatsApp">WhatsApp</option>
+          </select>
+
+          <label for="r_contactID">您的 ID</label>
+          <input id="r_contactID" name="contactID" placeholder="請輸入您的 LINE/WeChat/WhatsApp ID" required>
+
+          <label for="r_remarks">備註 / 需求</label>
+          <textarea id="r_remarks" name="remarks" rows="4" placeholder="請留下您的滑雪經驗以及其他需求"></textarea>
+
+          <div style="margin-top:12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+            <button type="submit" class="btn-submit">送出預約</button>
+            <div id="loading" style="display:none;color:var(--muted)">處理中...</div>
+          </div>
+        </form>
+
+        <div id="thankyou" class="thankyou" aria-live="polite">
+          <h3>感謝您的預約！</h3>
+          <p>我們已收到您的訊息，將盡快以您提供的聯絡方式回覆。</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div style="max-width:1100px;margin:0 auto;padding:8px 18px;color:rgba(255,255,255,0.9)">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+      <div>© Class NISEKO 2025</div>
+      <div style="color:rgba(255,255,255,0.6)">Contact | Instagram | LINE</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------- Hamburger & mobile nav ---------- */
+const hamburger = document.querySelector('.hamburger');
+const mobileNav = document.getElementById('mobileNav');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  mobileNav.classList.toggle('active');
+  mobileNav.setAttribute('aria-hidden', mobileNav.classList.contains('active') ? 'false' : 'true');
+});
+
+/* close mobile nav when clicking a link */
+mobileNav.querySelectorAll('a').forEach(a=>{
+  a.addEventListener('click', ()=> {
+    mobileNav.classList.remove('active');
+    hamburger.classList.remove('active');
+  });
+});
+
+/* ---------- Smooth scroll for anchors & close mobile ---------- */
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+  anchor.addEventListener('click',function(e){
+    // only handle internal anchors
+    const href = this.getAttribute('href');
+    if(!href || href === '#') return;
+    const target = document.querySelector(href);
+    if(target){
+      e.preventDefault();
+      target.scrollIntoView({behavior:'smooth', block:'start'});
+      // close mobile if open
+      if(mobileNav.classList.contains('active')){ mobileNav.classList.remove('active'); hamburger.classList.remove('active'); }
+    }
+  });
+});
+
+/* ---------- header scroll effect ---------- */
+const header = document.getElementById('siteHeader');
+window.addEventListener('scroll', ()=> {
+  if(window.scrollY > 30) header.classList.add('scrolled'); else header.classList.remove('scrolled');
+});
+
+/* ---------- reveal animations on scroll ---------- */
+const faders = document.querySelectorAll('.fade-up');
+const appearOptions = {threshold: 0.12, rootMargin: "0px 0px -60px 0px"};
+const appearOnScroll = new IntersectionObserver(function(entries, observer){
+  entries.forEach(entry=>{
+    if(!entry.isIntersecting) return;
+    entry.target.classList.add('in');
+    observer.unobserve(entry.target);
+  });
+}, appearOptions);
+faders.forEach(f => appearOnScroll.observe(f));
+
+/* ---------- Form handling (client-side) ---------- */
+const form = document.getElementById('reservationForm');
+const thankyou = document.getElementById('thankyou');
+const loading = document.getElementById('loading');
+
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+
+  // gather values
+  const data = {
+    name: document.getElementById('r_name').value.trim(),
+    email: document.getElementById('r_email').value.trim(),
+    board: document.getElementById('r_board').value,
+    resort: document.getElementById('r_resort').value,
+    people: document.getElementById('r_people').value,
+    startDate: document.getElementById('r_start').value,
+    contactMethod: document.getElementById('r_contactMethod').value,
+    contactID: document.getElementById('r_contactID').value.trim(),
+    remarks: document.getElementById('r_remarks').value.trim()
+  };
+
+  // simple validation
+  if(!data.name || !data.email || !data.board || !data.resort || !data.people || !data.startDate || !data.contactMethod || !data.contactID){
+    alert('請完整填寫所有必填欄位');
+    return;
+  }
+
+  // show loading
+  loading.style.display = 'inline-block';
+
+  // simulate network / sending
+  setTimeout(()=> {
+    loading.style.display = 'none';
+    form.style.display = 'none';
+    thankyou.style.display = 'block';
+    // optionally log to console for testing
+    console.log('Reservation data (client only):', data);
+  }, 900);
+});
+</script>
+</body>
+</html>
