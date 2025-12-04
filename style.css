@@ -234,7 +234,56 @@ section {
     border: 1px solid #eee;
     display: inline-block;
 }
+.price-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-top: 24px;
+}
 
+.price-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 26px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    border: 1px solid #eee;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.price-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 45px rgba(0,0,0,0.12);
+}
+
+.price-card h3 {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.price-card .sub {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 18px;
+}
+
+.price-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.price-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    font-size: 15px;
+}
+
+.price-list li:last-child {
+    border-bottom: none;
+}
 .cta {
     background: var(--bg);
     color: var(--surface);
