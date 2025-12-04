@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CLASS NISEKO</title>
+
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Main CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+  <!-- Header + Navigation -->
   <header>
     <div class="logo">CLASS NISEKO</div>
+
+    <!-- Desktop Nav -->
     <nav class="nav-links">
       <a href="#hero">首頁</a>
       <a href="#courses">課程</a>
@@ -23,6 +29,8 @@
       <a href="#faq">FAQ</a>
       <a href="#reservation">預約</a>
     </nav>
+
+    <!-- Mobile Hamburger -->
     <div class="hamburger">
       <span></span>
       <span></span>
@@ -30,6 +38,7 @@
     </div>
   </header>
 
+  <!-- Mobile Nav -->
   <nav class="mobile-nav">
     <a href="#hero">首頁</a>
     <a href="#courses">課程</a>
@@ -42,12 +51,15 @@
   </nav>
 
   <main>
-    <!-- HERO -->
+
+    <!-- HERO Section -->
     <section class="hero" id="hero">
       <div class="inner">
         <h1 class="fade-up">CLASS NISEKO</h1>
-        <p class="fade-up" style="transition-delay:.08s">Private ski lessons in Niseko — personalized coaching for
-          confidence on the snow.</p>
+        <p class="fade-up" style="transition-delay:.08s">
+          Private ski lessons in Niseko — personalized coaching for confidence on the snow.
+        </p>
+
         <div class="hero-buttons fade-up" style="transition-delay:.12s">
           <a class="btn btn-primary" href="#reservation">立即預約</a>
           <a class="btn btn-outline" href="#courses">了解課程</a>
@@ -58,6 +70,7 @@
     <!-- COURSES -->
     <section id="courses" class="container courses">
       <h2 class="fade-up">課程介紹</h2>
+
       <div class="course-cards">
         <article class="card fade-up" style="transition-delay:.05s">
           <h3>入門課程</h3>
@@ -69,6 +82,7 @@
           </ul>
           <p><strong>建議時數：3 小時起</strong></p>
         </article>
+
         <article class="card fade-up" style="transition-delay:.12s">
           <h3>進階課程</h3>
           <p>適合已能穩定滑行、希望提升技巧的學員。</p>
@@ -85,12 +99,16 @@
     <!-- ABOUT -->
     <section id="about" class="container about">
       <h2 class="fade-up">關於我們</h2>
-      <p class="fade-up">Class NISEKO 是一群熟悉二世谷雪況與地形的滑雪教練團隊。我們專注於入門至中級的教學，以溫和、清楚、循序的方式建立你的滑行自信。</p>
+      <p class="fade-up">
+        Class NISEKO 是一群熟悉二世谷雪況與地形的滑雪教練團隊。
+        我們專注於入門至中級的教學，以溫和、清楚、循序的方式建立你的滑行自信。
+      </p>
     </section>
 
     <!-- SERVICE AREA -->
     <section id="service" class="container">
       <h2 class="fade-up">授課區域</h2>
+
       <div class="service-list fade-up" style="transition-delay:.06s">
         <div class="service-item">Hirafu</div>
         <div class="service-item">Niseko Village</div>
@@ -99,14 +117,16 @@
       </div>
     </section>
 
-    <!-- COACHES -->
+    <!-- COACHES (暫時隱藏) -->
     <section id="coaches" class="container" style="display:none">
       <h2 class="fade-up">教練團隊</h2>
+
       <div class="coaches">
         <div class="coach fade-up" style="transition-delay:.04s">
           <h4>Head Coach — Takumi</h4>
           <p>資深教練，熟悉二世谷各單元與教學法。</p>
         </div>
+
         <div class="coach fade-up" style="transition-delay:.08s">
           <h4>Coach — Emi</h4>
           <p>兒童與成人教學經驗豐富，善於建立信心。</p>
@@ -118,38 +138,34 @@
     <section id="pricing" class="container">
       <h2 class="fade-up">價格方案</h2>
 
-      <!-- 旺季 -->
-      <div class="price-card fade-up">
-        <button class="price-header">
-          <div class="title">🏔 旺季價格</div>
-          <div class="sub">12/15–1/5 ・ 2/10–2/25</div>
-          <span class="arrow">+</span>
-        </button>
+      <div class="pricing-grid fade-up">
 
-        <div class="price-content">
-          <div class="row"><strong>Full Day 7H</strong> <span>¥00,000</span></div>
-          <div class="row"><strong>Full Day 6H</strong> <span>¥00,000</span></div>
-          <div class="row"><strong>Half Day 3H</strong> <span>¥00,000</span></div>
-          <div class="row"><strong>Resort Guiding</strong> <span>¥00,000</span></div>
-          <div class="row"><strong>Gate Guiding</strong> <span>¥00,000</span></div>
+        <!-- 平日方案 -->
+        <div class="price-card">
+          <h3>平日方案</h3>
+          <p class="date">11/20–12/14 ・ 3/1–End</p>
+          <ul>
+            <li><strong>Full Day 7H</strong> — ¥XX,XXX</li>
+            <li><strong>Full Day 6H</strong> — ¥XX,XXX</li>
+            <li><strong>Half Day 3H</strong> — ¥XX,XXX</li>
+            <li><strong>Resort Guiding</strong> — ¥XX,XXX</li>
+            <li><strong>Gate Guiding</strong> — ¥XX,XXX</li>
+          </ul>
         </div>
-      </div>
 
-      <!-- 平日 -->
-      <div class="price-card fade-up">
-        <button class="price-header">
-          <div class="title">🎿 平日價格</div>
-          <div class="sub">11/20–12/14 ・ 3/1–End of Season</div>
-          <span class="arrow">+</span>
-        </button>
-
-        <div class="price-content">
-          <div class="row"><strong>Full Day 7H</strong> <span>¥00,000</span></div>
-          <div class="row"><strong>Full Day 6H</strong> <span>¥00,000</span></div>
-          <div class="row"><strong>Half Day 3H</strong> <span>¥00,000</span></div>
-          <div class="row"><strong>Resort Guiding</strong> <span>¥00,000</span></div>
-          <div class="row"><strong>Gate Guiding</strong> <span>¥00,000</span></div>
+        <!-- 旺季方案 -->
+        <div class="price-card">
+          <h3>旺季方案</h3>
+          <p class="date">12/15–1/5 ・ 2/10–2/25</p>
+          <ul>
+            <li><strong>Full Day 7H</strong> — ¥XX,XXX</li>
+            <li><strong>Full Day 6H</strong> — ¥XX,XXX</li>
+            <li><strong>Half Day 3H</strong> — ¥XX,XXX</li>
+            <li><strong>Resort Guiding</strong> — ¥XX,XXX</li>
+            <li><strong>Gate Guiding</strong> — ¥XX,XXX</li>
+          </ul>
         </div>
+
       </div>
     </section>
 
@@ -169,7 +185,7 @@
 
         <div class="faq-item">
           <h3 class="faq-question">課程適合什麼程度的人？</h3>
-          <p class="faq-answer">我們的課程從完全初學者到進階都適合，會依照你的程度進行調整。</p>
+          <p class="faq-answer">我們的課程從完全初學者到進階都適合，會依照你的程度調整。</p>
         </div>
 
         <div class="faq-item">
@@ -184,16 +200,21 @@
 
       </div>
     </section>
+
     <!-- Reservation Form -->
     <section id="reservation" class="reservation" style="padding-top:36px;padding-bottom:84px">
       <div class="container">
         <h2>預約課程</h2>
+
         <div class="card-form fade-up" style="margin-top:12px">
           <form id="reservationForm">
+
             <label for="r_name">姓名</label>
             <input id="r_name" name="name" required>
+
             <label for="r_email">Email</label>
             <input id="r_email" type="email" name="email" required>
+
             <div class="two-col">
               <div class="col">
                 <label for="r_board">課程選擇</label>
@@ -203,6 +224,7 @@
                   <option value="snowboard">單板</option>
                 </select>
               </div>
+
               <div class="col">
                 <label for="r_resort">滑雪場</label>
                 <select id="r_resort" name="resort" required>
@@ -213,6 +235,7 @@
                 </select>
               </div>
             </div>
+
             <div class="two-col">
               <div class="col">
                 <label for="r_people">人數（1–4）</label>
@@ -224,11 +247,13 @@
                   <option value="4">4 人</option>
                 </select>
               </div>
+
               <div class="col">
                 <label for="r_start">開始日期</label>
                 <input id="r_start" type="date" name="startDate" required>
               </div>
             </div>
+
             <label for="r_contactMethod">聯絡方式</label>
             <select id="r_contactMethod" name="contactMethod" required>
               <option value="">請選擇</option>
@@ -236,24 +261,31 @@
               <option value="WeChat">WeChat</option>
               <option value="WhatsApp">WhatsApp</option>
             </select>
+
             <label for="r_contactID">您的 ID</label>
             <input id="r_contactID" name="contactID" placeholder="請輸入您的 LINE/WeChat/WhatsApp ID" required>
+
             <label for="r_remarks">備註 / 需求</label>
             <textarea id="r_remarks" name="remarks" rows="4" placeholder="請留下您的滑雪經驗以及其他需求"></textarea>
+
             <div style="margin-top:12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
               <button type="submit" class="btn-submit">送出預約</button>
               <div id="loading" style="display:none;color:var(--muted)">處理中...</div>
             </div>
           </form>
+
           <div id="thankyou" class="thankyou" aria-live="polite">
             <h3>感謝您的預約！</h3>
             <p>我們已收到您的訊息，將盡快以您提供的聯絡方式回覆。</p>
           </div>
+
         </div>
       </div>
     </section>
+
   </main>
 
+  <!-- Footer -->
   <footer>
     <div style="max-width:1100px;margin:0 auto;padding:8px 18px;color:rgba(255,255,255,0.9)">
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
@@ -263,7 +295,8 @@
     </div>
   </footer>
 
+  <!-- JS -->
   <script src="script.js"></script>
-</body>
 
+</body>
 </html>
