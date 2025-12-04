@@ -1,14 +1,19 @@
-/* Hamburger & Mobile nav */
+/* ===========================================================
+   Hamburger & Mobile Nav
+   =========================================================== */
 const hamburger = document.querySelector('.hamburger');
 const mobileNav = document.querySelector('.mobile-nav');
 
 hamburger.addEventListener('click', () => {
   hamburger.classList.toggle('active');
   mobileNav.classList.toggle('active');
-  mobileNav.setAttribute('aria-hidden', mobileNav.classList.contains('active') ? 'false' : 'true');
+  mobileNav.setAttribute(
+    'aria-hidden',
+    mobileNav.classList.contains('active') ? 'false' : 'true'
+  );
 });
 
-/* Close mobile when clicking link */
+/* 點選手機選單後關閉 */
 mobileNav.querySelectorAll('a').forEach(a => {
   a.addEventListener('click', () => {
     mobileNav.classList.remove('active');
@@ -16,48 +21,68 @@ mobileNav.querySelectorAll('a').forEach(a => {
   });
 });
 
-/* Header scroll effect */
+
+/* ===========================================================
+   Header Scroll Effect
+   =========================================================== */
 const header = document.querySelector('header');
 window.addEventListener('scroll', () => {
   if (window.scrollY > 30) header.classList.add('scrolled');
   else header.classList.remove('scrolled');
 });
 
-/* Fade-up on scroll */
-const faders = document.querySelectorAll('.fade-up');
-const appearOptions = { threshold: 0.12, rootMargin: "0px 0px -60px 0px" };
-const appearOnScroll = new IntersectionObserver(function(entries, observer){
-  entries.forEach(entry => {
-    if(!entry.isIntersecting) return;
-    entry.target.classList.add('in');
-    observer.unobserve(entry.target);
-  });
-}, appearOptions);
-faders.forEach(f => appearOnScroll.observe(f));
 
-/* Form handling */
+/* ===========================================================
+   Fade-up Scroll Animation
+  （整合，移除你原本重複的版本）
+   =========================================================== */
+const fadeUps = document.querySelectorAll('.fade-up');
+const fadeObserver = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('in');
+      fadeObserver.unobserve(entry.target);
+    });
+  },
+  { threshold: 0.18, rootMargin: '0px 0px -40px 0px' }
+);
+
+fadeUps.forEach(el => fadeObserver.observe(el));
+
+
+/* ===========================================================
+   Reservation Form Handling
+   =========================================================== */
 const form = document.getElementById('reservationForm');
 const thankyou = document.getElementById('thankyou');
 const loading = document.getElementById('loading');
 
-form.addEventListener('submit', function(e){
+form.addEventListener('submit', function (e) {
   e.preventDefault();
+
   const data = {
-    name: document.getElementById('r_name').value.trim(),
-    email: document.getElementById('r_email').value.trim(),
-    board: document.getElementById('r_board').value,
-    resort: document.getElementById('r_resort').value,
-    people: document.getElementById('r_people').value,
-    startDate: document.getElementById('r_start').value,
-    contactMethod: document.getElementById('r_contactMethod').value,
-    contactID: document.getElementById('r_contactID').value.trim(),
-    remarks: document.getElementById('r_remarks').value.trim()
+    name: r_name.value.trim(),
+    email: r_email.value.trim(),
+    board: r_board.value,
+    resort: r_resort.value,
+    people: r_people.value,
+    startDate: r_start.value,
+    contactMethod: r_contactMethod.value,
+    contactID: r_contactID.value.trim(),
+    remarks: r_remarks.value.trim(),
   };
-  if(!data.name || !data.email || !data.board || !data.resort || !data.people || !data.startDate || !data.contactMethod || !data.contactID){
-    alert('請完整填寫所有必填欄位');
-    return;
+
+  // 確認必填
+  for (const key in data) {
+    if (!data[key]) {
+      alert('請完整填寫所有必填欄位');
+      return;
+    }
   }
+
   loading.style.display = 'inline-block';
+
   setTimeout(() => {
     loading.style.display = 'none';
     form.style.display = 'none';
@@ -66,50 +91,43 @@ form.addEventListener('submit', function(e){
   }, 900);
 });
 
-/* Smooth scroll */
+
+/* ===========================================================
+   Smooth Scroll for Anchor Links
+   =========================================================== */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e){
+  anchor.addEventListener('click', function (e) {
     const href = this.getAttribute('href');
-    if(!href || href === '#') return;
+    if (!href || href === '#') return;
+
     const target = document.querySelector(href);
-    if(target){
+    if (target) {
       e.preventDefault();
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      if(mobileNav.classList.contains('active')){
+
+      // 手機版 - 點選後自動關閉選單
+      if (mobileNav.classList.contains('active')) {
         mobileNav.classList.remove('active');
         hamburger.classList.remove('active');
       }
     }
   });
 });
-// Scroll Fade-up Reveal
-const fadeUps = document.querySelectorAll('.fade-up');
-
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('in');
-      observer.unobserve(entry.target); // 動畫跑一次就結束
-    }
-  });
-}, {
-  threshold: 0.2  // 20% 出現在畫面就觸發
-});
-
-// 全部元素加入觀察器
-fadeUps.forEach(el => observer.observe(el));
 
 
-// ===============================
-// Pricing Collapse Animation
-// ===============================
-
+/* ===========================================================
+   Pricing - Collapse Animation（新版）
+   =========================================================== */
 document.querySelectorAll('.price-card').forEach(card => {
-  const toggle = card.querySelector('.price-toggle');
-  const details = card.querySelector('.price-details');
+  
+  const toggleBtn = card.querySelector('.price-toggle');   // 折疊按鈕
+  const detailBox = card.querySelector('.price-details');  // 內容區塊
 
-  toggle.addEventListener('click', () => {
-    details.classList.toggle('open');
-    toggle.classList.toggle('open');
+  // 安全檢查：避免 HTML 還沒加就報錯
+  if (!toggleBtn || !detailBox) return;
+
+  toggleBtn.addEventListener('click', () => {
+    detailBox.classList.toggle('open');
+    toggleBtn.classList.toggle('open');
   });
 });
