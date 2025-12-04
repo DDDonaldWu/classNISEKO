@@ -448,3 +448,94 @@ footer {
         padding: 24px;
     }
 }
+
+/* ================================
+   高級感黑白紅價格卡片
+===================================*/
+
+/* GRID LAYOUT */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+  margin-top: 32px;
+  padding: 0 12px;
+}
+
+/* PRICE CARD */
+.price-card {
+  background: #fff; /* 純白底 */
+  border-radius: 20px;
+  padding: 28px 24px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08); /* 柔和陰影 */
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* Hover 微浮動 */
+.price-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+}
+
+/* 標題 */
+.price-card h3 {
+  font-size: 1.45rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #111; /* 深黑文字 */
+}
+
+/* 日期 / 次要文字 */
+.price-card .date {
+  color: var(--muted); /* 淡灰色 */
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+/* 價格列表 */
+.price-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.price-card li {
+  padding: 10px 0;
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 價格數字特別標示紅色 */
+.price-card li strong {
+  color: var(--accent);
+}
+/* ================================
+   手機 RWD 優化
+===================================*/
+@media (max-width: 768px) {
+  .pricing-grid {
+    gap: 20px;      /* 網格間距稍微縮小 */
+  }
+
+  .price-card {
+    padding: 20px 16px;  /* 卡片內距縮小 */
+  }
+
+  .price-card h3 {
+    font-size: 1.25rem;
+  }
+
+  .price-card .date {
+    font-size: 0.9rem;
+  }
+
+  .price-card li {
+    font-size: 0.95rem;
+  }
+}
