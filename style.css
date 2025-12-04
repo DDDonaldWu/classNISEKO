@@ -2,12 +2,15 @@
    Root Variables
 ========================================================= */
 :root {
-    --bg: #0b0b0b;
-    --surface: #fff;
-    --accent: #8b0000;
-    --muted: #7a7a7a;
-    --radius: 12px;
+    --bg: #0b0b0b;           /* 黑色背景 */
+    --surface: #fff;          /* 白色背景 */
+    --accent: #8b0000;        /* 紅色 */
+    --muted: #7a7a7a;         /* 灰色文字 */
+    --radius: 12px;           /* 圓角統一 */
     --header-h: 64px;
+
+    --section-bg-dark: var(--bg);       /* 重點區黑底 */
+    --section-bg-light: var(--surface); /* 一般白底區域 */
 }
 
 /* =========================================================
@@ -22,7 +25,7 @@ body {
     margin: 0;
     height: 100%;
     font-family: 'Inter', sans-serif;
-    background: var(--surface);
+    background: var(--section-bg-light);
     color: #111;
     scroll-behavior: smooth;
 }
@@ -226,8 +229,8 @@ section {
 
 .card {
     flex: 1 1 300px;
-    background: var(--surface);
-    border-radius: 12px;
+    background: var(--section-bg-light);
+    border-radius: var(--radius);
     padding: 20px;
     box-shadow: 0 10px 30px rgba(10, 10, 10, 0.06);
     transition: transform .28s, box-shadow .28s;
@@ -241,103 +244,94 @@ section {
 /* =========================================================
    Pricing Cards — 高級黑白紅風格
 ========================================================= */
-
-/* GRID LAYOUT */
 .pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 28px;
-  margin-top: 32px;
-  padding: 0 12px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+    margin-top: 32px;
+    padding: 0 12px;
 }
 
-/* PRICE CARD */
 .price-card {
-  position: relative;
-  padding: 32px 28px;
-  border-radius: 24px;
-  background: #ffffff;
-  color: #111;
-  overflow: hidden;
-  box-shadow: 
-    0 4px 12px rgba(0,0,0,0.08),
-    0 12px 30px rgba(0,0,0,0.12);
-  border: 1px solid rgba(0,0,0,0.06);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
-  cursor: pointer;
+    position: relative;
+    padding: 32px 28px;
+    border-radius: 24px;
+    background: var(--section-bg-light);
+    color: #111;
+    overflow: hidden;
+    box-shadow: 
+        0 4px 12px rgba(0,0,0,0.08),
+        0 12px 30px rgba(0,0,0,0.12);
+    border: 1px solid rgba(0,0,0,0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
+    cursor: pointer;
 }
 
-/* 光澤效果 */
 .price-card::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15), transparent 70%);
-  transform: rotate(-25deg);
-  pointer-events: none;
-  transition: all 0.3s ease;
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15), transparent 70%);
+    transform: rotate(-25deg);
+    pointer-events: none;
+    transition: all 0.3s ease;
 }
 
-/* Hover 浮起 + 光澤增強 */
 .price-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 
-    0 8px 20px rgba(0,0,0,0.12),
-    0 18px 42px rgba(0,0,0,0.18);
+    transform: translateY(-6px);
+    box-shadow: 
+        0 8px 20px rgba(0,0,0,0.12),
+        0 18px 42px rgba(0,0,0,0.18);
 }
 
 .price-card:hover::before {
-  top: -40%;
-  left: -40%;
-  background: radial-gradient(circle at 25% 25%, rgba(255,255,255,0.2), transparent 70%);
+    top: -40%;
+    left: -40%;
+    background: radial-gradient(circle at 25% 25%, rgba(255,255,255,0.2), transparent 70%);
 }
 
-/* 標題 */
 .price-card h3 {
-  font-size: 1.45rem;
-  font-weight: 700;
-  margin-bottom: 8px;
-  color: #111;
+    font-size: 1.45rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #111;
 }
 
-/* 日期 / 次要文字 */
 .price-card .date {
-  color: var(--muted);
-  font-size: 0.95rem;
-  margin-bottom: 20px;
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-bottom: 20px;
 }
 
-/* 收費列表 */
 .price-card ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .price-card li {
-  padding: 10px 0;
-  font-size: 1rem;
-  border-bottom: 1px solid rgba(0,0,0,0.06);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    padding: 10px 0;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* 價格數字特別標示紅色 */
 .price-card li strong {
-  color: var(--accent);
+    color: var(--accent);
 }
 
 /* =========================================================
    Reservation Form
 ========================================================= */
 .reservation .card-form {
-    background: var(--surface);
+    background: var(--section-bg-light);
     padding: 22px;
-    border-radius: 12px;
+    border-radius: var(--radius);
     max-width: 720px;
     margin: 0 auto;
     box-shadow: 0 18px 50px rgba(10, 10, 10, 0.08);
@@ -413,6 +407,30 @@ footer {
 }
 
 /* =========================================================
+   CTA / Service / Section Backgrounds 統一
+========================================================= */
+.cta {
+    background: var(--section-bg-dark);
+    color: var(--surface);
+    padding: 72px 20px;
+    text-align: center;
+}
+
+#service {
+    background: var(--section-bg-dark);
+    color: var(--surface);
+    border-radius: var(--radius);
+    text-align: center;
+    padding: 72px 20px;
+    margin-bottom: 48px;
+}
+
+section:not(.cta):not(#service):not(.hero) {
+    background: var(--section-bg-light);
+    color: #111;
+}
+
+/* =========================================================
    Responsive
 ========================================================= */
 @media(max-width:900px) {
@@ -459,53 +477,9 @@ footer {
     .price-card li {
         font-size: 0.95rem;
     }
-}
-.cta {
-    background: var(--bg); /* 黑色 */
-    color: #fff;            /* 白色文字 */
-    padding: 72px 20px;
-    text-align: center;
-}
-/* =========================================================
-   Service / 授課區域
-========================================================= */
-#service {
-    padding: 72px 20px;
-    background: #0b0b0b; /* 深色背景，高質感對比 */
-    color: #fff;
-    text-align: center;
-    border-radius: 12px;
-    margin-bottom: 48px;
-}
 
-#service h2 {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 24px;
-    color: var(--accent); /* 高亮紅色標題 */
+    #service {
+        background: var(--section-bg-dark);
+        border-radius: var(--radius);
+    }
 }
-
-#service p {
-    font-size: 1rem;
-    margin-bottom: 16px;
-    color: #eee;
-}
-
-#service ul {
-    list-style: none;
-    padding: 0;
-    margin: 0 auto 20px;
-    max-width: 400px;
-}
-
-#service ul li {
-    padding: 10px 0;
-    font-size: 1rem;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-#service ul li:last-child {
-    border-bottom: none;
-}
-
-/* Fade-up Animation 已經套在 HTML class fade-up */
