@@ -82,19 +82,3 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     }
   });
 });
-// Scroll Fade-up Reveal
-const fadeUps = document.querySelectorAll('.fade-up');
-
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('in');
-      observer.unobserve(entry.target); // 動畫跑一次就結束
-    }
-  });
-}, {
-  threshold: 0.2  // 20% 出現在畫面就觸發
-});
-
-// 全部元素加入觀察器
-fadeUps.forEach(el => observer.observe(el));
