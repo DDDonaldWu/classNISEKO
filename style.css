@@ -533,6 +533,9 @@ section:not(.cta):not(#service):not(.hero) {
 
 #service ul li:last-child {
     border-bottom: none;
+    list-style-type: none !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
 }
 
 #service ul li:hover {
