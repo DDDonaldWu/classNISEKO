@@ -483,3 +483,84 @@ section:not(.cta):not(#service):not(.hero) {
         border-radius: var(--radius);
     }
 }
+/* =========================================================
+   授課區高級排版
+========================================================= */
+#service {
+    background: var(--section-bg-dark);
+    color: var(--surface);
+    border-radius: var(--radius);
+    text-align: center;
+    padding: 72px 20px;
+    margin-bottom: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#service h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 32px;
+    color: var(--accent); /* 高亮紅色標題 */
+    letter-spacing: 1px;
+}
+
+#service p {
+    font-size: 1.05rem;
+    margin-bottom: 24px;
+    color: #eee;
+    line-height: 1.7;
+    max-width: 720px;
+}
+
+#service ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 480px;
+}
+
+#service ul li {
+    padding: 14px 0;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+#service ul li:last-child {
+    border-bottom: none;
+}
+
+#service ul li:hover {
+    transform: translateX(4px);
+    color: var(--accent);
+}
+
+/* RWD 手機版保持與桌面一致 */
+@media (max-width: 768px) {
+    #service {
+        padding: 48px 16px;
+    }
+    
+    #service h2 {
+        font-size: 1.75rem;
+    }
+    
+    #service p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    
+    #service ul {
+        max-width: 100%;
+    }
+    
+    #service ul li {
+        font-size: 0.95rem;
+        padding: 12px 0;
+    }
+}
