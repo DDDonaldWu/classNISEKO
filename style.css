@@ -467,3 +467,100 @@ footer {
   margin: 8px 0;
   font-size: 1rem;
 }
+
+/* ================================
+   美化價格 Pricing Section
+===================================*/
+#pricing {
+  margin-top: 80px;
+}
+
+#pricing h2 {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+/* GRID LAYOUT */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+  padding: 0 12px;
+}
+
+/* PRICE CARD */
+.price-card {
+  background: white;
+  border-radius: 16px;
+  padding: 28px 24px;
+  box-shadow: 0 6px 22px rgba(0,0,0,0.12);
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: transform .28s ease, box-shadow .28s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.price-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+}
+
+/* 標題 */
+.price-card h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+/* 日期 */
+.price-card .date {
+  color: #666;
+  font-size: .92rem;
+  margin-bottom: 18px;
+}
+
+/* 收費列表（可折疊） */
+.price-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .5s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.price-details.open {
+  max-height: 800px; /* 夠大避免壓縮內容 */
+}
+
+.price-details ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+.price-details li {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.price-details li:last-child {
+  border-bottom: none;
+}
+
+/* ▼ 展開箭頭 */
+.price-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.price-toggle svg {
+  width: 22px;
+  height: 22px;
+  transition: transform .35s ease;
+}
+
+.price-toggle.open svg {
+  transform: rotate(180deg);
+}

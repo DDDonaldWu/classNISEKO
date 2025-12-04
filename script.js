@@ -109,3 +109,17 @@ priceCards.forEach(card => {
     card.classList.toggle("open");
   });
 });
+
+// ===============================
+// Pricing Collapse Animation
+// ===============================
+
+document.querySelectorAll('.price-card').forEach(card => {
+  const toggle = card.querySelector('.price-toggle');
+  const details = card.querySelector('.price-details');
+
+  toggle.addEventListener('click', () => {
+    details.classList.toggle('open');
+    toggle.classList.toggle('open');
+  });
+});
