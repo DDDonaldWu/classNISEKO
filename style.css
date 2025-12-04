@@ -1,574 +1,243 @@
 /* =========================================================
-   Root Variables（主題色、尺寸）
-   ========================================================= */
+   Root Variables
+========================================================= */
 :root {
-    --bg: #0b0b0b;
-    --surface: #fff;
-    --accent: #8b0000;      /* 調整點：主色，可換紅色 */
-    --muted: #7a7a7a;
-    --radius: 12px;
-    --header-h: 64px;        /* 調整點：header 高度 */
+  --bg: #0b0b0b;
+  --surface: #fff;
+  --accent: #8b0000;
+  --muted: #7a7a7a;
+  --radius: 12px;
+  --header-h: 64px;
 }
 
 /* =========================================================
    Reset & Base
-   ========================================================= */
+========================================================= */
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html, body {
-    height: 100%;
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background: var(--surface);
-    color: #111;
-    scroll-behavior: smooth;
+  margin: 0;
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  background: var(--surface);
+  color: #111;
+  scroll-behavior: smooth;
 }
 
 a {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
 main {
-    overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 /* =========================================================
-   Header（桌機導覽列）
-   ========================================================= */
+   Header
+========================================================= */
 header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: var(--header-h);
-    display: flex;
-    align-items: center;
-    padding: 0 28px;
-    background: linear-gradient(90deg, rgba(11,11,11,0.95), rgba(11,11,11,0.95));
-    color: var(--surface);
-    z-index: 1200;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  background: rgba(11,11,11,0.95);
+  color: var(--surface);
+  z-index: 1200;
 }
 
 .logo {
-    font-weight: 700;
-    font-size: 20px;
+  font-weight: 700;
+  font-size: 20px;
 }
 
 .nav-links {
-    display: flex;
-    gap: 28px;                /* 調整點：桌機選單間距 */
-    margin-left: auto;
+  display: flex;
+  gap: 28px;
+  margin-left: auto;
 }
 
 .nav-links a {
-    font-weight: 600;
-    opacity: .95;
-    color: var(--surface);
+  font-weight: 600;
+  opacity: .95;
+  color: var(--surface);
 }
 
 .nav-links a:hover {
-    color: var(--accent);
+  color: var(--accent);
 }
 
 /* =========================================================
-   Hamburger（手機版漢堡選單）
-   ========================================================= */
+   Hamburger (Mobile)
+========================================================= */
 .hamburger {
-    position: absolute;
-    right: 0;                 /* 調整點：貼右邊 */
-    top: 50%;
-    transform: translateY(-50%);
-    display: none;            /* 桌面不顯示，手機版才顯示 */
-    flex-direction: column;
-    width: 44px;              /* 調整點：容器寬 */
-    height: 24px;             /* 調整點：容器高 */
-    justify-content: space-between;
-    cursor: pointer;
-    z-index: 1100;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: none;
+  flex-direction: column;
+  width: 44px;
+  height: 24px;
+  justify-content: space-between;
+  cursor: pointer;
+  z-index: 1100;
 }
 
 .hamburger span {
-    display: block;
-    height: 3px;              /* 調整點：線條粗細 */
-    width: 35px;              /* 調整點：漢堡線長度 */
-    background: #fff;
-    border-radius: 3px;
-    transition: all 0.3s ease;
+  display: block;
+  height: 3px;
+  width: 35px;
+  background: #fff;
+  border-radius: 3px;
+  transition: all 0.3s ease;
 }
 
-/* X動態效果 */
 .hamburger.active span:nth-child(1) {
-    transform: translateY(10px) rotate(45deg);
+  transform: translateY(10px) rotate(45deg);
 }
-
 .hamburger.active span:nth-child(2) {
-    opacity: 0;
+  opacity: 0;
 }
-
 .hamburger.active span:nth-child(3) {
-    transform: translateY(-10px) rotate(-45deg);
+  transform: translateY(-10px) rotate(-45deg);
 }
 
 /* =========================================================
-   Mobile Navigation（手機版側欄選單）
-   ========================================================= */
+   Mobile Nav
+========================================================= */
 .mobile-nav {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 70%;               /* 調整點：手機側欄寬度 */
-    max-width: 320px;
-    height: 100vh;
-    background: var(--bg);
-    display: flex;
-    flex-direction: column;
-    padding: 80px 20px;
-    transition: right 0.35s ease;
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 70%;
+  max-width: 320px;
+  height: 100vh;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  padding: 80px 20px;
+  transition: right 0.35s ease;
+  z-index: 1000;
 }
 
 .mobile-nav a {
-    margin: 12px 0;
-    font-size: 18px;
-    color: var(--surface);
+  margin: 12px 0;
+  font-size: 18px;
+  color: var(--surface);
 }
 
 .mobile-nav.active {
-    right: 0;
+  right: 0;
 }
 
 /* =========================================================
-   Hero Section（大首頁 Banner）
-   ========================================================= */
+   Hero Section
+========================================================= */
 .hero {
-    margin-top: var(--header-h);
-    height: calc(100vh - var(--header-h));
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background:
-        linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.48)),
-        url('https://images.unsplash.com/photo-1674297026373-6e2b74da47b6?fm=jpg&q=80&w=2400')
-        center/cover no-repeat;
-    color: var(--surface);
-    position: relative;
+  margin-top: var(--header-h);
+  height: calc(100vh - var(--header-h));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.48)),
+    url('https://images.unsplash.com/photo-1674297026373-6e2b74da47b6?fm=jpg&q=80&w=2400') center/cover no-repeat;
+  color: var(--surface);
+  position: relative;
 }
 
 .hero .inner {
-    z-index: 5;
-    max-width: 980px;
-    padding: 28px;
+  z-index: 5;
+  max-width: 980px;
+  padding: 28px;
 }
 
 .hero-buttons {
-    display: flex;
-    gap: 14px;                /* 調整點：按鈕間距 */
-    justify-content: center;
-    flex-wrap: wrap;
-    z-index: 5;
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  z-index: 5;
 }
 
 /* =========================================================
-   Buttons（按鈕樣式）
-   ========================================================= */
+   Buttons
+========================================================= */
 .btn {
-    display: inline-block;
-    padding: 12px 26px;
-    border-radius: 10px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: transform .18s ease, box-shadow .18s ease;
+  display: inline-block;
+  padding: 12px 26px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease;
 }
 
 .btn-primary {
-    background: var(--accent);
-    color: var(--surface);
-    box-shadow: 0 8px 30px rgba(196,30,58,0.12);
+  background: var(--accent);
+  color: var(--surface);
+  box-shadow: 0 8px 30px rgba(196,30,58,0.12);
 }
 
 .btn-outline {
-    background: transparent;
-    border: 2px solid rgba(255,255,255,0.95);
-    color: var(--surface);
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.95);
+  color: var(--surface);
 }
 
 .btn:hover {
-    transform: translateY(-3px);
+  transform: translateY(-3px);
 }
 
 .btn-outline:hover {
-    background: rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.06);
 }
 
 /* =========================================================
-   Generic Sections
-   ========================================================= */
+   Sections & Containers
+========================================================= */
 section {
-    padding: 72px 20px;       /* 調整點：區塊上下距 */
+  padding: 72px 20px;
 }
 
 .container {
-    max-width: 1100px;
-    margin: 0 auto;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 /* =========================================================
-   Courses（課程卡片）
-   ========================================================= */
+   Course Cards
+========================================================= */
 .course-cards {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .card {
-    flex: 1 1 300px;
-    background: var(--surface);
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 10px 30px rgba(10,10,10,0.06);
-    transition: transform .28s, box-shadow .28s;
+  flex: 1 1 300px;
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(10,10,10,0.06);
+  transition: transform .28s, box-shadow .28s;
 }
 
 .card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 50px rgba(10,10,10,0.12);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(10,10,10,0.12);
 }
 
 /* =========================================================
-   Coaches（教練團隊）
-   ========================================================= */
-.coaches {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-}
-
-/* =========================================================
-   Pricing（價格卡片）
-   ========================================================= */
-.price-box {
-    background: linear-gradient(180deg,#fff,#fbfbfb);
-    padding: 18px;
-    border-radius: 12px;
-    border: 1px solid #eee;
-    display: inline-block;
-}
-
-.price-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 24px;
-    margin-top: 24px;
-}
-
-.price-card {
-    background: #fff;
-    border-radius: 14px;
-    padding: 26px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-    border: 1px solid #eee;
-    transition: transform .25s ease, box-shadow .25s ease;
-}
-
-.price-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 18px 45px rgba(0,0,0,0.12);
-}
-
-.price-card h3 {
-    font-size: 22px;
-    font-weight: 800;
-    margin-bottom: 4px;
-}
-
-.price-card .sub {
-    font-size: 14px;
-    color: #888;
-    margin-bottom: 18px;
-}
-
-.price-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.price-list li {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.08);
-    font-size: 15px;
-}
-
-.price-list li:last-child {
-    border-bottom: none;
-}
-
-/* =========================================================
-   Reservation Form（預約表單）
-   ========================================================= */
-.reservation .card-form {
-    background: var(--surface);
-    padding: 22px;
-    border-radius: 12px;
-    max-width: 720px;
-    margin: 0 auto;
-    box-shadow: 0 18px 50px rgba(10,10,10,0.08);
-}
-
-.reservation label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: 600;
-    color: #222;
-}
-
-.reservation input,
-.reservation select,
-.reservation textarea {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    font-size: 15px;
-    margin-bottom: 10px;
-}
-
-.two-col {
-    display: flex;
-    gap: 12px;
-}
-
-.two-col .col {
-    flex: 1;
-}
-
-.btn-submit {
-    padding: 14px 18px;
-    border-radius: 10px;
-    background: var(--accent);
-    color: var(--surface);
-    font-weight: 700;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-}
-
-.thankyou {
-    display: none;
-    padding: 36px;
-    text-align: center;
-    color: var(--bg);
-}
-
-/* =========================================================
-   Fade-up Animation（滾動淡入）
-   ========================================================= */
-.fade-up {
-    opacity: 0;
-    transform: translateY(18px);
-    transition: opacity .6s ease, transform .6s ease;
-}
-
-.fade-up.in {
-    opacity: 1;
-    transform: none;
-}
-
-/* =========================================================
-   Footer
-   ========================================================= */
-footer {
-    background: #080808;
-    color: rgba(255,255,255,.9);
-    padding: 30px 20px;
-    text-align: center;
-}
-
-/* =========================================================
-   Responsive（RWD）
-   ========================================================= */
-@media(max-width:900px) {
-
-    /* 課程、教練改成單欄 */
-    .course-cards,
-    .coaches {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    /* 桌機選單隱藏，改用漢堡 */
-    .nav-links {
-        display: none;
-    }
-
-    /* 顯示漢堡 */
-    .hamburger {
-        display: flex;
-    }
-
-    /* HERO 字體縮小 */
-    .hero h1 {
-        font-size: 36px;
-    }
-
-    /* 按鈕垂直排列 */
-    .hero-buttons {
-        flex-direction: column;
-        gap: 12px;
-    }
-}
-/* --- Pricing Section --- */
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
-  margin-top: 30px;
-}
-
-.price-card {
-  background: #fff;
-  padding: 24px;
-  border-radius: 16px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-  transition: .3s;
-  border: 1px solid #eee;
-}
-
-.price-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
-}
-
-.price-card h3 {
-  margin-bottom: 8px;
-  font-size: 1.4rem;
-}
-
-.price-card .date {
-  font-size: 0.9rem;
-  color: #666;
-  margin-bottom: 18px;
-}
-
-.price-card ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.price-card li {
-  margin: 8px 0;
-  font-size: 1rem;
-}
-
-/* ================================
-   美化價格 Pricing Section
-===================================*/
-#pricing {
-  margin-top: 80px;
-}
-
-#pricing h2 {
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-/* GRID LAYOUT */
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 32px;
-  padding: 0 12px;
-}
-
-/* PRICE CARD */
-.price-card {
-  background: white;
-  border-radius: 16px;
-  padding: 28px 24px;
-  box-shadow: 0 6px 22px rgba(0,0,0,0.12);
-  border: 1px solid rgba(0,0,0,0.06);
-  transition: transform .28s ease, box-shadow .28s ease;
-  cursor: pointer;
-  overflow: hidden;
-}
-
-.price-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.18);
-}
-
-/* 標題 */
-.price-card h3 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-
-/* 日期 */
-.price-card .date {
-  color: #666;
-  font-size: .92rem;
-  margin-bottom: 18px;
-}
-
-/* 收費列表（可折疊） */
-.price-details {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height .5s cubic-bezier(0.33, 1, 0.68, 1);
-}
-
-.price-details.open {
-  max-height: 800px; /* 夠大避免壓縮內容 */
-}
-
-.price-details ul {
-  padding-left: 0;
-  list-style: none;
-}
-
-.price-details li {
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(0,0,0,0.06);
-}
-
-.price-details li:last-child {
-  border-bottom: none;
-}
-
-/* ▼ 展開箭頭 */
-.price-toggle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 600;
-  font-size: 1.1rem;
-  padding: 10px 0;
-  cursor: pointer;
-}
-
-.price-toggle svg {
-  width: 22px;
-  height: 22px;
-  transition: transform .35s ease;
-}
-
-.price-toggle.open svg {
-  transform: rotate(180deg);
-}
-
-/* =========================================
-   APPLE STYLE — Pricing Cards
-   ========================================= */
-
+   Pricing Cards (Apple Style, No Collapse)
+========================================================= */
 .pricing-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
@@ -576,7 +245,6 @@ footer {
   margin-top: 32px;
 }
 
-/* 通用卡片外觀 */
 .price-card {
   padding: 32px;
   border-radius: 24px;
@@ -585,7 +253,6 @@ footer {
   transition: transform .25s ease, box-shadow .25s ease;
 }
 
-/* 滑鼠移過呈現高級浮起效果 */
 .price-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 12px 28px rgba(0,0,0,0.12);
@@ -603,7 +270,6 @@ footer {
   margin-bottom: 20px;
 }
 
-/* 列表美化 */
 .price-card ul {
   list-style: none;
   padding: 0;
@@ -616,7 +282,6 @@ footer {
   border-bottom: 1px solid rgba(0,0,0,0.06);
 }
 
-/* 左右雙色卡片（Apple 風格） */
 .soft-left {
   background: linear-gradient(135deg, #F4F8FF 0%, #FFFFFF 70%);
 }
@@ -625,8 +290,115 @@ footer {
   background: linear-gradient(135deg, #FFF6F3 0%, #FFFFFF 70%);
 }
 
-/* RWD */
-@media (max-width: 768px) {
+/* =========================================================
+   Reservation Form
+========================================================= */
+.reservation .card-form {
+  background: var(--surface);
+  padding: 22px;
+  border-radius: 12px;
+  max-width: 720px;
+  margin: 0 auto;
+  box-shadow: 0 18px 50px rgba(10,10,10,0.08);
+}
+
+.reservation label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #222;
+}
+
+.reservation input,
+.reservation select,
+.reservation textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.two-col {
+  display: flex;
+  gap: 12px;
+}
+
+.two-col .col {
+  flex: 1;
+}
+
+.btn-submit {
+  padding: 14px 18px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: var(--surface);
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.thankyou {
+  display: none;
+  padding: 36px;
+  text-align: center;
+  color: var(--bg);
+}
+
+/* =========================================================
+   Fade-up Animation
+========================================================= */
+.fade-up {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+.fade-up.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* =========================================================
+   Footer
+========================================================= */
+footer {
+  background: #080808;
+  color: rgba(255,255,255,.9);
+  padding: 30px 20px;
+  text-align: center;
+}
+
+/* =========================================================
+   Responsive
+========================================================= */
+@media(max-width:900px) {
+  .course-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+@media(max-width:768px) {
   .price-card {
     padding: 24px;
   }

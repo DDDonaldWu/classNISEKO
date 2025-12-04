@@ -40,7 +40,7 @@
   </header>
 
   <!-- Mobile Nav -->
-  <nav class="mobile-nav">
+  <nav class="mobile-nav" aria-hidden="true">
     <a href="#hero">首頁</a>
     <a href="#courses">課程</a>
     <a href="#about">關於</a>
@@ -60,7 +60,6 @@
         <p class="fade-up" style="transition-delay:.08s">
           Private ski lessons in Niseko — personalized coaching for confidence on the snow.
         </p>
-
         <div class="hero-buttons fade-up" style="transition-delay:.12s">
           <a class="btn btn-primary" href="#reservation">立即預約</a>
           <a class="btn btn-outline" href="#courses">了解課程</a>
@@ -71,7 +70,6 @@
     <!-- COURSES -->
     <section id="courses" class="container courses">
       <h2 class="fade-up">課程介紹</h2>
-
       <div class="course-cards">
         <article class="card fade-up" style="transition-delay:.05s">
           <h3>入門課程</h3>
@@ -109,7 +107,6 @@
     <!-- SERVICE AREA -->
     <section id="service" class="container">
       <h2 class="fade-up">授課區域</h2>
-
       <div class="service-list fade-up" style="transition-delay:.06s">
         <div class="service-item">Hirafu</div>
         <div class="service-item">Niseko Village</div>
@@ -118,34 +115,15 @@
       </div>
     </section>
 
-    <!-- COACHES (暫時隱藏) -->
-    <section id="coaches" class="container" style="display:none">
-      <h2 class="fade-up">教練團隊</h2>
-
-      <div class="coaches">
-        <div class="coach fade-up" style="transition-delay:.04s">
-          <h4>Head Coach — Takumi</h4>
-          <p>資深教練，熟悉二世谷各單元與教學法。</p>
-        </div>
-
-        <div class="coach fade-up" style="transition-delay:.08s">
-          <h4>Coach — Emi</h4>
-          <p>兒童與成人教學經驗豐富，善於建立信心。</p>
-        </div>
-      </div>
-    </section>
-
     <!-- PRICING -->
     <section id="pricing" class="container">
       <h2 class="fade-up">價格方案</h2>
-
       <div class="pricing-grid fade-up">
 
         <!-- 平日方案 -->
         <div class="price-card soft-left">
           <h3>平日方案</h3>
           <p class="date">11/20–12/14 ・ 3/1–End</p>
-
           <ul>
             <li><strong>Full Day 7H</strong> — ¥28,000 JPY</li>
             <li><strong>Full Day 6H</strong> — ¥25,000 JPY</li>
@@ -159,7 +137,6 @@
         <div class="price-card soft-right">
           <h3>旺季方案</h3>
           <p class="date">12/15–1/5 ・ 2/10–2/25</p>
-
           <ul>
             <li><strong>Full Day 7H</strong> — ¥35,000 JPY</li>
             <li><strong>Full Day 6H</strong> — ¥32,000 JPY</li>
@@ -185,22 +162,18 @@
     <section id="faq" class="faq-section fade-up">
       <div class="container">
         <h2>常見問題 FAQ</h2>
-
         <div class="faq-item">
           <h3 class="faq-question">課程適合什麼程度的人？</h3>
           <p class="faq-answer">我們的課程從完全初學者到進階都適合，會依照你的程度調整。</p>
         </div>
-
         <div class="faq-item">
           <h3 class="faq-question">是否提供裝備租借？</h3>
           <p class="faq-answer">是的，我們提供全套滑雪裝備，亦可自行攜帶。</p>
         </div>
-
         <div class="faq-item">
           <h3 class="faq-question">課程可以改期嗎？</h3>
           <p class="faq-answer">課程可於 48 小時前聯繫我們進行改期。</p>
         </div>
-
       </div>
     </section>
 
@@ -208,10 +181,8 @@
     <section id="reservation" class="reservation" style="padding-top:36px;padding-bottom:84px">
       <div class="container">
         <h2>預約課程</h2>
-
         <div class="card-form fade-up" style="margin-top:12px">
           <form id="reservationForm">
-
             <label for="r_name">姓名</label>
             <input id="r_name" name="name" required>
 
@@ -227,7 +198,6 @@
                   <option value="snowboard">單板</option>
                 </select>
               </div>
-
               <div class="col">
                 <label for="r_resort">滑雪場</label>
                 <select id="r_resort" name="resort" required>
@@ -250,7 +220,6 @@
                   <option value="4">4 人</option>
                 </select>
               </div>
-
               <div class="col">
                 <label for="r_start">開始日期</label>
                 <input id="r_start" type="date" name="startDate" required>
@@ -281,7 +250,6 @@
             <h3>感謝您的預約！</h3>
             <p>我們已收到您的訊息，將盡快以您提供的聯絡方式回覆。</p>
           </div>
-
         </div>
       </div>
     </section>
@@ -300,7 +268,6 @@
 
   <!-- JS -->
   <script src="script.js"></script>
-
 </body>
 
 </html>
