@@ -1,13 +1,18 @@
+/* =========================================================
+   Root Variables（主題色、尺寸）
+   ========================================================= */
 :root {
     --bg: #0b0b0b;
     --surface: #fff;
-    --accent: #8b0000;      /* 調整點：可改紅色 */
+    --accent: #8b0000;      /* 調整點：主色，可換紅色 */
     --muted: #7a7a7a;
     --radius: 12px;
-    --header-h: 64px;       /* 調整點：header 高度 */
+    --header-h: 64px;        /* 調整點：header 高度 */
 }
 
-/* Reset & Base */
+/* =========================================================
+   Reset & Base
+   ========================================================= */
 * {
     box-sizing: border-box;
 }
@@ -30,13 +35,15 @@ main {
     overflow-x: hidden;
 }
 
-/* Header */
+/* =========================================================
+   Header（桌機導覽列）
+   ========================================================= */
 header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: var(--header-h);     /* 調整點 */
+    height: var(--header-h);
     display: flex;
     align-items: center;
     padding: 0 28px;
@@ -52,7 +59,7 @@ header {
 
 .nav-links {
     display: flex;
-    gap: 28px;                  /* 調整點：連結間距 */
+    gap: 28px;                /* 調整點：桌機選單間距 */
     margin-left: auto;
 }
 
@@ -66,16 +73,18 @@ header {
     color: var(--accent);
 }
 
-/* Hamburger */
+/* =========================================================
+   Hamburger（手機版漢堡選單）
+   ========================================================= */
 .hamburger {
     position: absolute;
-    right: 0;                     /* 調整點：貼右邊 */
+    right: 0;                 /* 調整點：貼右邊 */
     top: 50%;
     transform: translateY(-50%);
-    display: none;
+    display: none;            /* 桌面不顯示，手機版才顯示 */
     flex-direction: column;
-    width: 44px;                  /* 調整點：漢堡容器寬度 */
-    height: 24px;                 /* 調整點：漢堡容器高度 */
+    width: 44px;              /* 調整點：容器寬 */
+    height: 24px;             /* 調整點：容器高 */
     justify-content: space-between;
     cursor: pointer;
     z-index: 1100;
@@ -83,16 +92,16 @@ header {
 
 .hamburger span {
     display: block;
-    height: 3px;                  /* 調整點：橫線高度 */
-    width: 35px;                  /* 調整點：橫線長度 */
-    background: #fff;             /* 調整點：X 線顏色 */
+    height: 3px;              /* 調整點：線條粗細 */
+    width: 35px;              /* 調整點：漢堡線長度 */
+    background: #fff;
     border-radius: 3px;
     transition: all 0.3s ease;
 }
 
+/* X動態效果 */
 .hamburger.active span:nth-child(1) {
-    transform: translateY(10px) rotate(45deg); /* 調整點：X 線斜度與位移 */
-    background: #fff;
+    transform: translateY(10px) rotate(45deg);
 }
 
 .hamburger.active span:nth-child(2) {
@@ -100,16 +109,17 @@ header {
 }
 
 .hamburger.active span:nth-child(3) {
-    transform: translateY(-10px) rotate(-45deg); /* 調整點：X 線斜度與位移 */
-    background: #fff;
+    transform: translateY(-10px) rotate(-45deg);
 }
 
-/* Mobile nav */
+/* =========================================================
+   Mobile Navigation（手機版側欄選單）
+   ========================================================= */
 .mobile-nav {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 70%;                   /* 調整點：選單寬度 */
+    width: 70%;               /* 調整點：手機側欄寬度 */
     max-width: 320px;
     height: 100vh;
     background: var(--bg);
@@ -130,7 +140,9 @@ header {
     right: 0;
 }
 
-/* Hero */
+/* =========================================================
+   Hero Section（大首頁 Banner）
+   ========================================================= */
 .hero {
     margin-top: var(--header-h);
     height: calc(100vh - var(--header-h));
@@ -138,37 +150,38 @@ header {
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.48)),
-                url('https://images.unsplash.com/photo-1674297026373-6e2b74da47b6?fm=jpg&q=80&w=2400') center/cover no-repeat;
+    background:
+        linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.48)),
+        url('https://images.unsplash.com/photo-1674297026373-6e2b74da47b6?fm=jpg&q=80&w=2400')
+        center/cover no-repeat;
     color: var(--surface);
     position: relative;
 }
 
 .hero .inner {
     z-index: 5;
-    position: relative;
     max-width: 980px;
     padding: 28px;
 }
 
 .hero-buttons {
     display: flex;
-    gap: 14px;                     /* 調整點：按鈕間距 */
+    gap: 14px;                /* 調整點：按鈕間距 */
     justify-content: center;
     flex-wrap: wrap;
-    position: relative;
-    z-index: 5;                     /* 調整點：避免被背景遮蓋 */
+    z-index: 5;
 }
 
-/* Buttons */
+/* =========================================================
+   Buttons（按鈕樣式）
+   ========================================================= */
 .btn {
     display: inline-block;
     padding: 12px 26px;
     border-radius: 10px;
     font-weight: 700;
     cursor: pointer;
-    text-decoration: none;
-    transition: transform .18s ease, box-shadow .18s;
+    transition: transform .18s ease, box-shadow .18s ease;
 }
 
 .btn-primary {
@@ -191,9 +204,11 @@ header {
     background: rgba(255,255,255,0.06);
 }
 
-/* Sections */
+/* =========================================================
+   Generic Sections
+   ========================================================= */
 section {
-    padding: 72px 20px;             /* 調整點：區塊上下距 */
+    padding: 72px 20px;       /* 調整點：區塊上下距 */
 }
 
 .container {
@@ -201,6 +216,9 @@ section {
     margin: 0 auto;
 }
 
+/* =========================================================
+   Courses（課程卡片）
+   ========================================================= */
 .course-cards {
     display: flex;
     gap: 20px;
@@ -221,12 +239,18 @@ section {
     box-shadow: 0 20px 50px rgba(10,10,10,0.12);
 }
 
+/* =========================================================
+   Coaches（教練團隊）
+   ========================================================= */
 .coaches {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
 }
 
+/* =========================================================
+   Pricing（價格卡片）
+   ========================================================= */
 .price-box {
     background: linear-gradient(180deg,#fff,#fbfbfb);
     padding: 18px;
@@ -234,6 +258,7 @@ section {
     border: 1px solid #eee;
     display: inline-block;
 }
+
 .price-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -284,13 +309,10 @@ section {
 .price-list li:last-child {
     border-bottom: none;
 }
-.cta {
-    background: var(--bg);
-    color: var(--surface);
-    padding: 56px 20px;
-    border-top: 6px solid var(--accent);
-}
 
+/* =========================================================
+   Reservation Form（預約表單）
+   ========================================================= */
 .reservation .card-form {
     background: var(--surface);
     padding: 22px;
@@ -345,7 +367,9 @@ section {
     color: var(--bg);
 }
 
-/* Fade-up animation */
+/* =========================================================
+   Fade-up Animation（滾動淡入）
+   ========================================================= */
 .fade-up {
     opacity: 0;
     transform: translateY(18px);
@@ -357,7 +381,9 @@ section {
     transform: none;
 }
 
-/* Footer */
+/* =========================================================
+   Footer
+   ========================================================= */
 footer {
     background: #080808;
     color: rgba(255,255,255,.9);
@@ -365,28 +391,36 @@ footer {
     text-align: center;
 }
 
-/* Responsive */
+/* =========================================================
+   Responsive（RWD）
+   ========================================================= */
 @media(max-width:900px) {
+
+    /* 課程、教練改成單欄 */
     .course-cards,
     .coaches {
         flex-direction: column;
         align-items: center;
     }
 
+    /* 桌機選單隱藏，改用漢堡 */
     .nav-links {
         display: none;
     }
 
+    /* 顯示漢堡 */
     .hamburger {
         display: flex;
     }
 
+    /* HERO 字體縮小 */
     .hero h1 {
-        font-size: 36px;            /* 調整點：HERO 字體大小 */
+        font-size: 36px;
     }
 
+    /* 按鈕垂直排列 */
     .hero-buttons {
-        flex-direction: column;      /* 調整點：按鈕垂直排列 */
+        flex-direction: column;
         gap: 12px;
     }
 }
