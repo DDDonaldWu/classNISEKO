@@ -236,7 +236,7 @@ section {
 }
 
 /* =========================================================
-   Pricing Cards (Apple Style, No Collapse)
+   Pricing Cards (Apple Style + Scroll Fade-in + Hover Glow)
 ========================================================= */
 .pricing-grid {
   display: grid;
@@ -250,26 +250,45 @@ section {
   border-radius: 24px;
   background: #ffffff;
   box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-  transition: transform .25s ease, box-shadow .25s ease;
+  transition: transform .25s ease, box-shadow .25s ease, background .3s ease, opacity .6s ease, transform .6s ease;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px);
 }
 
+/* 左右漸層背景 */
+.soft-left {
+  background: linear-gradient(135deg, #F4F8FF 0%, #FFFFFF 70%);
+}
+
+.soft-right {
+  background: linear-gradient(135deg, #FFF6F3 0%, #FFFFFF 70%);
+}
+
+/* hover 動態效果 */
 .price-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+  background-size: 120% 120%;
 }
 
+/* 標題 */
 .price-card h3 {
   font-size: 1.4rem;
   font-weight: 700;
   margin-bottom: 4px;
 }
 
+/* 日期 */
 .price-card .date {
   font-size: .95rem;
   color: var(--muted);
   margin-bottom: 20px;
 }
 
+/* 收費列表 */
 .price-card ul {
   list-style: none;
   padding: 0;
@@ -282,12 +301,52 @@ section {
   border-bottom: 1px solid rgba(0,0,0,0.06);
 }
 
-.soft-left {
-  background: linear-gradient(135deg, #F4F8FF 0%, #FFFFFF 70%);
+.price-card li:last-child {
+  border-bottom: none;
 }
 
-.soft-right {
-  background: linear-gradient(135deg, #FFF6F3 0%, #FFFFFF 70%);
+/* 漸層光暈 (微移動) */
+.price-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: inherit;
+  filter: blur(60px);
+  opacity: 0.4;
+  transition: transform .5s ease;
+  z-index: 0;
+}
+
+.price-card:hover::before {
+  transform: rotate(10deg) translateX(10px) translateY(10px);
+}
+
+/* 內部文字保持最上層 */
+.price-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Scroll Fade-in (整合現有 fade-up) */
+.price-card.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+.price-card.fade-up.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* RWD */
+@media(max-width:768px) {
+  .price-card {
+    padding: 24px;
+  }
 }
 
 /* =========================================================

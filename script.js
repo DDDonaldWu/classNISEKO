@@ -29,9 +29,8 @@ window.addEventListener('scroll', () => {
   else header.classList.remove('scrolled');
 });
 
-/* ===========================================================
-   Fade-up Scroll Animation
-=========================================================== */
+// ===========================================================
+// Fade-up Scroll Animation (整合所有 fade-up)
 const fadeUps = document.querySelectorAll('.fade-up');
 const fadeObserver = new IntersectionObserver(
   entries => {
