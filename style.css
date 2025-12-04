@@ -557,7 +557,7 @@ section:not(.cta):not(#service):not(.hero) {
     
     #service ul {
         max-width: 100%;
-        list-style: none;
+        list-style: none !important;
         padding-left: 0;
     }
     
