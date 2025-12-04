@@ -1,235 +1,239 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CLASS NISEKO</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CLASS NISEKO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<header>
-  <div class="logo">CLASS NISEKO</div>
-  <nav class="nav-links">
-    <a href="#hero">首頁</a>
-    <a href="#courses">課程</a>
-    <a href="#about">關於</a>
-    <a href="#service">授課區域</a>
-    <a href="#coaches">教練</a>
-    <a href="#pricing">價格</a>
-    <a href="#faq">FAQ</a>
-    <a href="#reservation">預約</a>
-  </nav>
-  <div class="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</header>
-
-<nav class="mobile-nav">
-  <a href="#hero">首頁</a>
-  <a href="#courses">課程</a>
-  <a href="#about">關於</a>
-  <a href="#service">授課區域</a>
-  <a href="#coaches">教練</a>
-  <a href="#pricing">價格</a>
-  <a href="#faq">FAQ</a>
-  <a href="#reservation">預約</a>
-</nav>
-
-<main>
-  <!-- HERO -->
-  <section class="hero" id="hero">
-    <div class="inner">
-      <h1 class="fade-up">CLASS NISEKO</h1>
-      <p class="fade-up" style="transition-delay:.08s">Private ski lessons in Niseko — personalized coaching for confidence on the snow.</p>
-      <div class="hero-buttons fade-up" style="transition-delay:.12s">
-        <a class="btn btn-primary" href="#reservation">立即預約</a>
-        <a class="btn btn-outline" href="#courses">了解課程</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- COURSES -->
-  <section id="courses" class="container courses">
-    <h2 class="fade-up">課程介紹</h2>
-    <div class="course-cards">
-      <article class="card fade-up" style="transition-delay:.05s">
-        <h3>入門課程</h3>
-        <p>適合第一次上雪或想重新建立基礎的學員。</p>
-        <ul>
-          <li>裝備適應</li>
-          <li>基本姿勢與平衡</li>
-          <li>初階滑行與方向控制</li>
-        </ul>
-        <p><strong>建議時數：3 小時起</strong></p>
-      </article>
-      <article class="card fade-up" style="transition-delay:.12s">
-        <h3>進階課程</h3>
-        <p>適合已能穩定滑行、希望提升技巧的學員。</p>
-        <ul>
-          <li>平行轉彎技巧</li>
-          <li>速度控制與地形適應</li>
-          <li>動作分析與修正</li>
-        </ul>
-        <p><strong>建議時數：3 小時起</strong></p>
-      </article>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about" class="container about">
-    <h2 class="fade-up">關於我們</h2>
-    <p class="fade-up">Class NISEKO 是一群熟悉二世谷雪況與地形的滑雪教練團隊。我們專注於入門至中級的教學，以溫和、清楚、循序的方式建立你的滑行自信。</p>
-  </section>
-
-  <!-- SERVICE AREA -->
-  <section id="service" class="container">
-    <h2 class="fade-up">授課區域</h2>
-    <div class="service-list fade-up" style="transition-delay:.06s">
-      <div class="service-item">Hirafu</div>
-      <div class="service-item">Niseko Village</div>
-      <div class="service-item">Annupuri</div>
-      <div class="service-item">Moiwa</div>
-    </div>
-  </section>
-
-  <!-- COACHES -->
-  <section id="coaches" class="container">
-    <h2 class="fade-up">教練團隊</h2>
-    <div class="coaches">
-      <div class="coach fade-up" style="transition-delay:.04s">
-        <h4>Head Coach — Takumi</h4>
-        <p>資深教練，熟悉二世谷各單元與教學法。</p>
-      </div>
-      <div class="coach fade-up" style="transition-delay:.08s">
-        <h4>Coach — Emi</h4>
-        <p>兒童與成人教學經驗豐富，善於建立信心。</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRICING -->
-  <section id="pricing" class="container">
-    <h2 class="fade-up">價格資訊</h2>
-    <div class="price-box fade-up" style="margin-top:12px">
-      <p>課程建議時數：<strong>3 小時起</strong></p>
-      <p style="color:var(--muted)">價格會依淡旺季和人數有所調整，請在預約時註明日期與人數以便報價。</p>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta container">
-    <h2>準備啟程了嗎？</h2>
-    <p>點擊下方「立即預約」填寫需求，我們會盡快回覆您。</p>
-    <div style="margin-top:18px">
-      <a class="btn btn-primary" href="#reservation">立即預約</a>
-    </div>
-  </section>
-  <!-- faq -->>
-  <section id="faq" class="faq-section fade-up">
-  <div class="container">
-    <h2>常見問題 FAQ</h2>
-
-    <div class="faq-item">
-      <h3 class="faq-question">課程適合什麼程度的人？</h3>
-      <p class="faq-answer">我們的課程從完全初學者到進階都適合，會依照你的程度進行調整。</p>
-    </div>
-
-    <div class="faq-item">
-      <h3 class="faq-question">是否提供裝備租借？</h3>
-      <p class="faq-answer">是的，我們提供全套滑雪裝備，亦可自行攜帶。</p>
-    </div>
-
-    <div class="faq-item">
-      <h3 class="faq-question">課程可以改期嗎？</h3>
-      <p class="faq-answer">課程可於 48 小時前聯繫我們進行改期。</p>
-    </div>
-
-  </div>
-</section>
-
-  <!-- Reservation Form -->
-  <section id="reservation" class="reservation" style="padding-top:36px;padding-bottom:84px">
-    <div class="container">
-      <h2>預約課程</h2>
-      <div class="card-form fade-up" style="margin-top:12px">
-        <form id="reservationForm">
-          <label for="r_name">姓名</label>
-          <input id="r_name" name="name" required>
-          <label for="r_email">Email</label>
-          <input id="r_email" type="email" name="email" required>
-          <div class="two-col">
-            <div class="col">
-              <label for="r_board">課程選擇</label>
-              <select id="r_board" name="board" required>
-                <option value="">請選擇</option>
-                <option value="ski">雙板</option>
-                <option value="snowboard">單板</option>
-              </select>
-            </div>
-            <div class="col">
-              <label for="r_resort">滑雪場</label>
-              <select id="r_resort" name="resort" required>
-                <option value="">請選擇</option>
-                <option value="Hirafu">Hirafu</option>
-                <option value="Niseko Village">Niseko Village</option>
-                <option value="Annupuri">Annupuri</option>
-              </select>
-            </div>
-          </div>
-          <div class="two-col">
-            <div class="col">
-              <label for="r_people">人數（1–4）</label>
-              <select id="r_people" name="people" required>
-                <option value="">請選擇</option>
-                <option value="1">1 人</option>
-                <option value="2">2 人</option>
-                <option value="3">3 人</option>
-                <option value="4">4 人</option>
-              </select>
-            </div>
-            <div class="col">
-              <label for="r_start">開始日期</label>
-              <input id="r_start" type="date" name="startDate" required>
-            </div>
-          </div>
-          <label for="r_contactMethod">聯絡方式</label>
-          <select id="r_contactMethod" name="contactMethod" required>
-            <option value="">請選擇</option>
-            <option value="LINE">LINE</option>
-            <option value="WeChat">WeChat</option>
-            <option value="WhatsApp">WhatsApp</option>
-          </select>
-          <label for="r_contactID">您的 ID</label>
-          <input id="r_contactID" name="contactID" placeholder="請輸入您的 LINE/WeChat/WhatsApp ID" required>
-          <label for="r_remarks">備註 / 需求</label>
-          <textarea id="r_remarks" name="remarks" rows="4" placeholder="請留下您的滑雪經驗以及其他需求"></textarea>
-          <div style="margin-top:12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
-            <button type="submit" class="btn-submit">送出預約</button>
-            <div id="loading" style="display:none;color:var(--muted)">處理中...</div>
-          </div>
-        </form>
-        <div id="thankyou" class="thankyou" aria-live="polite">
-          <h3>感謝您的預約！</h3>
-          <p>我們已收到您的訊息，將盡快以您提供的聯絡方式回覆。</p>
+    <header>
+        <div class="logo">CLASS NISEKO</div>
+        <nav class="nav-links">
+            <a href="#hero">首頁</a>
+            <a href="#courses">課程</a>
+            <a href="#about">關於</a>
+            <a href="#service">授課區域</a>
+            <a href="#coaches">教練</a>
+            <a href="#pricing">價格</a>
+            <a href="#faq">FAQ</a>
+            <a href="#reservation">預約</a>
+        </nav>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
-      </div>
-    </div>
-  </section>
-</main>
+    </header>
 
-<footer>
-  <div style="max-width:1100px;margin:0 auto;padding:8px 18px;color:rgba(255,255,255,0.9)">
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
-      <div>© Class NISEKO 2025</div>
-      <div style="color:rgba(255,255,255,0.6)">Contact | Instagram | LINE</div>
-    </div>
-  </div>
-</footer>
+    <nav class="mobile-nav">
+        <a href="#hero">首頁</a>
+        <a href="#courses">課程</a>
+        <a href="#about">關於</a>
+        <a href="#service">授課區域</a>
+        <a href="#coaches">教練</a>
+        <a href="#pricing">價格</a>
+        <a href="#faq">FAQ</a>
+        <a href="#reservation">預約</a>
+    </nav>
 
-<script src="script.js"></script>
+    <main>
+        <!-- HERO -->
+        <section class="hero" id="hero">
+            <div class="inner">
+                <h1 class="fade-up">CLASS NISEKO</h1>
+                <p class="fade-up" style="transition-delay:.08s">Private ski lessons in Niseko — personalized coaching
+                    for confidence on the snow.</p>
+                <div class="hero-buttons fade-up" style="transition-delay:.12s">
+                    <a class="btn btn-primary" href="#reservation">立即預約</a>
+                    <a class="btn btn-outline" href="#courses">了解課程</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- COURSES -->
+        <section id="courses" class="container courses">
+            <h2 class="fade-up">課程介紹</h2>
+            <div class="course-cards">
+                <article class="card fade-up" style="transition-delay:.05s">
+                    <h3>入門課程</h3>
+                    <p>適合第一次上雪或想重新建立基礎的學員。</p>
+                    <ul>
+                        <li>裝備適應</li>
+                        <li>基本姿勢與平衡</li>
+                        <li>初階滑行與方向控制</li>
+                    </ul>
+                    <p><strong>建議時數：3 小時起</strong></p>
+                </article>
+                <article class="card fade-up" style="transition-delay:.12s">
+                    <h3>進階課程</h3>
+                    <p>適合已能穩定滑行、希望提升技巧的學員。</p>
+                    <ul>
+                        <li>平行轉彎技巧</li>
+                        <li>速度控制與地形適應</li>
+                        <li>動作分析與修正</li>
+                    </ul>
+                    <p><strong>建議時數：3 小時起</strong></p>
+                </article>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section id="about" class="container about">
+            <h2 class="fade-up">關於我們</h2>
+            <p class="fade-up">Class NISEKO 是一群熟悉二世谷雪況與地形的滑雪教練團隊。我們專注於入門至中級的教學，以溫和、清楚、循序的方式建立你的滑行自信。</p>
+        </section>
+
+        <!-- SERVICE AREA -->
+        <section id="service" class="container">
+            <h2 class="fade-up">授課區域</h2>
+            <div class="service-list fade-up" style="transition-delay:.06s">
+                <div class="service-item">Hirafu</div>
+                <div class="service-item">Niseko Village</div>
+                <div class="service-item">Annupuri</div>
+                <div class="service-item">Moiwa</div>
+            </div>
+        </section>
+
+        <!-- COACHES -->
+        <section id="coaches" class="container">
+            <h2 class="fade-up">教練團隊</h2>
+            <div class="coaches">
+                <div class="coach fade-up" style="transition-delay:.04s">
+                    <h4>Head Coach — Takumi</h4>
+                    <p>資深教練，熟悉二世谷各單元與教學法。</p>
+                </div>
+                <div class="coach fade-up" style="transition-delay:.08s">
+                    <h4>Coach — Emi</h4>
+                    <p>兒童與成人教學經驗豐富，善於建立信心。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRICING -->
+        <section id="pricing" class="container">
+            <h2 class="fade-up">價格資訊</h2>
+            <div class="price-box fade-up" style="margin-top:12px">
+                <p>課程建議時數：<strong>3 小時起</strong></p>
+                <p style="color:var(--muted)">價格會依淡旺季和人數有所調整，請在預約時註明日期與人數以便報價。</p>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta container">
+            <h2>準備啟程了嗎？</h2>
+            <p>點擊下方「立即預約」填寫需求，我們會盡快回覆您。</p>
+            <div style="margin-top:18px">
+                <a class="btn btn-primary" href="#reservation">立即預約</a>
+            </div>
+        </section>
+        <!-- faq -->>
+        <section id="faq" class="faq-section fade-up">
+            <div class="container">
+                <h2>常見問題 FAQ</h2>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">課程適合什麼程度的人？</h3>
+                    <p class="faq-answer">我們的課程從完全初學者到進階都適合，會依照你的程度進行調整。</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">是否提供裝備租借？</h3>
+                    <p class="faq-answer">是的，我們提供全套滑雪裝備，亦可自行攜帶。</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">課程可以改期嗎？</h3>
+                    <p class="faq-answer">課程可於 48 小時前聯繫我們進行改期。</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Reservation Form -->
+        <section id="reservation" class="reservation" style="padding-top:36px;padding-bottom:84px">
+            <div class="container">
+                <h2>預約課程</h2>
+                <div class="card-form fade-up" style="margin-top:12px">
+                    <form id="reservationForm">
+                        <label for="r_name">姓名</label>
+                        <input id="r_name" name="name" required>
+                        <label for="r_email">Email</label>
+                        <input id="r_email" type="email" name="email" required>
+                        <div class="two-col">
+                            <div class="col">
+                                <label for="r_board">課程選擇</label>
+                                <select id="r_board" name="board" required>
+                                    <option value="">請選擇</option>
+                                    <option value="ski">雙板</option>
+                                    <option value="snowboard">單板</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="r_resort">滑雪場</label>
+                                <select id="r_resort" name="resort" required>
+                                    <option value="">請選擇</option>
+                                    <option value="Hirafu">Hirafu</option>
+                                    <option value="Niseko Village">Niseko Village</option>
+                                    <option value="Annupuri">Annupuri</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="two-col">
+                            <div class="col">
+                                <label for="r_people">人數（1–4）</label>
+                                <select id="r_people" name="people" required>
+                                    <option value="">請選擇</option>
+                                    <option value="1">1 人</option>
+                                    <option value="2">2 人</option>
+                                    <option value="3">3 人</option>
+                                    <option value="4">4 人</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="r_start">開始日期</label>
+                                <input id="r_start" type="date" name="startDate" required>
+                            </div>
+                        </div>
+                        <label for="r_contactMethod">聯絡方式</label>
+                        <select id="r_contactMethod" name="contactMethod" required>
+                            <option value="">請選擇</option>
+                            <option value="LINE">LINE</option>
+                            <option value="WeChat">WeChat</option>
+                            <option value="WhatsApp">WhatsApp</option>
+                        </select>
+                        <label for="r_contactID">您的 ID</label>
+                        <input id="r_contactID" name="contactID" placeholder="請輸入您的 LINE/WeChat/WhatsApp ID" required>
+                        <label for="r_remarks">備註 / 需求</label>
+                        <textarea id="r_remarks" name="remarks" rows="4" placeholder="請留下您的滑雪經驗以及其他需求"></textarea>
+                        <div style="margin-top:12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+                            <button type="submit" class="btn-submit">送出預約</button>
+                            <div id="loading" style="display:none;color:var(--muted)">處理中...</div>
+                        </div>
+                    </form>
+                    <div id="thankyou" class="thankyou" aria-live="polite">
+                        <h3>感謝您的預約！</h3>
+                        <p>我們已收到您的訊息，將盡快以您提供的聯絡方式回覆。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div style="max-width:1100px;margin:0 auto;padding:8px 18px;color:rgba(255,255,255,0.9)">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+                <div>© Class NISEKO 2025</div>
+                <div style="color:rgba(255,255,255,0.6)">Contact | Instagram | LINE</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
