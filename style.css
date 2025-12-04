@@ -341,3 +341,9 @@ footer {
         gap: 12px;
     }
 }
+
+/* 暫時隱藏教練區塊 */
+#coaches,
+.coaches-section {
+    display: none;
+}
