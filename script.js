@@ -115,19 +115,3 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 
-/* ===========================================================
-   Pricing - Collapse Animation（新版）
-   =========================================================== */
-document.querySelectorAll('.price-card').forEach(card => {
-  
-  const toggleBtn = card.querySelector('.price-toggle');   // 折疊按鈕
-  const detailBox = card.querySelector('.price-details');  // 內容區塊
-
-  // 安全檢查：避免 HTML 還沒加就報錯
-  if (!toggleBtn || !detailBox) return;
-
-  toggleBtn.addEventListener('click', () => {
-    detailBox.classList.toggle('open');
-    toggleBtn.classList.toggle('open');
-  });
-});
