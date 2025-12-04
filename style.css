@@ -539,3 +539,91 @@ footer {
     font-size: 0.95rem;
   }
 }
+
+/* ================================
+   高級質感價格卡片（黑白紅 + 光澤 + 立體感）
+===================================*/
+.price-card {
+  position: relative;
+  padding: 32px 28px;
+  border-radius: 24px;
+  background: #ffffff;
+  color: #111;
+  overflow: hidden;
+  box-shadow: 
+    0 4px 12px rgba(0,0,0,0.08),  /* 基本陰影 */
+    0 12px 30px rgba(0,0,0,0.12);  /* 浮起感 */
+  transition: transform .25s ease, box-shadow .25s ease, background .3s ease;
+  cursor: pointer;
+}
+
+/* 微光澤感 */
+.price-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15), transparent 70%);
+  transform: rotate(-25deg);
+  pointer-events: none;
+  transition: all .3s ease;
+}
+
+/* 滑鼠移入浮起 + 光暈強化 */
+.price-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 
+    0 8px 20px rgba(0,0,0,0.12),
+    0 18px 42px rgba(0,0,0,0.18);
+}
+
+.price-card:hover::before {
+  top: -40%;
+  left: -40%;
+  background: radial-gradient(circle at 25% 25%, rgba(255,255,255,0.2), transparent 70%);
+}
+
+/* 標題 */
+.price-card h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+/* 日期 */
+.price-card .date {
+  font-size: .95rem;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+/* 收費列表 */
+.price-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.price-card li {
+  padding: 10px 0;
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+/* RWD 手機版 */
+@media (max-width: 768px) {
+  .price-card {
+    padding: 24px 16px;
+  }
+  .price-card h3 {
+    font-size: 1.25rem;
+  }
+  .price-card .date {
+    font-size: 0.9rem;
+  }
+  .price-card li {
+    font-size: 0.95rem;
+  }
+}
