@@ -460,3 +460,9 @@ footer {
         font-size: 0.95rem;
     }
 }
+.cta {
+    background: var(--bg); /* 黑色 */
+    color: #fff;            /* 白色文字 */
+    padding: 72px 20px;
+    text-align: center;
+}
