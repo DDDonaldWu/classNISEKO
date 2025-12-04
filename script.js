@@ -99,16 +99,6 @@ const observer = new IntersectionObserver(entries => {
 // 全部元素加入觀察器
 fadeUps.forEach(el => observer.observe(el));
 
-// Pricing collapse
-const priceCards = document.querySelectorAll(".price-card");
-
-priceCards.forEach(card => {
-  const header = card.querySelector(".price-header");
-
-  header.addEventListener("click", () => {
-    card.classList.toggle("open");
-  });
-});
 
 // ===============================
 // Pricing Collapse Animation

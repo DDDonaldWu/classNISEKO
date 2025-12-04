@@ -564,3 +564,6 @@ footer {
 .price-toggle.open svg {
   transform: rotate(180deg);
 }
+
+<div class="price-card light">
+<div class="price-card dark">
