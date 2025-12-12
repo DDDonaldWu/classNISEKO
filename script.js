@@ -1,19 +1,17 @@
 /* ===========================================================
-   CLASS NISEKO — script.js
-   Purpose:
-   - Navigation (hamburger / mobile nav)
+   CLASS NISEKO — Final Stable script.js
+   - Hamburger / Mobile Nav
    - Header scroll effect
    - Fade-up animation
-   - Reservation form (multi-course)
-   - Frontend validation
-   - Smooth anchor scrolling
+   - Simple email validation
+   - Reservation submit → Google Apps Script
+   - Frontend redirect to thank-you page
 =========================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-
-  /* =========================================================
-     Navigation: Hamburger & Mobile Nav
-  ========================================================= */
+  /* ===============================
+     Hamburger & Mobile Nav
+  =============================== */
   const hamburger = document.querySelector('.hamburger');
   const mobileNav = document.querySelector('.mobile-nav');
 
@@ -29,16 +27,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     mobileNav.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
         mobileNav.classList.remove('active');
+        hamburger.classList.remove('active');
         mobileNav.setAttribute('aria-hidden', 'true');
       });
     });
   }
 
-  /* =========================================================
+  /* ===============================
      Header Scroll Effect
-  ========================================================= */
+  =============================== */
   const header = document.querySelector('header');
   if (header) {
     window.addEventListener('scroll', () => {
@@ -46,28 +44,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* =========================================================
+  /* ===============================
      Fade-up Animation
-  ========================================================= */
+  =============================== */
   const fadeUps = document.querySelectorAll('.fade-up');
   if (fadeUps.length) {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('in');
-        observer.unobserve(entry.target);
-      });
-    }, {
-      threshold: 0.18,
-      rootMargin: '0px 0px -40px 0px'
-    });
-
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('in');
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.18, rootMargin: '0px 0px -40px 0px' }
+    );
     fadeUps.forEach(el => observer.observe(el));
   }
 
-  /* =========================================================
-     Frontend Validation: Email (即時防呆)
-  ========================================================= */
+  /* ===============================
+     Simple Email Validation (UX)
+  =============================== */
   const emailInput = document.getElementById('r_email');
   if (emailInput) {
     const error = document.createElement('div');
@@ -75,160 +72,90 @@ document.addEventListener('DOMContentLoaded', () => {
     error.style.cssText = `
       color:#8b0000;
       font-size:14px;
-      margin:-8px 0 12px;
+      margin-top:-8px;
+      margin-bottom:12px;
       display:none;
     `;
     emailInput.after(error);
 
     emailInput.addEventListener('input', () => {
-      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim());
-      error.style.display = (!emailInput.value || valid) ? 'none' : 'block';
+      const val = emailInput.value.trim();
+      const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+      error.style.display = val && !ok ? 'block' : 'none';
     });
   }
 
-  /* =========================================================
-     Reservation Form: Multi-course Handling
-  ========================================================= */
-  const courseList = document.getElementById('courseList');
-  const addBtn = document.getElementById('addCourseBtn');
+  /* ===============================
+     Reservation Submit (Route B)
+  =============================== */
+  const form = document.getElementById('reservationForm');
+  if (!form) return;
 
-  if (courseList && addBtn) {
+  form.addEventListener('submit', async e => {
+    e.preventDefault(); // ⭐ 關鍵：由前端接管流程
 
-    // Add course block
-    addBtn.addEventListener('click', () => {
-      const count = courseList.children.length + 1;
+    const email = document.getElementById('r_email')?.value.trim();
+    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-      const item = document.createElement('div');
-      item.className = 'course-item';
-      item.innerHTML = `
-        <h3>課程 ${count}</h3>
+    if (!emailValid) {
+      alert('請確認 Email 格式是否正確');
+      return;
+    }
 
-        <label>日期</label>
-        <input type="date" name="course_date[]" required>
+    const submitBtn = form.querySelector('.btn-submit');
+    const loading = document.getElementById('loading');
 
-        <label>雪場</label>
-        <select name="course_resort[]" required>
-          <option value="">請選擇雪場</option>
-          <option value="Niseko Grand Hirafu">Niseko Grand Hirafu</option>
-          <option value="Niseko Annupuri">Niseko Annupuri</option>
-          <option value="Hanazono">Hanazono</option>
-          <option value="Moiwa">Moiwa</option>
-        </select>
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = '送出中...';
+    }
+    if (loading) loading.style.display = 'inline-block';
 
-        <label>課程時數</label>
-        <select name="course_duration[]" class="duration" required>
-          <option value="">選擇時數</option>
-          <option value="3">3 小時</option>
-          <option value="6">6 小時</option>
-          <option value="7">7 小時</option>
-        </select>
+    try {
+      const res = await fetch(
+        'https://script.google.com/macros/s/AKfycbwWGqhq9PEzCAJguEliRCpL_WLld8voFfAtL6cHAvwIqaiqWzQNKHrIIXi1bMlJHrLgsw/exec',
+        {
+          method: 'POST',
+          body: new FormData(form)
+        }
+      );
 
-        <div class="time-slot" style="display:none">
-          <label>時段（3 小時課程）</label>
-          <select name="course_timeslot[]">
-            <option value="09:00-12:00">09:00 — 12:00</option>
-            <option value="13:00-16:00">13:00 — 16:00</option>
-          </select>
-        </div>
+      if (!res.ok) throw new Error('Network error');
 
-        <button type="button" class="delete-course">刪除此課程</button>
-        <hr class="course-split">
-      `;
-      courseList.appendChild(item);
-    });
+      const result = await res.json();
+      if (!result.ok) throw new Error('GAS error');
 
-    // Toggle time slot
-    courseList.addEventListener('change', e => {
-      if (!e.target.classList.contains('duration')) return;
-      const slot = e.target.closest('.course-item')?.querySelector('.time-slot');
-      if (slot) slot.style.display = e.target.value === '3' ? 'block' : 'none';
-    });
+      // ✅ 成功 → 前端跳轉
+      window.location.href = '/thank-you.html';
 
-    // Delete course
-    courseList.addEventListener('click', e => {
-      if (e.target.classList.contains('delete-course')) {
-        e.target.closest('.course-item')?.remove();
+    } catch (err) {
+      console.error(err);
+      alert('送出失敗，請稍後再試或直接聯絡我們');
+
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '送出';
       }
-    });
-  }
-
-/* =========================================================
-   Smooth Scroll + Close Mobile Nav
-========================================================= */
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    const href = this.getAttribute('href');
-    if (!href || href === '#') return;
-
-    const target = document.querySelector(href);
-    if (!target) return;
-
-    e.preventDefault();
-
-    target.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
-    });
-
-    // ⭐ 只有在「手機選單內點擊」才關閉
-    if (
-      mobileNav &&
-      hamburger &&
-      mobileNav.classList.contains('active') &&
-      this.closest('.mobile-nav')
-    ) {
-      mobileNav.classList.remove('active');
-      hamburger.classList.remove('active');
-      mobileNav.setAttribute('aria-hidden', 'true');
+      if (loading) loading.style.display = 'none';
     }
   });
+
+  /* ===============================
+     Smooth Anchor Scroll
+  =============================== */
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', e => {
+      const target = document.querySelector(anchor.getAttribute('href'));
+      if (!target) return;
+
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      if (mobileNav?.classList.contains('active')) {
+        mobileNav.classList.remove('active');
+        hamburger.classList.remove('active');
+        mobileNav.setAttribute('aria-hidden', 'true');
+      }
+    });
+  });
 });
-});
-
-/* =========================================================
-   Form Submit Guard (送出前最後防呆)
-   - 綁在 <form onsubmit="return handleFormSubmit()">
-========================================================= */
-async function handleFormSubmit(e) {
-  e.preventDefault(); // ⭐ 關鍵：我們自己接管流程
-
-  const email = document.getElementById('r_email')?.value.trim();
-  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-  if (!emailValid) {
-    alert('請確認 Email 格式是否正確');
-    return;
-  }
-
-  const btn = document.querySelector('.btn-submit');
-  const loading = document.getElementById('loading');
-
-  if (btn) {
-    btn.disabled = true;
-    btn.textContent = '送出中...';
-  }
-  if (loading) loading.style.display = 'inline-block';
-
-  const form = document.getElementById('reservationForm');
-  const formData = new FormData(form);
-
-  // ⭐ 直接送給 GAS
-  const res = await fetch(
-    'https://script.google.com/macros/s/AKfycbwWGqhq9PEzCAJguEliRCpL_WLld8voFfAtL6cHAvwIqaiqWzQNKHrIIXi1bMlJHrLgsw/exec',
-    {
-      method: 'POST',
-      body: formData
-    }
-  );
-
-  if (!res.ok) {
-    alert('送出失敗，請稍後再試');
-    btn.disabled = false;
-    btn.textContent = '送出';
-    loading.style.display = 'none';
-    return;
-  }
-
-  // ⭐ 成功 → 前端自己跳轉
-  window.location.href = '/thank-you.html';
-}
