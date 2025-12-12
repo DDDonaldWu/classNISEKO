@@ -189,23 +189,46 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
    Form Submit Guard (送出前最後防呆)
    - 綁在 <form onsubmit="return handleFormSubmit()">
 ========================================================= */
-function handleFormSubmit() {
-  const email = document.getElementById('r_email')?.value.trim();
-  const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+async function handleFormSubmit(e) {
+  e.preventDefault(); // ⭐ 關鍵：我們自己接管流程
 
-  if (!valid) {
+  const email = document.getElementById('r_email')?.value.trim();
+  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  if (!emailValid) {
     alert('請確認 Email 格式是否正確');
-    return false;
+    return;
   }
 
   const btn = document.querySelector('.btn-submit');
+  const loading = document.getElementById('loading');
+
   if (btn) {
     btn.disabled = true;
     btn.textContent = '送出中...';
   }
-
-  const loading = document.getElementById('loading');
   if (loading) loading.style.display = 'inline-block';
 
-  return true; // 讓表單真的送出
+  const form = document.getElementById('reservationForm');
+  const formData = new FormData(form);
+
+  // ⭐ 直接送給 GAS
+  const res = await fetch(
+    'https://script.google.com/macros/s/AKfycbwWGqhq9PEzCAJguEliRCpL_WLld8voFfAtL6cHAvwIqaiqWzQNKHrIIXi1bMlJHrLgsw/exec',
+    {
+      method: 'POST',
+      body: formData
+    }
+  );
+
+  if (!res.ok) {
+    alert('送出失敗，請稍後再試');
+    btn.disabled = false;
+    btn.textContent = '送出';
+    loading.style.display = 'none';
+    return;
+  }
+
+  // ⭐ 成功 → 前端自己跳轉
+  window.location.href = '/thank-you.html';
 }
