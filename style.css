@@ -108,7 +108,7 @@ header.scrolled{
 
 /* hamburger */
 .hamburger{
-  position:absolute;right:0;top:50%;transform:translateY(-50%);
+  margin-left: auto;
   display:none;flex-direction:column;width:44px;height:24px;justify-content:space-between;
   cursor:pointer;z-index:1100;padding:6px;
 }
