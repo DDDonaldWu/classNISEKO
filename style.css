@@ -171,49 +171,44 @@ header.scrolled {
     background: rgba(255, 255, 255, 0.03)
 }
 
-/* hamburger — geometrically correct X */
+/* hamburger — structurally correct */
 .hamburger {
-    margin-left: auto;
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    gap: 8px;
-    width: 44px;
-    height: 44px;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 1100;
+  margin-left: auto;
+  position: relative;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  z-index: 1100;
 }
 
 .hamburger span {
-    display: block;
-    height: 2px;
-    width: 25px;
-    background: var(--surface);
-    border-radius: 2px;
-    transition: transform .28s ease, opacity .2s ease;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 24px;
+  height: 2px;
+  background: var(--surface);
+  border-radius: 2px;
+  transform-origin: center;
+  transition: transform .28s ease, opacity .2s ease;
 }
 
-/* 中線：微右對齊（你已確認 5px 是對的） */
+/* 初始狀態：兩條線分開 */
+.hamburger span:nth-child(1) {
+  transform: translate(-50%, -6px);
+}
+
 .hamburger span:nth-child(2) {
-    width: 18px;
-    transform: translateX(6px);
-    transform-origin: 45% 50%;
+  transform: translate(-50%, 6px);
 }
 
-/* ===== X 狀態 ===== */
-/* 關鍵：上下線先回到中心，再旋轉 */
-
+/* active → X（完全在盒內） */
 .hamburger.active span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
+  transform: translate(-50%, 0) rotate(45deg);
 }
 
 .hamburger.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger.active span:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
+  transform: translate(-50%, 0) rotate(-45deg);
 }
 /* mobile nav (slide from right) */
 .mobile-nav {
