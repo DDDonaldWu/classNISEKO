@@ -47,88 +47,84 @@ const fadeObserver = new IntersectionObserver(
 fadeUps.forEach(el => fadeObserver.observe(el));
 
 /* ===========================================================
-   Reservation Form (新版多課程)
+   Reservation Form → Google Sheet
 =========================================================== */
-const form = document.getElementById('reservationForm');
-const thankyou = document.getElementById('thankyou');
-const loading = document.getElementById('loading');
-const courseList = document.getElementById('courseList');
-const addBtn = document.getElementById('addCourseBtn');
+const GOOGLE_SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbwWGqhq9PEzCAJguEliRCpL_WLld8voFfAtL6cHAvwIqaiqWzQNKHrIIXi1bMlJHrLgsw/exec";
 
-// 新增課程
-addBtn.addEventListener('click', () => {
-  const count = document.querySelectorAll('.course-item').length + 1;
 
-  const div = document.createElement('div');
-  div.classList.add('course-item');
-  div.innerHTML = `
-    <h3>課程 ${count}</h3>
+const form = document.getElementById("reservationForm");
+const thankyou = document.getElementById("thankyou");
+const loading = document.getElementById("loading");
 
-    <label>日期</label>
-    <input type="date" name="course_date[]" required>
-
-    <label>雪場</label>
-    <select name="course_resort[]" required>
-      <option value="">請選擇雪場</option>
-      <option value="Niseko Grand Hirafu">Niseko Grand Hirafu</option>
-      <option value="Niseko Annupuri">Niseko Annupuri</option>
-      <option value="Hanazono">Hanazono</option>
-      <option value="Moiwa">Moiwa</option>
-    </select>
-
-    <label>課程時數</label>
-    <select name="course_duration[]" class="duration" required>
-      <option value="">選擇時數</option>
-      <option value="3">3 小時</option>
-      <option value="6">6 小時</option>
-      <option value="7">7 小時</option>
-    </select>
-
-    <div class="time-slot" style="display:none">
-      <label>時段（3 小時課程）</label>
-      <select name="course_timeslot[]">
-        <option value="09:00-12:00">09:00 — 12:00</option>
-        <option value="13:00-16:00">13:00 — 16:00</option>
-      </select>
-    </div>
-
-    <button type="button" class="delete-course">刪除此課程</button>
-    <hr class="course-split">
-  `;
-
-  courseList.appendChild(div);
-});
-
-// 時段顯示控制
-courseList.addEventListener('change', e => {
-  if (e.target.classList.contains('duration')) {
-    const parent = e.target.closest('.course-item');
-    const timeSlot = parent.querySelector('.time-slot');
-
-    timeSlot.style.display = e.target.value === '3' ? 'block' : 'none';
-  }
-});
-
-// 刪除課程
-courseList.addEventListener('click', e => {
-  if (e.target.classList.contains('delete-course')) {
-    e.target.closest('.course-item').remove();
-  }
-});
-
-/* ===========================================================
-   Form Submit
-=========================================================== */
-form.addEventListener('submit', e => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  loading.style.display = 'inline-block';
+  // 收集多堂課資料
+  const courses = [];
+  document.querySelectorAll(".course-item").forEach((item) => {
+    const course = {
+      date: item.querySelector('input[type="date"]')?.value || "",
+      resort: item.querySelector('select[name*="resort"]')?.value || "",
+      duration: item.querySelector('select.duration')?.value || "",
+      timeslot: item.querySelector('.time-slot select')?.value || ""
+    };
 
-  setTimeout(() => {
-    loading.style.display = 'none';
-    form.style.display = 'none';
-    thankyou.style.display = 'block';
-  }, 900);
+    if (course.date && course.resort && course.duration) {
+      courses.push(course);
+    }
+  });
+
+  if (courses.length === 0) {
+    alert("請至少填寫一堂課程");
+    return;
+  }
+
+  // 使用者資料
+  const payload = {
+    name: document.getElementById("r_name").value.trim(),
+    email: document.getElementById("r_email").value.trim(),
+    contactMethod: document.getElementById("r_contactMethod").value,
+    contactID: document.getElementById("r_contactID").value.trim(),
+    remarks: document.getElementById("r_remarks").value.trim(),
+    courses
+  };
+
+  // 基本前端驗證
+  for (const key of ["name", "email", "contactMethod", "contactID"]) {
+    if (!payload[key]) {
+      alert("請完整填寫所有必填欄位");
+      return;
+    }
+  }
+
+  // 顯示 loading
+  loading.style.display = "inline-block";
+
+  try {
+    const res = await fetch(GOOGLE_SHEET_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const result = await res.json();
+
+    if (!result.ok) {
+      throw new Error(result.error || "Submission failed");
+    }
+
+    // 成功
+    loading.style.display = "none";
+    form.style.display = "none";
+    thankyou.style.display = "block";
+
+  } catch (err) {
+    loading.style.display = "none";
+    alert("送出失敗，請稍後再試或直接聯絡我們");
+    console.error(err);
+  }
 });
 
 /* ===========================================================
