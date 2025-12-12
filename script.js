@@ -197,25 +197,24 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function handleFormSubmit() {
-  // 1️⃣ 鎖住送出按鈕（防止重複送出）
+  const email = document.getElementById('r_email')?.value.trim();
+  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  if (!emailValid) {
+    alert('請確認 Email 格式是否正確');
+    return false; // ❗ 阻止送出
+  }
+
   const submitBtn = document.querySelector('.btn-submit');
   if (submitBtn) {
     submitBtn.disabled = true;
     submitBtn.textContent = '送出中...';
   }
 
-  // 2️⃣ 顯示 loading
   const loading = document.getElementById('loading');
   if (loading) loading.style.display = 'inline-block';
 
-  // 3️⃣ 延遲跳轉到前端感謝頁
-  // （GAS 在 iframe 裡跑，這裡只負責畫面）
-  setTimeout(() => {
-    window.location.href = './thank-you.html';
-  }, 600);
-
-  // ❗ 不要 return false
-  // ❗ 不要 preventDefault
+  // 不 return false，讓表單真的送出
 }
 function showThankYou() {
   window.location.href = './thank-you.html';
