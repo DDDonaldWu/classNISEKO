@@ -145,6 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
 =========================================================== */
   const GOOGLE_SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwWGqhq9PEzCAJguEliRCpL_WLld8voFfAtL6cHAvwIqaiqWzQNKHrIIXi1bMlJHrLgsw/exec';
 
+  /*
   if (form && loading && thankyou) {
     form.addEventListener('submit', async e => {
       e.preventDefault();
@@ -216,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-
+*/
   /* =========================================================
      Smooth Scroll (Anchor Links)
   ========================================================= */
