@@ -63,7 +63,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fadeUps.forEach(el => fadeObserver.observe(el));
   }
+  /* =========================================================
+     Simple Frontend Validation (防呆)
+  ========================================================= */
+  const emailInput = document.getElementById('r_email');
 
+  if (emailInput) {
+    const error = document.createElement('div');
+    error.style.color = '#8b0000';
+    error.style.fontSize = '14px';
+    error.style.marginTop = '-8px';
+    error.style.marginBottom = '12px';
+    error.style.display = 'none';
+    error.textContent = '請輸入正確的 Email 格式';
+
+    emailInput.after(error);
+
+    emailInput.addEventListener('input', () => {
+      const value = emailInput.value.trim();
+      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+
+      if (!value || valid) {
+        error.style.display = 'none';
+      } else {
+        error.style.display = 'block';
+      }
+    });
+  }
   /* =========================================================
      Reservation (Multi-course)
   ========================================================= */
@@ -145,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const GOOGLE_SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwWGqhq9PEzCAJguEliRCpL_WLld8voFfAtL6cHAvwIqaiqWzQNKHrIIXi1bMlJHrLgsw/exec';
 
 
-  
+
   /* =========================================================
      Smooth Scroll (Anchor Links)
   ========================================================= */
