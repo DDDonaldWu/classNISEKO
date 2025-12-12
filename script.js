@@ -1,16 +1,18 @@
 /* ===========================================================
    CLASS NISEKO — script.js
-   - Stable DOM binding (DOMContentLoaded)
-   - Hamburger / Mobile Nav
-   - Header scrolled effect
+   Purpose:
+   - Navigation (hamburger / mobile nav)
+   - Header scroll effect
    - Fade-up animation
-   - Submit → Google Apps Script (Google Sheet)
+   - Reservation form (multi-course)
+   - Frontend validation
    - Smooth anchor scrolling
 =========================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
+
   /* =========================================================
-     Hamburger & Mobile Nav
+     Navigation: Hamburger & Mobile Nav
   ========================================================= */
   const hamburger = document.querySelector('.hamburger');
   const mobileNav = document.querySelector('.mobile-nav');
@@ -25,10 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
       );
     });
 
-    mobileNav.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        mobileNav.classList.remove('active');
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
         hamburger.classList.remove('active');
+        mobileNav.classList.remove('active');
         mobileNav.setAttribute('aria-hidden', 'true');
       });
     });
@@ -40,75 +42,65 @@ document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('header');
   if (header) {
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 30) header.classList.add('scrolled');
-      else header.classList.remove('scrolled');
+      header.classList.toggle('scrolled', window.scrollY > 30);
     });
   }
 
   /* =========================================================
-     Fade-up Scroll Animation
+     Fade-up Animation
   ========================================================= */
   const fadeUps = document.querySelectorAll('.fade-up');
   if (fadeUps.length) {
-    const fadeObserver = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add('in');
-          fadeObserver.unobserve(entry.target);
-        });
-      },
-      { threshold: 0.18, rootMargin: '0px 0px -40px 0px' }
-    );
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      });
+    }, {
+      threshold: 0.18,
+      rootMargin: '0px 0px -40px 0px'
+    });
 
-    fadeUps.forEach(el => fadeObserver.observe(el));
+    fadeUps.forEach(el => observer.observe(el));
   }
+
   /* =========================================================
-     Simple Frontend Validation (防呆)
+     Frontend Validation: Email (即時防呆)
   ========================================================= */
   const emailInput = document.getElementById('r_email');
-
   if (emailInput) {
     const error = document.createElement('div');
-    error.style.color = '#8b0000';
-    error.style.fontSize = '14px';
-    error.style.marginTop = '-8px';
-    error.style.marginBottom = '12px';
-    error.style.display = 'none';
     error.textContent = '請輸入正確的 Email 格式';
-
+    error.style.cssText = `
+      color:#8b0000;
+      font-size:14px;
+      margin:-8px 0 12px;
+      display:none;
+    `;
     emailInput.after(error);
 
     emailInput.addEventListener('input', () => {
-      const value = emailInput.value.trim();
-      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-
-      if (!value || valid) {
-        error.style.display = 'none';
-      } else {
-        error.style.display = 'block';
-      }
+      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim());
+      error.style.display = (!emailInput.value || valid) ? 'none' : 'block';
     });
   }
-  /* =========================================================
-     Reservation (Multi-course)
-  ========================================================= */
-  const form = document.getElementById('reservationForm');
-  const thankyou = document.getElementById('thankyou');
-  const loading = document.getElementById('loading');
 
+  /* =========================================================
+     Reservation Form: Multi-course Handling
+  ========================================================= */
   const courseList = document.getElementById('courseList');
   const addBtn = document.getElementById('addCourseBtn');
 
   if (courseList && addBtn) {
-    // Add course
+
+    // Add course block
     addBtn.addEventListener('click', () => {
-      const count = courseList.querySelectorAll('.course-item').length + 1;
+      const count = courseList.children.length + 1;
 
-      const div = document.createElement('div');
-      div.className = 'course-item';
-
-      div.innerHTML = `
+      const item = document.createElement('div');
+      item.className = 'course-item';
+      item.innerHTML = `
         <h3>課程 ${count}</h3>
 
         <label>日期</label>
@@ -142,80 +134,64 @@ document.addEventListener('DOMContentLoaded', () => {
         <button type="button" class="delete-course">刪除此課程</button>
         <hr class="course-split">
       `;
-
-      courseList.appendChild(div);
+      courseList.appendChild(item);
     });
 
-    // Duration → show/hide time-slot
+    // Toggle time slot
     courseList.addEventListener('change', e => {
       if (!e.target.classList.contains('duration')) return;
-      const item = e.target.closest('.course-item');
-      if (!item) return;
-      const timeSlot = item.querySelector('.time-slot');
-      if (!timeSlot) return;
-      timeSlot.style.display = e.target.value === '3' ? 'block' : 'none';
+      const slot = e.target.closest('.course-item')?.querySelector('.time-slot');
+      if (slot) slot.style.display = e.target.value === '3' ? 'block' : 'none';
     });
 
     // Delete course
     courseList.addEventListener('click', e => {
-      if (!e.target.classList.contains('delete-course')) return;
-      const item = e.target.closest('.course-item');
-      if (item) item.remove();
+      if (e.target.classList.contains('delete-course')) {
+        e.target.closest('.course-item')?.remove();
+      }
     });
   }
 
   /* =========================================================
-     Form Submit → Google Sheet
-     1) Replace YOUR_WEB_APP_URL_HERE with your deployed Web App URL
-=========================================================== */
-  const GOOGLE_SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwWGqhq9PEzCAJguEliRCpL_WLld8voFfAtL6cHAvwIqaiqWzQNKHrIIXi1bMlJHrLgsw/exec';
-
-
-
-  /* =========================================================
-     Smooth Scroll (Anchor Links)
+     Smooth Scroll
   ========================================================= */
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      const href = this.getAttribute('href');
-      if (!href || href === '#') return;
-
-      const target = document.querySelector(href);
+    anchor.addEventListener('click', e => {
+      const target = document.querySelector(anchor.getAttribute('href'));
       if (!target) return;
 
       e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      target.scrollIntoView({ behavior: 'smooth' });
 
-      // Close mobile nav if open
-      if (mobileNav && hamburger && mobileNav.classList.contains('active')) {
+      if (mobileNav?.classList.contains('active')) {
+        hamburger?.classList.remove('active');
         mobileNav.classList.remove('active');
-        hamburger.classList.remove('active');
-        mobileNav.setAttribute('aria-hidden', 'true');
       }
     });
   });
 });
 
+/* =========================================================
+   Form Submit Guard (送出前最後防呆)
+   - 綁在 <form onsubmit="return handleFormSubmit()">
+========================================================= */
 function handleFormSubmit() {
   const email = document.getElementById('r_email')?.value.trim();
-  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-  if (!emailValid) {
+  if (!valid) {
     alert('請確認 Email 格式是否正確');
-    return false; // ❗ 阻止送出
+    return false;
   }
 
-  const submitBtn = document.querySelector('.btn-submit');
-  if (submitBtn) {
-    submitBtn.disabled = true;
-    submitBtn.textContent = '送出中...';
+  const btn = document.querySelector('.btn-submit');
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = '送出中...';
   }
 
   const loading = document.getElementById('loading');
   if (loading) loading.style.display = 'inline-block';
 
-  // 不 return false，讓表單真的送出
-}
-function showThankYou() {
-  window.location.href = './thank-you.html';
+  return true; // 讓表單真的送出
 }
