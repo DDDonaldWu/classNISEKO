@@ -88,6 +88,83 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ===============================
      Reservation Submit (Route B)
   =============================== */
+  /* =========================================================
+   Reservation (Multi-course) — 必須整組存在
+========================================================= */
+const courseList = document.getElementById('courseList');
+const addBtn = document.getElementById('addCourseBtn');
+
+if (courseList && addBtn) {
+
+  // ➕ 新增課程
+  addBtn.addEventListener('click', () => {
+    const count = courseList.querySelectorAll('.course-item').length + 1;
+
+    const div = document.createElement('div');
+    div.className = 'course-item';
+
+    div.innerHTML = `
+      <h3>課程 ${count}</h3>
+
+      <label>日期</label>
+      <input type="date" name="course_date[]" required>
+
+      <label>雪場</label>
+      <select name="course_resort[]" required>
+        <option value="">請選擇雪場</option>
+        <option value="Niseko Grand Hirafu">Niseko Grand Hirafu</option>
+        <option value="Niseko Annupuri">Niseko Annupuri</option>
+        <option value="Hanazono">Hanazono</option>
+        <option value="Moiwa">Moiwa</option>
+      </select>
+
+      <label>課程時數</label>
+      <select name="course_duration[]" class="duration" required>
+        <option value="">選擇時數</option>
+        <option value="3">3 小時</option>
+        <option value="6">6 小時</option>
+        <option value="7">7 小時</option>
+      </select>
+
+      <div class="time-slot">
+        <label>時段（3 小時課程）</label>
+        <select name="course_timeslot[]">
+          <option value="09:00-12:00">09:00 — 12:00</option>
+          <option value="13:00-16:00">13:00 — 16:00</option>
+        </select>
+      </div>
+
+      <button type="button" class="delete-course">刪除此課程</button>
+      <hr class="course-split">
+    `;
+
+    courseList.appendChild(div);
+  });
+
+  // ⏱ 3 小時 → 顯示時段
+  courseList.addEventListener('change', e => {
+    if (!e.target.classList.contains('duration')) return;
+
+    const item = e.target.closest('.course-item');
+    if (!item) return;
+
+    const timeSlot = item.querySelector('.time-slot');
+    if (!timeSlot) return;
+
+    if (e.target.value === '3') {
+      timeSlot.classList.add('is-visible');
+    } else {
+      timeSlot.classList.remove('is-visible');
+    }
+  });
+
+  // ❌ 刪除課程
+  courseList.addEventListener('click', e => {
+    if (!e.target.classList.contains('delete-course')) return;
+    const item = e.target.closest('.course-item');
+    if (item) item.remove();
+  });
+}
   const form = document.getElementById('reservationForm');
   if (!form) return;
 
