@@ -195,11 +195,11 @@ header.scrolled {
 
 /* 初始狀態：兩條線分開 */
 .hamburger span:nth-child(1) {
-  transform: translate(-50%, -6px);
+  transform: translate(-50%, -4px);
 }
 
 .hamburger span:nth-child(2) {
-  transform: translate(-50%, 6px);
+  transform: translate(-50%, 4px);
 }
 
 /* active → X（完全在盒內） */
