@@ -548,8 +548,12 @@ section {
 
 /* time-slot hidden by default (JS toggles display) */
 .time-slot {
-    margin-top: 8px;
-    display: none
+  margin-top: 8px;
+  display: none;
+}
+
+.time-slot.is-visible {
+  display: block;
 }
 
 /* delete button — minimal outline red */
