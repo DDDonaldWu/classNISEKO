@@ -173,43 +173,45 @@ header.scrolled {
 
 /* hamburger — structurally correct */
 .hamburger {
-  margin-left: auto;
-  position: relative;
-  width: 44px;
-  height: 44px;
-  cursor: pointer;
-  z-index: 1100;
+    margin-left: auto;
+    position: relative;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    z-index: 1100;
+    display: none;
 }
 
 .hamburger span {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 24px;
-  height: 2px;
-  background: var(--surface);
-  border-radius: 2px;
-  transform-origin: center;
-  transition: transform .28s ease, opacity .2s ease;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 24px;
+    height: 2px;
+    background: var(--surface);
+    border-radius: 2px;
+    transform-origin: center;
+    transition: transform .28s ease, opacity .2s ease;
 }
 
 /* 初始狀態：兩條線分開 */
 .hamburger span:nth-child(1) {
-  transform: translate(-50%, -4px);
+    transform: translate(-50%, -4px);
 }
 
 .hamburger span:nth-child(2) {
-  transform: translate(-50%, 4px);
+    transform: translate(-50%, 4px);
 }
 
 /* active → X（完全在盒內） */
 .hamburger.active span:nth-child(1) {
-  transform: translate(-50%, 0) rotate(45deg);
+    transform: translate(-50%, 0) rotate(45deg);
 }
 
 .hamburger.active span:nth-child(2) {
-  transform: translate(-50%, 0) rotate(-45deg);
+    transform: translate(-50%, 0) rotate(-45deg);
 }
+
 /* mobile nav (slide from right) */
 .mobile-nav {
     position: fixed;
@@ -506,15 +508,19 @@ section {
     resize: vertical;
     padding-top: 10px
 }
+
 /* iOS / Safari 專用：修正 date input 撐高問題 */
 .reservation input[type="date"],
 .reservation input[type="time"] {
-  height: 44px;
-  line-height: 44px;      /* ⭐ 關鍵 */
-  padding: 0 6px;        /* ⭐ 關鍵：不要上下 padding */
-  font-size: 15px;
-  box-sizing: border-box;
+    height: 44px;
+    line-height: 44px;
+    /* ⭐ 關鍵 */
+    padding: 0 6px;
+    /* ⭐ 關鍵：不要上下 padding */
+    font-size: 15px;
+    box-sizing: border-box;
 }
+
 /* course-item (derived from card-base with slight differences) */
 .course-item {
     background: var(--surface);
