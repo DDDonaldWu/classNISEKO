@@ -218,6 +218,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 */
+
+  if (form) {
+    form.addEventListener('submit', () => {
+      const submitBtn = form.querySelector('.btn-submit');
+      if (!submitBtn) return;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = '送出中…';
+    });
+  }
   /* =========================================================
      Smooth Scroll (Anchor Links)
   ========================================================= */
