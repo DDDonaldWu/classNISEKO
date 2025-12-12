@@ -152,23 +152,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* =========================================================
-     Smooth Scroll
-  ========================================================= */
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', e => {
-      const target = document.querySelector(anchor.getAttribute('href'));
-      if (!target) return;
+/* =========================================================
+   Smooth Scroll + Close Mobile Nav
+========================================================= */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    const href = this.getAttribute('href');
+    if (!href || href === '#') return;
 
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth' });
+    const target = document.querySelector(href);
+    if (!target) return;
 
-      if (mobileNav?.classList.contains('active')) {
-        hamburger?.classList.remove('active');
-        mobileNav.classList.remove('active');
-      }
+    e.preventDefault();
+
+    target.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
     });
+
+    // ⭐ 只有在「手機選單內點擊」才關閉
+    if (
+      mobileNav &&
+      hamburger &&
+      mobileNav.classList.contains('active') &&
+      this.closest('.mobile-nav')
+    ) {
+      mobileNav.classList.remove('active');
+      hamburger.classList.remove('active');
+      mobileNav.setAttribute('aria-hidden', 'true');
+    }
   });
+});
 });
 
 /* =========================================================
