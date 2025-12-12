@@ -4,7 +4,6 @@
    - Hamburger / Mobile Nav
    - Header scrolled effect
    - Fade-up animation
-   - Reservation: multi-course add/delete + timeslot toggle
    - Submit → Google Apps Script (Google Sheet)
    - Smooth anchor scrolling
 =========================================================== */
@@ -145,79 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
 =========================================================== */
   const GOOGLE_SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwWGqhq9PEzCAJguEliRCpL_WLld8voFfAtL6cHAvwIqaiqWzQNKHrIIXi1bMlJHrLgsw/exec';
 
-  /*
-  if (form && loading && thankyou) {
-    form.addEventListener('submit', async e => {
-      e.preventDefault();
-
-      // Guard
-      if (!courseList) {
-        alert('表單初始化失敗（courseList 不存在）');
-        return;
-      }
-
-      // Collect courses
-      const courses = [];
-      courseList.querySelectorAll('.course-item').forEach(item => {
-        const date = item.querySelector('input[type="date"]')?.value || '';
-        const resort = item.querySelector('select[name="course_resort[]"]')?.value || '';
-        const duration = item.querySelector('select.duration')?.value || '';
-        const timeslot = item.querySelector('.time-slot select')?.value || '';
-
-        if (date && resort && duration) {
-          courses.push({ date, resort, duration, timeslot });
-        }
-      });
-
-      if (!courses.length) {
-        alert('請至少填寫一堂課程');
-        return;
-      }
-
-      const payload = {
-        name: document.getElementById('r_name')?.value.trim() || '',
-        email: document.getElementById('r_email')?.value.trim() || '',
-        contactMethod: document.getElementById('r_contactMethod')?.value || '',
-        contactID: document.getElementById('r_contactID')?.value.trim() || '',
-        remarks: document.getElementById('r_remarks')?.value.trim() || '',
-        courses
-      };
-
-      for (const key of ['name', 'email', 'contactMethod', 'contactID']) {
-        if (!payload[key]) {
-          alert('請完整填寫所有必填欄位');
-          return;
-        }
-      }
-
-      if (!GOOGLE_SHEET_ENDPOINT || GOOGLE_SHEET_ENDPOINT === 'YOUR_WEB_APP_URL_HERE') {
-        alert('請先在 script.js 填入 GOOGLE_SHEET_ENDPOINT（Web App URL）');
-        return;
-      }
-
-      loading.style.display = 'inline-block';
-
-      try {
-        const res = await fetch(GOOGLE_SHEET_ENDPOINT, {
-          method: 'POST',
-          body: JSON.stringify(payload)
-        });
-
-        const result = await res.json();
-        if (!result.ok) throw new Error(result.error || 'Submission failed');
-
-        loading.style.display = 'none';
-        form.style.display = 'none';
-        thankyou.style.display = 'block';
-
-      } catch (err) {
-        loading.style.display = 'none';
-        alert('送出失敗，請稍後再試或直接聯絡我們');
-        console.error(err);
-      }
-    });
-  }
-*/
 
   if (form) {
     form.addEventListener('submit', () => {
