@@ -251,3 +251,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+function handleFormSubmit() {
+  // 1️⃣ 鎖住送出按鈕（防重送）
+  const submitBtn = document.querySelector('.btn-submit');
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = '送出中...';
+  }
+
+  // 2️⃣ 顯示 loading（如果你有）
+  const loading = document.getElementById('loading');
+  if (loading) loading.style.display = 'inline-block';
+
+  // 3️⃣ 延遲顯示感謝畫面（給 GAS 一點時間）
+  setTimeout(() => {
+    showThankYou();
+  }, 600);
+
+  // ⭐ 很重要：不要 return false
+  // 讓瀏覽器真的送出表單給 GAS
+}
+function showThankYou() {
+  window.location.href = './thank-you.html';
+}
