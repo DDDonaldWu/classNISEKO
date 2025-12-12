@@ -131,11 +131,7 @@ header {
     backdrop-filter: blur(0px);
 
     /* 標準屬性 */
-    @media (max-width: 768px) {
-        header {
-            padding: 0 20px;
-        }
-    }
+    
 }
 
 /* header scrolled state */
@@ -236,6 +232,20 @@ header.scrolled {
 
 .mobile-nav.active {
     right: 0
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 0 20px;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+    }
 }
 
 /* ---------------------------------------------------------
