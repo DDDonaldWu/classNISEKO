@@ -82,6 +82,12 @@ button {
 /* ---------------------------------------------------------
    Layout helpers
 --------------------------------------------------------- */
+/* ----------------------------------
+   Anchor offset for fixed header
+---------------------------------- */
+section {
+  scroll-margin-top: calc(var(--header-h) + 16px);
+}
 .container {
     max-width: 1100px;
     margin: 0 auto;
@@ -163,7 +169,9 @@ header.scrolled {
     color: var(--surface);
     padding: 8px 4px;
     border-radius: 6px;
+    line-height: 1.2;
     transition: color .18s ease, background .18s ease
+    
 }
 
 .nav-links a:hover {
