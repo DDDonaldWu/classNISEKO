@@ -145,15 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const GOOGLE_SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwWGqhq9PEzCAJguEliRCpL_WLld8voFfAtL6cHAvwIqaiqWzQNKHrIIXi1bMlJHrLgsw/exec';
 
 
-  if (form) {
-    form.addEventListener('submit', () => {
-      const submitBtn = form.querySelector('.btn-submit');
-      if (!submitBtn) return;
-
-      submitBtn.disabled = true;
-      submitBtn.textContent = '送出中…';
-    });
-  }
+  
   /* =========================================================
      Smooth Scroll (Anchor Links)
   ========================================================= */
@@ -179,24 +171,25 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function handleFormSubmit() {
-  // 1️⃣ 鎖住送出按鈕（防重送）
+  // 1️⃣ 鎖住送出按鈕（防止重複送出）
   const submitBtn = document.querySelector('.btn-submit');
   if (submitBtn) {
     submitBtn.disabled = true;
     submitBtn.textContent = '送出中...';
   }
 
-  // 2️⃣ 顯示 loading（如果你有）
+  // 2️⃣ 顯示 loading
   const loading = document.getElementById('loading');
   if (loading) loading.style.display = 'inline-block';
 
-  // 3️⃣ 延遲顯示感謝畫面（給 GAS 一點時間）
+  // 3️⃣ 延遲跳轉到前端感謝頁
+  // （GAS 在 iframe 裡跑，這裡只負責畫面）
   setTimeout(() => {
-    showThankYou();
+    window.location.href = './thank-you.html';
   }, 600);
 
-  // ⭐ 很重要：不要 return false
-  // 讓瀏覽器真的送出表單給 GAS
+  // ❗ 不要 return false
+  // ❗ 不要 preventDefault
 }
 function showThankYou() {
   window.location.href = './thank-you.html';
