@@ -105,17 +105,17 @@
 
     <!-- SERVICE AREA -->
     <section id="service" class="container fade-up">
-  <h2>授課區域</h2>
-  <div class="service-list">
-    <p>我們主要覆蓋以下雪場：</p>
-    <ul>
-      <li>Hirafu</li>
-      <li>Annupuri</li>
-      <li>Niseko Village</li>
-    </ul>
-    <p>授課範圍固定，確保每位學員都能獲得最佳體驗與專業教學。</p>
-  </div>
-</section>
+      <h2>授課區域</h2>
+      <div class="service-list">
+        <p>我們主要覆蓋以下雪場：</p>
+        <ul>
+          <li>Hirafu</li>
+          <li>Annupuri</li>
+          <li>Niseko Village</li>
+        </ul>
+        <p>授課範圍固定，確保每位學員都能獲得最佳體驗與專業教學。</p>
+      </div>
+    </section>
 
     <!-- PRICING -->
     <section id="pricing" class="container">
@@ -204,54 +204,64 @@
       </div>
     </section>
 
-    <!-- Reservation Form -->
+    <!-- Reservation Form (新的：支援多堂課程新增) -->
     <section id="reservation" class="reservation" style="padding-top:36px;padding-bottom:84px">
       <div class="container">
         <h2>預約課程</h2>
+
         <div class="card-form fade-up" style="margin-top:12px">
           <form id="reservationForm">
+            <!-- ======== 動態課程區塊（可新增多筆） ======== -->
+            <div id="courseList">
+              <!-- 預設第一筆課程 -->
+              <div class="course-item">
+                <h3>課程 1</h3>
+
+                <label for="course_date_0">日期</label>
+                <input id="course_date_0" type="date" name="course_date[]" required>
+
+                <label for="course_resort_0">雪場</label>
+                <select id="course_resort_0" name="course_resort[]" required>
+                  <option value="">請選擇雪場</option>
+                  <option value="Niseko Grand Hirafu">Niseko Grand Hirafu</option>
+                  <option value="Niseko Annupuri">Niseko Annupuri</option>
+                  <option value="Hanazono">Hanazono</option>
+                  <option value="Moiwa">Moiwa</option>
+                </select>
+
+                <label for="course_duration_0">課程時數</label>
+                <select id="course_duration_0" name="course_duration[]" class="duration" required>
+                  <option value="">選擇時數</option>
+                  <option value="3">3 小時</option>
+                  <option value="6">6 小時</option>
+                  <option value="7">7 小時</option>
+                </select>
+
+                <div class="time-slot" data-for-index="0">
+                  <label for="course_timeslot_0">時段（3 小時課程）</label>
+                  <select id="course_timeslot_0" name="course_timeslot[]">
+                    <option value="09:00-12:00">09:00 — 12:00</option>
+                    <option value="13:00-16:00">13:00 — 16:00</option>
+                  </select>
+                </div>
+
+                <button type="button" class="delete-course">刪除此課程</button>
+                <hr class="course-split">
+              </div>
+            </div>
+
+            <button type="button" id="addCourseBtn" class="btn btn-outline" style="margin-top:8px;">
+              ＋ 新增課程
+            </button>
+
+            <hr style="margin:28px 0; border:0; border-bottom:1px solid rgba(0,0,0,0.08);">
+
+            <!-- 使用者資訊（保留原本 id 方便既有 JS 兼容） -->
             <label for="r_name">姓名</label>
             <input id="r_name" name="name" required>
 
             <label for="r_email">Email</label>
             <input id="r_email" type="email" name="email" required>
-
-            <div class="two-col">
-              <div class="col">
-                <label for="r_board">課程選擇</label>
-                <select id="r_board" name="board" required>
-                  <option value="">請選擇</option>
-                  <option value="ski">雙板</option>
-                  <option value="snowboard">單板</option>
-                </select>
-              </div>
-              <div class="col">
-                <label for="r_resort">滑雪場</label>
-                <select id="r_resort" name="resort" required>
-                  <option value="">請選擇</option>
-                  <option value="Hirafu">Hirafu</option>
-                  <option value="Niseko Village">Niseko Village</option>
-                  <option value="Annupuri">Annupuri</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="two-col">
-              <div class="col">
-                <label for="r_people">人數（1–4）</label>
-                <select id="r_people" name="people" required>
-                  <option value="">請選擇</option>
-                  <option value="1">1 人</option>
-                  <option value="2">2 人</option>
-                  <option value="3">3 人</option>
-                  <option value="4">4 人</option>
-                </select>
-              </div>
-              <div class="col">
-                <label for="r_start">開始日期</label>
-                <input id="r_start" type="date" name="startDate" required>
-              </div>
-            </div>
 
             <label for="r_contactMethod">聯絡方式</label>
             <select id="r_contactMethod" name="contactMethod" required>

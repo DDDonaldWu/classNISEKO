@@ -104,3 +104,74 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     }
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const courseList = document.getElementById("courseList");
+    const addBtn = document.getElementById("addCourseBtn");
+
+    // 新增課程
+    addBtn.addEventListener("click", () => {
+
+        const count = document.querySelectorAll(".course-item").length + 1;
+
+        const div = document.createElement("div");
+        div.classList.add("course-item");
+        div.innerHTML = `
+            <h3>課程 ${count}</h3>
+
+            <label>日期</label>
+            <input type="date" name="date[]" required>
+
+            <label>雪場</label>
+            <select name="resort[]" required>
+                <option value="">請選擇雪場</option>
+                <option value="Niseko Grand Hirafu">Niseko Grand Hirafu</option>
+                <option value="Niseko Annupuri">Niseko Annupuri</option>
+                <option value="Hanazono">Hanazono</option>
+                <option value="Moiwa">Moiwa</option>
+            </select>
+
+            <label>課程時數</label>
+            <select name="duration[]" class="duration" required>
+                <option value="">選擇時數</option>
+                <option value="3">3 小時</option>
+                <option value="6">6 小時</option>
+                <option value="7">7 小時</option>
+            </select>
+
+            <div class="time-slot">
+                <label>時段（3 小時課程）</label>
+                <select name="timeslot[]">
+                    <option value="am">09:00 — 12:00</option>
+                    <option value="pm">13:00 — 16:00</option>
+                </select>
+            </div>
+
+            <button type="button" class="delete-course">刪除此課程</button>
+        `;
+
+        courseList.appendChild(div);
+    });
+
+    // 刪除課程與時段顯示控制
+    document.addEventListener("change", (e) => {
+        if (e.target.classList.contains("duration")) {
+            const parent = e.target.closest(".course-item");
+            const timeSlot = parent.querySelector(".time-slot");
+
+            // 只有 3H 顯示 AM/PM
+            if (e.target.value === "3") {
+                timeSlot.style.display = "block";
+            } else {
+                timeSlot.style.display = "none";
+            }
+        }
+    });
+
+    document.addEventListener("click", (e) => {
+        if (e.target.classList.contains("delete-course")) {
+            e.target.closest(".course-item").remove();
+        }
+    });
+});
