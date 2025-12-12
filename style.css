@@ -506,7 +506,15 @@ section {
     resize: vertical;
     padding-top: 10px
 }
-
+/* iOS / Safari 專用：修正 date input 撐高問題 */
+.reservation input[type="date"],
+.reservation input[type="time"] {
+  height: 44px;
+  line-height: 44px;      /* ⭐ 關鍵 */
+  padding: 0 6px;        /* ⭐ 關鍵：不要上下 padding */
+  font-size: 15px;
+  box-sizing: border-box;
+}
 /* course-item (derived from card-base with slight differences) */
 .course-item {
     background: var(--surface);
