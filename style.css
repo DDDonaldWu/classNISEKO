@@ -86,8 +86,9 @@ button {
    Anchor offset for fixed header
 ---------------------------------- */
 section {
-  scroll-margin-top: calc(var(--header-h) + 16px);
+    scroll-margin-top: calc(var(--header-h) + 16px);
 }
+
 .container {
     max-width: 1100px;
     margin: 0 auto;
@@ -171,7 +172,6 @@ header.scrolled {
     border-radius: 6px;
     line-height: 1.2;
     transition: color .18s ease, background .18s ease
-    
 }
 
 .nav-links a:hover {
@@ -548,12 +548,12 @@ section {
 
 /* time-slot hidden by default (JS toggles display) */
 .time-slot {
-  margin-top: 8px;
-  display: none;
+    margin-top: 8px;
+    display: none;
 }
 
 .time-slot.is-visible {
-  display: block;
+    display: block;
 }
 
 /* delete button — minimal outline red */
@@ -645,6 +645,48 @@ section {
 .faq-answer {
     margin: 0;
     color: var(--text-soft)
+}
+
+/* ---------------------------------------------------------
+   Contact Section
+--------------------------------------------------------- */
+.contact-section {
+    padding: 56px 20px;
+    background: var(--section-light);
+    text-align: center;
+}
+
+.contact-section h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.contact-desc {
+    color: var(--muted);
+    margin-bottom: 28px;
+    line-height: 1.6;
+}
+
+.contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.contact-links a {
+    padding: 12px 22px;
+    border-radius: 999px;
+    border: 1.5px solid rgba(0, 0, 0, 0.08);
+    font-weight: 600;
+    transition: all .2s ease;
+}
+
+.contact-links a:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
 }
 
 /* ---------------------------------------------------------
