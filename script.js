@@ -235,4 +235,27 @@ if (courseList && addBtn) {
       }
     });
   });
+  document.addEventListener('DOMContentLoaded', () => {
+  const emailEl = document.querySelector('.footer-email');
+  const toast = document.getElementById('copyToast');
+
+  if (!emailEl) return;
+
+  emailEl.addEventListener('click', async () => {
+    const email = emailEl.dataset.email;
+
+    try {
+      await navigator.clipboard.writeText(email);
+
+      if (toast) {
+        toast.style.display = 'block';
+        setTimeout(() => {
+          toast.style.display = 'none';
+        }, 1500);
+      }
+    } catch (e) {
+      alert('無法自動複製，請手動複製 Email');
+    }
+  });
+});
 });
