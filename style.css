@@ -468,6 +468,18 @@ section {
     color: var(--accent)
 }
 
+.btn--outline.instagram {
+    border: 1.5px solid rgba(0, 0, 0, 0.25);
+    color: var(--text-soft);
+    background: transparent;
+}
+
+.btn--outline.instagram:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
 /* ---------------------------------------------------------
    Reservation Form (new) — unified & safe
    - preserves all .course-item, #addCourseBtn, .delete-course, .time-slot, .btn-submit
