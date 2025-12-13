@@ -203,7 +203,7 @@ if (courseList && addBtn) {
       if (!result.ok) throw new Error('GAS error');
 
       // ✅ 成功 → 前端跳轉
-      window.location.href = '/thank-you.html';
+      window.location.href = 'thank-you.html';
 
     } catch (err) {
       console.error(err);
