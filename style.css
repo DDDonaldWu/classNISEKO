@@ -769,10 +769,22 @@ footer {
 }
 
 .footer-email {
-  cursor: text;             /* 告訴使用者可以選取 */
-  user-select: all;         /* 一點就全選，超好用 */
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 10px;
+  user-select: none; 
+}
+.footer-email:hover {
+  text-decoration: underline;
 }
 
+/* 複製成功提示 */
+.copy-toast {
+  display: none;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
 .footer-links .sep {
   opacity: .5;
 }
