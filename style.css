@@ -731,9 +731,10 @@ section {
         flex-direction: column;
         align-items: stretch;
     }
+
     .contact-btn {
-    justify-content: center;
-  }
+        justify-content: center;
+    }
 }
 
 /* ---------------------------------------------------------
