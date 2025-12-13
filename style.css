@@ -693,6 +693,9 @@ section {
     flex-wrap: wrap;
     margin-top: 16px;
     justify-content: center;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* 基本按鈕 */
@@ -721,11 +724,13 @@ section {
     transform: translateY(-1px);
     background: #f4f4f4;
 }
+
 @media (max-width: 480px) {
-  .contact-actions {
-    gap: 10px;
-  }
+    .contact-actions {
+        gap: 10px;
+    }
 }
+
 /* ---------------------------------------------------------
    Footer
 --------------------------------------------------------- */
@@ -733,8 +738,8 @@ footer {
     background: #080808;
     color: rgba(255, 255, 255, 0.95);
     padding: 30px 20px;
-    text-align: center ;
-    
+    text-align: center;
+
 }
 
 /* ---------------------------------------------------------
