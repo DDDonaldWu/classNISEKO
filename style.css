@@ -769,9 +769,10 @@ footer {
 }
 /* 原本：靜態顯示 */
 .footer-email {
+  font-weight: 600;
+  margin-top: 10px;
+  user-select: text;   /* ⭐ 重點：允許選取 */
   cursor: text;
-  user-select: all;
-  font-weight: 500;
 }
 
 /* 新增：可點擊、互動 */
