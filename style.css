@@ -687,19 +687,53 @@ section {
     flex-wrap: wrap;
 }
 
-.contact-links a {
-    padding: 12px 22px;
-    border-radius: 999px;
-    background: transparent;
-    color: var(--text);
-    border: 2px solid #111;
-    font-weight: 700;
-    transition: all .2s ease;
+.contact-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 16px;
 }
 
-.contact-links a:hover {
-    background: #111;
-    color: #fff;
+/* 基本按鈕 */
+.contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  border: 1px solid rgba(0,0,0,0.15);
+  color: var(--text-soft);
+  background: #fff;
+  transition: background .2s ease, transform .15s ease;
+}
+
+/* icon 本體 */
+.contact-btn .icon {
+  font-size: 14px;
+  opacity: .8;
+}
+
+/* hover */
+.contact-btn:hover {
+  transform: translateY(-1px);
+  background: #f4f4f4;
+}
+
+/* LINE 微調 */
+.contact-btn.line:hover {
+  background: #e8f7ef;
+}
+
+/* Email */
+.contact-btn.email:hover {
+  background: #f3f3f3;
+}
+
+/* Facebook */
+.contact-btn.fb:hover {
+  background: #eef1f7;
 }
 
 /* 桌面順序：Email → LINE → Facebook（理性） */
