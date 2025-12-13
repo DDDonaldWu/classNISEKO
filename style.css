@@ -702,6 +702,34 @@ section {
     color: #fff;
 }
 
+/* 桌面順序：Email → LINE → Facebook（理性） */
+.contact-btn.email {
+    order: 1;
+}
+
+.contact-btn.line {
+    order: 2;
+}
+
+.contact-btn.fb {
+    order: 3;
+}
+
+/* 手機順序：LINE → Email → Facebook（直覺） */
+@media (max-width: 768px) {
+    .contact-btn.line {
+        order: 1;
+    }
+
+    .contact-btn.email {
+        order: 2;
+    }
+
+    .contact-btn.fb {
+        order: 3;
+    }
+}
+
 /* ---------------------------------------------------------
    Footer
 --------------------------------------------------------- */
