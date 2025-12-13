@@ -767,14 +767,21 @@ footer {
 .footer-links a:hover {
   text-decoration: underline;
 }
-
+/* 原本：靜態顯示 */
 .footer-email {
-  cursor: pointer;
-  font-weight: 600;
-  margin-top: 10px;
-  user-select: none; 
+  cursor: text;
+  user-select: all;
+  font-weight: 500;
 }
-.footer-email:hover {
+
+/* 新增：可點擊、互動 */
+.copyable {
+  cursor: pointer;
+  user-select: none; /* 點擊複製時才需要 */
+}
+
+/* 視覺提示（可選） */
+.copyable:hover {
   text-decoration: underline;
 }
 
