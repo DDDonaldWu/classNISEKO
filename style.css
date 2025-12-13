@@ -688,82 +688,39 @@ section {
 }
 
 .contact-actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 16px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+    justify-content: center;
 }
 
 /* 基本按鈕 */
 .contact-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 16px;
-  border-radius: 10px;
-  font-weight: 600;
-  font-size: 15px;
-  border: 1px solid rgba(0,0,0,0.15);
-  color: var(--text-soft);
-  background: #fff;
-  transition: background .2s ease, transform .15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    color: var(--text-soft);
+    background: #fff;
+    transition: background .2s ease, transform .15s ease;
 }
 
 /* icon 本體 */
 .contact-btn .icon {
-  font-size: 14px;
-  opacity: .8;
+    font-size: 14px;
+    opacity: .8;
 }
 
 /* hover */
 .contact-btn:hover {
-  transform: translateY(-1px);
-  background: #f4f4f4;
+    transform: translateY(-1px);
+    background: #f4f4f4;
 }
-
-/* LINE 微調 */
-.contact-btn.line:hover {
-  background: #e8f7ef;
-}
-
-/* Email */
-.contact-btn.email:hover {
-  background: #f3f3f3;
-}
-
-/* Facebook */
-.contact-btn.fb:hover {
-  background: #eef1f7;
-}
-
-/* 桌面順序：Email → LINE → Facebook（理性） */
-.contact-btn.email {
-    order: 1;
-}
-
-.contact-btn.line {
-    order: 2;
-}
-
-.contact-btn.fb {
-    order: 3;
-}
-
-/* 手機順序：LINE → Email → Facebook（直覺） */
-@media (max-width: 768px) {
-    .contact-btn.line {
-        order: 1;
-    }
-
-    .contact-btn.email {
-        order: 2;
-    }
-
-    .contact-btn.fb {
-        order: 3;
-    }
-}
-
 /* ---------------------------------------------------------
    Footer
 --------------------------------------------------------- */
@@ -771,7 +728,8 @@ footer {
     background: #080808;
     color: rgba(255, 255, 255, 0.95);
     padding: 30px 20px;
-    text-align: center
+    text-align: center ;
+    
 }
 
 /* ---------------------------------------------------------
