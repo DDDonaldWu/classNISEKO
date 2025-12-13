@@ -721,6 +721,11 @@ section {
     transform: translateY(-1px);
     background: #f4f4f4;
 }
+@media (max-width: 480px) {
+  .contact-actions {
+    gap: 10px;
+  }
+}
 /* ---------------------------------------------------------
    Footer
 --------------------------------------------------------- */
