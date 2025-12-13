@@ -235,27 +235,62 @@ if (courseList && addBtn) {
       }
     });
   });
-  document.addEventListener('DOMContentLoaded', () => {
-  const emailEl = document.querySelector('.footer-email');
+  
+});
+/* ===============================
+   Copy Email to Clipboard
+=============================== */
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const emailEl = document.querySelector('.footer-email.copyable');
   const toast = document.getElementById('copyToast');
 
   if (!emailEl) return;
 
   emailEl.addEventListener('click', async () => {
-    const email = emailEl.dataset.email;
+    const email =
+      emailEl.dataset.email || emailEl.textContent.trim();
 
+    let copied = false;
+
+    // ✅ 方案 1：現代瀏覽器
     try {
-      await navigator.clipboard.writeText(email);
-
-      if (toast) {
-        toast.style.display = 'block';
-        setTimeout(() => {
-          toast.style.display = 'none';
-        }, 1500);
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(email);
+        copied = true;
       }
     } catch (e) {
-      alert('無法自動複製，請手動複製 Email');
+      copied = false;
+    }
+
+    // ✅ 方案 2：iOS / 舊手機 fallback
+    if (!copied) {
+      try {
+        const range = document.createRange();
+        range.selectNodeContents(emailEl);
+
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+
+        copied = document.execCommand('copy');
+        selection.removeAllRanges();
+      } catch (e) {
+        copied = false;
+      }
+    }
+
+    // ✅ 成功提示
+    if (copied) {
+      if (toast) {
+        toast.classList.add('show');
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 1500);
+      }
+    } else {
+      alert('無法自動複製，請長按 Email 手動複製');
     }
   });
-});
 });
