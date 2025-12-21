@@ -236,6 +236,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       );
 
+      
+      
+
       if (!res.ok) throw new Error('Network error');
 
       const result = await res.json();
