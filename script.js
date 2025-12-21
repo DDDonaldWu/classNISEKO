@@ -8,6 +8,8 @@
    - Frontend redirect to thank-you page
 =========================================================== */
 
+
+
 document.addEventListener('DOMContentLoaded', () => {
   /* ===============================
      Hamburger & Mobile Nav
@@ -91,80 +93,116 @@ document.addEventListener('DOMContentLoaded', () => {
   /* =========================================================
    Reservation (Multi-course) — 必須整組存在
 ========================================================= */
-const courseList = document.getElementById('courseList');
-const addBtn = document.getElementById('addCourseBtn');
+  /* ===============================
+     Duration Rules（唯一來源）
+  =============================== */
+  const DURATION_RULES = {
+    'Niseko Grand Hirafu': ['3', '4', '6', '7'],
+    'Niseko Annupuri': ['3', '4', '6', '7'],
+    'Hanazono': ['4', '7'],
+    'Moiwa': ['3', '4', '6', '7']
+  };
 
-if (courseList && addBtn) {
+  function updateDurationOptions(courseItem) {
+    const resortSelect = courseItem.querySelector('[name="course_resort[]"]');
+    const durationSelect = courseItem.querySelector('[name="course_duration[]"]');
+    if (!resortSelect || !durationSelect) return;
 
-  // ➕ 新增課程
-  addBtn.addEventListener('click', () => {
-    const count = courseList.querySelectorAll('.course-item').length + 1;
+    const resort = resortSelect.value;
+    if (!resort || !DURATION_RULES[resort]) return;
 
-    const div = document.createElement('div');
-    div.className = 'course-item';
+    const allowed = DURATION_RULES[resort];
+    const prev = durationSelect.value;
 
-    div.innerHTML = `
-      <h3>課程 ${count}</h3>
+    durationSelect.innerHTML = '<option value="">選擇時數</option>';
 
-      <label>日期</label>
-      <input type="date" name="course_date[]" required>
+    allowed.forEach(h => {
+      const opt = document.createElement('option');
+      opt.value = h;
+      opt.textContent = `${h} 小時`;
+      durationSelect.appendChild(opt);
+    });
 
-      <label>雪場</label>
-      <select name="course_resort[]" required>
-        <option value="">請選擇雪場</option>
-        <option value="Niseko Grand Hirafu">Niseko Grand Hirafu</option>
-        <option value="Niseko Annupuri">Niseko Annupuri</option>
-        <option value="Hanazono">Hanazono</option>
-        <option value="Moiwa">Moiwa</option>
-      </select>
-
-      <label>課程時數</label>
-      <select name="course_duration[]" class="duration" required>
-        <option value="">選擇時數</option>
-        <option value="3">3 小時</option>
-        <option value="6">6 小時</option>
-        <option value="7">7 小時</option>
-      </select>
-
-      <div class="time-slot">
-        <label>時段（3 小時課程）</label>
-        <select name="course_timeslot[]">
-          <option value="09:00-12:00">09:00 — 12:00</option>
-          <option value="13:00-16:00">13:00 — 16:00</option>
-        </select>
-      </div>
-
-      <button type="button" class="delete-course">刪除此課程</button>
-      <hr class="course-split">
-    `;
-
-    courseList.appendChild(div);
-  });
-
-  // ⏱ 3 小時 → 顯示時段
-  courseList.addEventListener('change', e => {
-    if (!e.target.classList.contains('duration')) return;
-
-    const item = e.target.closest('.course-item');
-    if (!item) return;
-
-    const timeSlot = item.querySelector('.time-slot');
-    if (!timeSlot) return;
-
-    if (e.target.value === '3') {
-      timeSlot.classList.add('is-visible');
-    } else {
-      timeSlot.classList.remove('is-visible');
+    if (allowed.includes(prev)) {
+      durationSelect.value = prev;
     }
-  });
+  }
 
-  // ❌ 刪除課程
-  courseList.addEventListener('click', e => {
-    if (!e.target.classList.contains('delete-course')) return;
-    const item = e.target.closest('.course-item');
-    if (item) item.remove();
-  });
-}
+  /* ===============================
+     Course Add / Change / Delete
+  =============================== */
+  const courseList = document.getElementById('courseList');
+  const addBtn = document.getElementById('addCourseBtn');
+
+  if (courseList && addBtn) {
+
+    addBtn.addEventListener('click', () => {
+      const count = courseList.querySelectorAll('.course-item').length + 1;
+      const div = document.createElement('div');
+      div.className = 'course-item';
+
+      div.innerHTML = `
+        <h3>課程 ${count}</h3>
+
+        <label>日期</label>
+        <input type="date" name="course_date[]" required>
+
+        <label>雪場</label>
+        <select name="course_resort[]" required>
+          <option value="">請選擇雪場</option>
+          <option value="Niseko Grand Hirafu">Niseko Grand Hirafu</option>
+          <option value="Niseko Annupuri">Niseko Annupuri</option>
+          <option value="Hanazono">Hanazono</option>
+        </select>
+
+        <label>課程時數</label>
+        <select name="course_duration[]" class="duration" required>
+          <option value="">選擇時數</option>
+        </select>
+
+        <div class="time-slot">
+          <label>時段（3 小時課程）</label>
+          <select name="course_timeslot[]">
+            <option value="09:00-12:00">09:00 — 12:00</option>
+            <option value="13:00-16:00">13:00 — 16:00</option>
+          </select>
+        </div>
+
+        <button type="button" class="delete-course">刪除此課程</button>
+        <hr class="course-split">
+      `;
+
+      courseList.appendChild(div);
+    });
+
+    courseList.addEventListener('change', e => {
+      const item = e.target.closest('.course-item');
+      if (!item) return;
+
+      // 雪場 → 更新時數
+      if (e.target.matches('[name="course_resort[]"]')) {
+        updateDurationOptions(item);
+        item.querySelector('.time-slot')?.classList.remove('is-visible');
+      }
+
+      // 時數 → 3H 顯示時段
+      if (e.target.classList.contains('duration')) {
+        const timeSlot = item.querySelector('.time-slot');
+        if (!timeSlot) return;
+
+        if (e.target.value === '3') {
+          timeSlot.classList.add('is-visible');
+        } else {
+          timeSlot.classList.remove('is-visible');
+        }
+      }
+    });
+
+    courseList.addEventListener('click', e => {
+      if (!e.target.classList.contains('delete-course')) return;
+      e.target.closest('.course-item')?.remove();
+    });
+  }
   const form = document.getElementById('reservationForm');
   if (!form) return;
 
@@ -235,5 +273,5 @@ if (courseList && addBtn) {
       }
     });
   });
-  
+
 });
