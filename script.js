@@ -100,7 +100,8 @@ document.addEventListener('DOMContentLoaded', () => {
     'Niseko Grand Hirafu': ['3', '4', '6', '7'],
     'Niseko Annupuri': ['3', '4', '6', '7'],
     'Hanazono': ['4', '7'],
-    'Moiwa': ['3', '4', '6', '7']
+    'Moiwa': ['3', '4', '6', '7'],
+    'Private Area': ['2']
   };
 
   function updateDurationOptions(courseItem) {
