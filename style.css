@@ -67,7 +67,27 @@
 .lang-switch a:hover {
   text-decoration: underline;
 }
+.mobile-lang {
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  text-align: center;
+  font-size: 16px;
+}
 
+.mobile-lang a {
+  color: rgba(255,255,255,0.85);
+  font-weight: 600;
+}
+
+.mobile-lang a.active {
+  color: #fff;
+}
+
+.mobile-lang span {
+  margin: 0 6px;
+  opacity: 0.6;
+}
 /* ---------------------------------------------------------
    Reset & Base
 --------------------------------------------------------- */
