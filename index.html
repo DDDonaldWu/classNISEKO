@@ -230,11 +230,19 @@
                 <label for="course_date_0">日期</label>
                 <input id="course_date_0" type="date" name="course_date[]" required>
 
-                <label for="r_people">板類/label>
-                <select id="r_people" name="people" required>
-                  <option value="">請選擇人數</option>
-                  <option value="ski">雙板 ski</option>
-                  <option value="snowboard">單板 snowboard</option>
+                <label>滑雪板類</label>
+                <select name="boardType" required>
+                  <option value="">請選擇</option>
+                  <option value="Ski">雙板 Ski</option>
+                  <option value="Snowboard">單板 Snowboard</option>
+                </select>
+
+                <label>程度</label>
+                <select name="level" required>
+                  <option value="FirstTime">無經驗</option>
+                  <option value="Beginner">初學者</option>
+                  <option value="Intermediate">中階</option>
+                  <option value="Advanced">進階</option>
                 </select>
 
                 <label for="course_resort_0">雪場</label>
