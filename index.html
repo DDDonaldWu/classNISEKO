@@ -54,6 +54,7 @@
   <header>
     <div class="logo">CLASS NISEKO</div>
 
+
     <!-- Desktop Nav -->
     <nav class="nav-links">
       <a href="#hero">首頁</a>
@@ -65,6 +66,12 @@
       <a href="#faq">FAQ</a>
 
     </nav>
+    <!-- ⭐ 語言切換 -->
+    <div class="lang-switch">
+      <a href="/" class="active">中</a>
+      <span>/</span>
+      <a href="/index-en.html">EN</a>
+    </div>
 
     <!-- Mobile Hamburger -->
     <div class="hamburger">
@@ -281,6 +288,13 @@
             <!-- 使用者資訊（保留原本 id 方便既有 JS 兼容） -->
             <label for="r_name">姓名</label>
             <input id="r_name" name="name" required>
+            <label for="language">偏好語言</label>
+            <select name="language" id="language" required>
+              <option value="">請選擇</option>
+              <option value="zh">中文</option>
+              <option value="en">English</option>
+              <option value="jp">日本語</option>
+            </select>
 
             <label for="r_email">Email</label>
             <input id="r_email" type="email" name="email" required>
