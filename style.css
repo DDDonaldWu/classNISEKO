@@ -47,6 +47,27 @@
     --section-light: var(--surface);
 }
 
+.lang-switch {
+  margin-left: 16px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.lang-switch a {
+  color: rgba(255,255,255,0.8);
+  font-weight: 600;
+}
+
+.lang-switch a.active {
+  color: #fff;
+}
+
+.lang-switch a:hover {
+  text-decoration: underline;
+}
+
 /* ---------------------------------------------------------
    Reset & Base
 --------------------------------------------------------- */
