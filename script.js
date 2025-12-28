@@ -197,40 +197,50 @@ document.addEventListener('DOMContentLoaded', () => {
       div.className = 'course-item';
 
       div.innerHTML = `
-        <h3>課程 ${count}</h3>
+    <h3>課程 ${count}</h3>
 
-        <label>日期</label>
-        <input type="date" name="course_date[]" required>
+    <label>日期</label>
+    <input type="date" name="course_date[]" required>
 
-        <label>雪場</label>
-        <select name="course_resort[]" required>
-          <option value="">請選擇雪場</option>
-          <option value="Niseko Grand Hirafu">Niseko Grand Hirafu</option>
-          <option value="Niseko Annupuri">Niseko Annupuri</option>
-          <option value="Hanazono">Hanazono</option>
-          <option value="Private Area">私人區域 Private Area</option>
-        </select>
+    <label>滑雪板類</label>
+    <select name="boardType" required>
+      <option value="">請選擇</option>
+      <option value="Ski">雙板 Ski</option>
+      <option value="Snowboard">單板 Snowboard</option>
+    </select>
 
-        <label>課程時數</label>
-        <select name="course_duration[]" class="duration" required>
-          <option value="">選擇時數</option>
-        </select>
+    <label>程度</label>
+    <select name="level" required>
+      <option value="FirstTime">無經驗（請選擇）</option>
+      <option value="Beginner">初學者</option>
+      <option value="Intermediate">中階</option>
+      <option value="Advanced">進階</option>
+    </select>
 
-        <div class="time-slot">
-          <label>時段（3 小時課程）</label>
-          <select name="course_timeslot[]">
-            <option value="09:00-12:00">09:00 — 12:00</option>
-            <option value="13:00-16:00">13:00 — 16:00</option>
-          </select>
-        </div>
+    <label>雪場</label>
+    <select name="course_resort[]" required></select>
 
-        <button type="button" class="delete-course">刪除此課程</button>
-        <hr class="course-split">
-      `;
+    <label>課程時數</label>
+    <select name="course_duration[]" class="duration" required>
+      <option value="">選擇時數</option>
+    </select>
+
+    <div class="time-slot">
+      <label>時段（3 小時課程）</label>
+      <select name="course_timeslot[]">
+        <option value="上午 ABOUT 09:00-12:00">09:00 — 12:00</option>
+        <option value="下午 ABOUT 13:00-16:00">13:00 — 16:00</option>
+      </select>
+    </div>
+
+    <button type="button" class="delete-course">刪除此課程</button>
+    <hr class="course-split">
+  `;
 
       courseList.appendChild(div);
 
-      updateDurationOptions(div);
+      // ⭐ 核心：由 JS 統一產生雪場
+      buildResortOptions(div.querySelector('[name="course_resort[]"]'));
     });
 
     courseList.addEventListener('change', e => {
