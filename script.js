@@ -7,15 +7,52 @@
    - Reservation submit → Google Apps Script
    - Frontend redirect to thank-you page
 =========================================================== */
+const I18N = {
+  zh: {},
+  en: {}
+};
+function setLanguage(lang) {
+  const dict = I18N[lang];
+  if (!dict) return;
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const keys = el.dataset.i18n.split('.');
+    let text = dict;
+
+    for (const k of keys) {
+      if (!text || typeof text !== 'object') return;
+      text = text[k];
+    }
+
+    // ⭐ 只有真的有翻譯才改
+    if (typeof text === 'string' && text.trim() !== '') {
+      el.textContent = text;
+    }
+  });
+
+  document.documentElement.lang = lang;
+  localStorage.setItem('lang', lang);
+}
+
+
 
 
 
 document.addEventListener('DOMContentLoaded', () => {
+
   /* ===============================
      Hamburger & Mobile Nav
   =============================== */
   const hamburger = document.querySelector('.hamburger');
   const mobileNav = document.querySelector('.mobile-nav');
+
+  setLanguage(localStorage.getItem('lang') || 'zh');
+  document.querySelectorAll('[data-lang]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      setLanguage(btn.dataset.lang);
+    });
+  });
 
   if (hamburger && mobileNav) {
     hamburger.addEventListener('click', () => {
@@ -96,13 +133,30 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ===============================
      Duration Rules（唯一來源）
   =============================== */
+  const RESORTS = [
+    { value: 'Niseko Grand Hirafu', label: 'Niseko Grand Hirafu' },
+    { value: 'Niseko Annupuri', label: 'Niseko Annupuri' },
+    { value: 'Hanazono', label: 'Hanazono' },
+    { value: 'Private Area', label: '私人區域（Private Area）' }
+  ];
   const DURATION_RULES = {
     'Niseko Grand Hirafu': ['3', '4', '6', '7'],
     'Niseko Annupuri': ['3', '4', '6', '7'],
     'Hanazono': ['4', '7'],
-    'Moiwa': ['3', '4', '6', '7'],
     'Private Area': ['2']
   };
+  function buildResortOptions(selectEl) {
+    if (!selectEl) return;
+
+    selectEl.innerHTML = '<option value="">請選擇雪場</option>';
+
+    RESORTS.forEach(r => {
+      const opt = document.createElement('option');
+      opt.value = r.value;
+      opt.textContent = r.label;
+      selectEl.appendChild(opt);
+    });
+  }
 
   function updateDurationOptions(courseItem) {
     const resortSelect = courseItem.querySelector('[name="course_resort[]"]');
@@ -154,6 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <option value="Niseko Grand Hirafu">Niseko Grand Hirafu</option>
           <option value="Niseko Annupuri">Niseko Annupuri</option>
           <option value="Hanazono">Hanazono</option>
+          <option value="Private Area">私人區域 Private Area</option>
         </select>
 
         <label>課程時數</label>
@@ -174,6 +229,8 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
 
       courseList.appendChild(div);
+
+      updateDurationOptions(div);
     });
 
     courseList.addEventListener('change', e => {
@@ -236,8 +293,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       );
 
-      
-      
+
+
 
       if (!res.ok) throw new Error('Network error');
 
