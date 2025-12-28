@@ -48,46 +48,48 @@
 }
 
 .lang-switch {
-  margin-left: 16px;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
+    margin-left: 16px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
 .lang-switch a {
-  color: rgba(255,255,255,0.8);
-  font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 600;
 }
 
 .lang-switch a.active {
-  color: #fff;
+    color: #fff;
 }
 
 .lang-switch a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
+
 .mobile-lang {
-  margin-top: 32px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(255,255,255,0.15);
-  text-align: center;
-  font-size: 16px;
+    margin-top: 32px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    text-align: center;
+    font-size: 16px;
 }
 
 .mobile-lang a {
-  color: rgba(255,255,255,0.85);
-  font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
 }
 
 .mobile-lang a.active {
-  color: #fff;
+    color: #fff;
 }
 
 .mobile-lang span {
-  margin: 0 6px;
-  opacity: 0.6;
+    margin: 0 6px;
+    opacity: 0.6;
 }
+
 /* ---------------------------------------------------------
    Reset & Base
 --------------------------------------------------------- */
@@ -287,19 +289,7 @@ header.scrolled {
     right: 0
 }
 
-@media (max-width: 768px) {
-    header {
-        padding: 0 20px;
-    }
 
-    .hamburger {
-        display: flex;
-    }
-
-    .nav-links {
-        display: none;
-    }
-}
 
 /* ---------------------------------------------------------
    Hero
@@ -785,78 +775,82 @@ section {
    Footer
 ================================ */
 .site-footer {
-  background: #080808;
-  color: rgba(255,255,255,0.9);
-  padding: 48px 20px 36px;
-  text-align: center;
+    background: #080808;
+    color: rgba(255, 255, 255, 0.9);
+    padding: 48px 20px 36px;
+    text-align: center;
 }
 
 .footer-inner {
-  max-width: 960px;
-  margin: 0 auto;
+    max-width: 960px;
+    margin: 0 auto;
 }
 
 /* 品牌區 */
 .footer-brand {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .footer-logo {
-  font-weight: 700;
-  letter-spacing: 1px;
-  font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 15px;
 }
 
 .footer-tagline {
-  font-size: 13px;
-  color: rgba(255,255,255,0.6);
-  margin-top: 6px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 6px;
 }
 
 /* 連結區（IG / LINE / Email） */
 .footer-links {
-  display: flex;
-  align-items: center;          /* ⭐ 關鍵：統一垂直置中 */
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 8px;
+    display: flex;
+    align-items: center;
+    /* ⭐ 關鍵：統一垂直置中 */
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
 
-  font-size: 14px;
-  margin-bottom: 20px;
+    font-size: 14px;
+    margin-bottom: 20px;
 }
 
 /* 所有項目統一成 inline-flex，避免基準線問題 */
 .footer-links a,
 .footer-email {
-  display: inline-flex;         /* ⭐ 關鍵 */
-  align-items: center;          /* ⭐ 關鍵 */
-  color: rgba(255,255,255,0.9);
-  font-weight: 600;
-  text-decoration: none;
+    display: inline-flex;
+    /* ⭐ 關鍵 */
+    align-items: center;
+    /* ⭐ 關鍵 */
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    text-decoration: none;
 }
 
 /* hover */
 .footer-links a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 /* 分隔點 */
 .footer-links .dot {
-  opacity: 0.5;
-  margin: 0 6px;
+    opacity: 0.5;
+    margin: 0 6px;
 }
 
 /* Email（只保留可選取，不做位移） */
 .footer-email {
-  user-select: text;
-  cursor: text;
+    user-select: text;
+    cursor: text;
 }
 
 /* copyright */
 .footer-copy {
-  font-size: 12px;
-  color: rgba(255,255,255,0.45);
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.45);
 }
+
 /* ---------------------------------------------------------
    Fade-up animation (used by JS IntersectionObserver)
 --------------------------------------------------------- */
@@ -894,12 +888,20 @@ textarea:focus {
 }
 
 @media (max-width: 768px) {
+    header {
+        padding: 0 20px;
+    }
+
     .hamburger {
         display: flex
     }
 
     .nav-links {
         display: none
+    }
+
+    .lang-switch {
+        display: none;
     }
 
     .hero {
@@ -948,17 +950,18 @@ textarea:focus {
 .hidden {
     display: none
 }
+
 /* Gallery */
 .service-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 14px;
-  margin-top: 28px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-top: 28px;
 }
 
 .service-gallery img {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  border-radius: 12px;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 12px;
 }
