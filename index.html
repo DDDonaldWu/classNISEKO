@@ -68,9 +68,9 @@
     </nav>
     <!-- ⭐ 語言切換 -->
     <div class="lang-switch">
-      <a href="/" class="active">中</a>
+      <a href="#" data-lang="zh">中文</a>
       <span>/</span>
-      <a href="/index-en.html">EN</a>
+      <a href="#" data-lang="en">EN</a>
     </div>
 
     <!-- Mobile Hamburger -->
@@ -102,16 +102,29 @@
     <!-- HERO Section -->
     <section class="hero" id="hero">
       <div class="inner">
-        <h1 class="fade-up">CLASS NISEKO</h1>
-        <h1 class="fade-up">北海道二世古私人滑雪課程</h1>
-        <p class="fade-up" style="transition-delay:.08s">
+
+        <h1 class="fade-up" data-i18n="hero.brand">
+          CLASS NISEKO
+        </h1>
+
+        <h1 class="fade-up" data-i18n="hero.title">
+          北海道二世古私人滑雪課程
+        </h1>
+
+        <p class="fade-up" style="transition-delay:.08s" data-i18n="hero.subtitle">
           CLASS NISEKO 提供雙板與單板私人教學，適合初學者與進階滑雪者。
         </p>
 
         <div class="hero-buttons fade-up" style="transition-delay:.12s">
-          <a class="btn btn-primary" href="#reservation">立即預約</a>
-          <a class="btn btn-outline" href="#courses">了解課程</a>
+          <a class="btn btn-primary" href="#reservation" data-i18n="hero.ctaPrimary">
+            立即預約
+          </a>
+
+          <a class="btn btn-outline" href="#courses" data-i18n="hero.ctaSecondary">
+            了解課程
+          </a>
         </div>
+
       </div>
     </section>
 
@@ -237,52 +250,7 @@
             <!-- ======== 動態課程區塊（可新增多筆） ======== -->
             <div id="courseList">
               <!-- 預設第一筆課程 -->
-              <div class="course-item">
-                <h3>課程 1</h3>
-
-                <label for="course_date_0">日期</label>
-                <input id="course_date_0" type="date" name="course_date[]" required>
-
-                <label>滑雪板類</label>
-                <select name="boardType" required>
-                  <option value="">請選擇</option>
-                  <option value="Ski">雙板 Ski</option>
-                  <option value="Snowboard">單板 Snowboard</option>
-                </select>
-
-                <label>程度</label>
-                <select name="level" required>
-                  <option value="FirstTime">無經驗（請選擇）</option>
-                  <option value="Beginner">初學者</option>
-                  <option value="Intermediate">中階</option>
-                  <option value="Advanced">進階</option>
-                </select>
-
-                <label for="course_resort_0">雪場</label>
-                <select id="course_resort_0" name="course_resort[]" required>
-                  <option value="">請選擇雪場</option>
-                  <option value="Niseko Grand Hirafu">比羅夫 Hirafu</option>
-                  <option value="Niseko Annupuri">安努普里 Annupuri</option>
-                  <option value="Hanazono">花園 Hanazono（僅提供4H/7H）</option>
-                  <option value="Private Area">私人區域（Private Area）</option>
-                </select>
-
-                <label for="course_duration_0">課程時數</label>
-                <select id="course_duration_0" name="course_duration[]" class="duration" required>
-                  <option value="">選擇時數</option>
-                </select>
-
-                <div class="time-slot" data-for-index="0">
-                  <label for="course_timeslot_0">時段（3 小時課程）</label>
-                  <select id="course_timeslot_0" name="course_timeslot[]">
-                    <option value="09:00-12:00">09:00 — 12:00</option>
-                    <option value="13:00-16:00">13:00 — 16:00</option>
-                  </select>
-                </div>
-
-                <button type="button" class="delete-course">刪除此課程</button>
-                <hr class="course-split">
-              </div>
+              
             </div>
 
             <button type="button" id="addCourseBtn" class="btn btn-outline" style="margin-top:8px;">
