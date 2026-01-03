@@ -194,8 +194,9 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="time-slot">
         <label>時段（3 小時課程）</label>
         <select name="course_timeslot[]">
-          <option value="09:00-12:00">09:00 — 12:00</option>
-          <option value="13:00-16:00">13:00 — 16:00</option>
+          <option value="09:00-12:00">09:00 — 12:00 </option>
+          <option value="13:00-16:00">13:00 — 16:00 </option>
+          <option value="13:00-16:00">其他（請在備註留言）</option>
         </select>
       </div>
 
