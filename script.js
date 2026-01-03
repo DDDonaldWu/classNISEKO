@@ -12,20 +12,25 @@ const I18N = {
   en: {}
 };
 function setLanguage(lang) {
+  console.log('🔤 setLanguage called with:', lang);
+
   const dict = I18N[lang];
-  if (!dict) return;
+  console.log('📘 dict:', dict);
 
   document.querySelectorAll('[data-i18n]').forEach(el => {
-    const keys = el.dataset.i18n.split('.');
+    const keyPath = el.dataset.i18n;
+    console.log('👉 found element:', el, 'key:', keyPath);
+
+    const keys = keyPath.split('.');
     let text = dict;
 
-    for (const k of keys) {
-      if (!text || typeof text !== 'object') return;
-      text = text[k];
-    }
+    keys.forEach(k => {
+      if (text) text = text[k];
+    });
 
-    // ⭐ 只有真的有翻譯才改
-    if (typeof text === 'string' && text.trim() !== '') {
+    console.log('➡️ resolved text:', text);
+
+    if (typeof text === 'string') {
       el.textContent = text;
     }
   });
