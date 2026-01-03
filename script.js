@@ -124,144 +124,114 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ===============================
-     Reservation Submit (Route B)
-  =============================== */
-  /* =========================================================
-   Reservation (Multi-course) — 必須整組存在
-========================================================= */
-  /* ===============================
-     Duration Rules（唯一來源）
-  =============================== */
-  const RESORTS = [
-    { value: 'Niseko Grand Hirafu', label: 'Niseko Grand Hirafu' },
-    { value: 'Niseko Annupuri', label: 'Niseko Annupuri' },
-    { value: 'Hanazono', label: 'Hanazono' },
-    { value: 'Private Area', label: '私人區域（Private Area）' }
-  ];
-  const DURATION_RULES = {
-    'Niseko Grand Hirafu': ['3', '4', '6', '7'],
-    'Niseko Annupuri': ['3', '4', '6', '7'],
-    'Hanazono': ['4', '7'],
-    'Private Area': ['2']
-  };
-  function buildResortOptions(selectEl) {
-    if (!selectEl) return;
+  function initReservationForm() {
+    const form = document.getElementById('reservationForm');
+    const courseList = document.getElementById('courseList');
+    const addBtn = document.getElementById('addCourseBtn');
 
-    selectEl.innerHTML = '<option value="">請選擇雪場</option>';
-
-    RESORTS.forEach(r => {
-      const opt = document.createElement('option');
-      opt.value = r.value;
-      opt.textContent = r.label;
-      selectEl.appendChild(opt);
-    });
-  }
-
-  function updateDurationOptions(courseItem) {
-    const resortSelect = courseItem.querySelector('[name="course_resort[]"]');
-    const durationSelect = courseItem.querySelector('[name="course_duration[]"]');
-    if (!resortSelect || !durationSelect) return;
-
-    const resort = resortSelect.value;
-    if (!resort || !DURATION_RULES[resort]) return;
-
-    const allowed = DURATION_RULES[resort];
-    const prev = durationSelect.value;
-
-    durationSelect.innerHTML = '<option value="">選擇時數</option>';
-
-    allowed.forEach(h => {
-      const opt = document.createElement('option');
-      opt.value = h;
-      opt.textContent = `${h} 小時`;
-      durationSelect.appendChild(opt);
-    });
-
-    if (allowed.includes(prev)) {
-      durationSelect.value = prev;
+    // ⭐ 防呆：任一不存在就不跑
+    if (!form || !courseList || !addBtn) {
+      console.warn('[Reservation] form not found, skip');
+      return;
     }
-  }
 
-  /* ===============================
-     Course Add / Change / Delete
-  =============================== */
-  const courseList = document.getElementById('courseList');
-  const addBtn = document.getElementById('addCourseBtn');
+    const DURATION_RULES = {
+      'Niseko Grand Hirafu': ['3', '4', '6', '7'],
+      'Niseko Annupuri': ['3', '4', '6', '7'],
+      'Hanazono': ['4', '7'],
+      'Private Area': ['2']
+    };
 
-  if (courseList && addBtn) {
+    function updateDurationOptions(courseItem) {
+      const resortSelect = courseItem.querySelector('[name="course_resort[]"]');
+      const durationSelect = courseItem.querySelector('[name="course_duration[]"]');
+      if (!resortSelect || !durationSelect) return;
 
-    addBtn.addEventListener('click', () => {
-      const count = courseList.querySelectorAll('.course-item').length + 1;
+      const resort = resortSelect.value;
+      if (!resort || !DURATION_RULES[resort]) return;
+
+      const allowed = DURATION_RULES[resort];
+      const prev = durationSelect.value;
+
+      durationSelect.innerHTML = '<option value="">選擇時數</option>';
+
+      allowed.forEach(h => {
+        const opt = document.createElement('option');
+        opt.value = h;
+        opt.textContent = `${h} 小時`;
+        durationSelect.appendChild(opt);
+      });
+
+      if (allowed.includes(prev)) {
+        durationSelect.value = prev;
+      }
+    }
+
+    function createCourseItem(index) {
       const div = document.createElement('div');
       div.className = 'course-item';
 
       div.innerHTML = `
-    <h3>課程 ${count}</h3>
+      <h3>課程 ${index + 1}</h3>
 
-    <label>日期</label>
-    <input type="date" name="course_date[]" required>
+      <label>日期</label>
+      <input type="date" name="course_date[]" required>
 
-    <label>滑雪板類</label>
-    <select name="boardType" required>
-      <option value="">請選擇</option>
-      <option value="Ski">雙板 Ski</option>
-      <option value="Snowboard">單板 Snowboard</option>
-    </select>
-
-    <label>程度</label>
-    <select name="level" required>
-      <option value="FirstTime">無經驗（請選擇）</option>
-      <option value="Beginner">初學者</option>
-      <option value="Intermediate">中階</option>
-      <option value="Advanced">進階</option>
-    </select>
-
-    <label>雪場</label>
-    <select name="course_resort[]" required></select>
-
-    <label>課程時數</label>
-    <select name="course_duration[]" class="duration" required>
-      <option value="">選擇時數</option>
-    </select>
-
-    <div class="time-slot">
-      <label>時段（3 小時課程）</label>
-      <select name="course_timeslot[]">
-        <option value="上午 ABOUT 09:00-12:00">09:00 — 12:00</option>
-        <option value="下午 ABOUT 13:00-16:00">13:00 — 16:00</option>
+      <label>雪場</label>
+      <select name="course_resort[]" required>
+        <option value="">請選擇雪場</option>
+        <option value="Niseko Grand Hirafu">比羅夫 Hirafu</option>
+        <option value="Niseko Annupuri">安努普里 Annupuri</option>
+        <option value="Hanazono">花園 Hanazono</option>
+        <option value="Private Area">私人區域</option>
       </select>
-    </div>
 
-    <button type="button" class="delete-course">刪除此課程</button>
-    <hr class="course-split">
-  `;
+      <label>課程時數</label>
+      <select name="course_duration[]" class="duration" required>
+        <option value="">選擇時數</option>
+      </select>
 
-      courseList.appendChild(div);
+      <div class="time-slot">
+        <label>時段（3 小時課程）</label>
+        <select name="course_timeslot[]">
+          <option value="09:00-12:00">09:00 — 12:00</option>
+          <option value="13:00-16:00">13:00 — 16:00</option>
+        </select>
+      </div>
 
-      // ⭐ 核心：由 JS 統一產生雪場
-      buildResortOptions(div.querySelector('[name="course_resort[]"]'));
+      <button type="button" class="delete-course">刪除此課程</button>
+      <hr class="course-split">
+    `;
+
+      return div;
+    }
+
+    if (courseList.children.length === 0) {
+      courseList.appendChild(createCourseItem(0));
+    }
+
+    addBtn.addEventListener('click', () => {
+      const index = courseList.querySelectorAll('.course-item').length;
+      courseList.appendChild(createCourseItem(index));
     });
 
     courseList.addEventListener('change', e => {
       const item = e.target.closest('.course-item');
       if (!item) return;
 
-      // 雪場 → 更新時數
       if (e.target.matches('[name="course_resort[]"]')) {
         updateDurationOptions(item);
         item.querySelector('.time-slot')?.classList.remove('is-visible');
       }
 
-      // 時數 → 3H 顯示時段
       if (e.target.classList.contains('duration')) {
-        const timeSlot = item.querySelector('.time-slot');
-        if (!timeSlot) return;
+        const slot = item.querySelector('.time-slot');
+        if (!slot) return;
 
         if (e.target.value === '3') {
-          timeSlot.classList.add('is-visible');
+          slot.classList.add('is-visible');
         } else {
-          timeSlot.classList.remove('is-visible');
+          slot.classList.remove('is-visible');
         }
       }
     });
@@ -270,6 +240,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!e.target.classList.contains('delete-course')) return;
       e.target.closest('.course-item')?.remove();
     });
+
+    console.log('[Reservation] init OK');
   }
   const form = document.getElementById('reservationForm');
   if (!form) return;
@@ -344,5 +316,5 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
-
+  initReservationForm();
 });
