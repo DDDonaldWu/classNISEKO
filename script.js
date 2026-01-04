@@ -309,6 +309,9 @@ document.addEventListener('DOMContentLoaded', () => {
   =============================== */
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', e => {
+      const id = anchor.getAttribute('href');
+
+      if (id === '#' || id.length <= 1) return;
       const target = document.querySelector(anchor.getAttribute('href'));
       if (!target) return;
 
