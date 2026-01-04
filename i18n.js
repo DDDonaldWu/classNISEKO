@@ -1,4 +1,4 @@
-const I18N = {
+ window.I18N = {
   zh: {
     hero: {
       brand: 'CLASS NISEKO',
@@ -15,6 +15,9 @@ const I18N = {
       subtitle: 'Private ski and snowboard lessons for beginners to advanced riders.',
       ctaPrimary: 'Book Now',
       ctaSecondary: 'View Courses'
+    },
+    courses: {
+      title: 'COURSES INTRODUCTION'
     }
   }
 };

@@ -7,10 +7,9 @@
    - Reservation submit → Google Apps Script
    - Frontend redirect to thank-you page
 =========================================================== */
-const I18N = {
-  zh: {},
-  en: {}
-};
+
+console.log('script.js LOADED', Date.now());
+
 function setLanguage(lang) {
   console.log('🔤 setLanguage called with:', lang);
 
@@ -182,6 +181,21 @@ document.addEventListener('DOMContentLoaded', () => {
       <label>日期</label>
       <input type="date" name="course_date[]" required>
 
+      <label>SKI or SNOWBOARD</label>
+      <select name="boardType[]" required>
+        <option value=""> 請選擇</option>
+        <option value="Ski">雙板 SKI</option>
+        <option value="Snowboard">單板 SNOWBOARD</option>
+      </select>
+
+      <label>程度 LEVEL</label>
+      <select name="level[]" required>
+        <option value="firstTime">無經驗</option>
+        <option value="Beginner">初級</option>
+        <option value="Intermediate">中級</option>
+        <option value="Advanced">高級</option>
+      </select>
+
       <label>雪場</label>
       <select name="course_resort[]" required>
         <option value="">請選擇雪場</option>
@@ -312,6 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const id = anchor.getAttribute('href');
 
       if (id === '#' || id.length <= 1) return;
+
       const target = document.querySelector(anchor.getAttribute('href'));
       if (!target) return;
 
