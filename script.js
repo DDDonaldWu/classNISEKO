@@ -267,7 +267,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!form) return;
 
   form.addEventListener('submit', async e => {
-    e.preventDefault(); // ⭐ 關鍵：由前端接管流程
+    e.preventDefault(); // 由前端接管流程
 
     const email = document.getElementById('r_email')?.value.trim();
     const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);

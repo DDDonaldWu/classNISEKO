@@ -6,6 +6,9 @@
       subtitle: 'CLASS NISEKO 提供雙板與單板私人教學，適合初學者與進階滑雪者。',
       ctaPrimary: '立即預約',
       ctaSecondary: '了解課程'
+    },
+    courses: {
+      title: '課程介紹'
     }
   },
   en: {
@@ -17,7 +20,7 @@
       ctaSecondary: 'View Courses'
     },
     courses: {
-      title: 'COURSES INTRODUCTION'
+      title: 'COURSES'
     }
   }
 };
