@@ -10,33 +10,7 @@
 
 console.log('script.js LOADED', Date.now());
 
-function setLanguage(lang) {
-  console.log('🔤 setLanguage called with:', lang);
 
-  const dict = I18N[lang];
-  console.log('📘 dict:', dict);
-
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const keyPath = el.dataset.i18n;
-    console.log('👉 found element:', el, 'key:', keyPath);
-
-    const keys = keyPath.split('.');
-    let text = dict;
-
-    keys.forEach(k => {
-      if (text) text = text[k];
-    });
-
-    console.log('➡️ resolved text:', text);
-
-    if (typeof text === 'string') {
-      el.textContent = text;
-    }
-  });
-
-  document.documentElement.lang = lang;
-  localStorage.setItem('lang', lang);
-}
 
 
 
@@ -52,35 +26,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // ===============================
   // Auto Language Detection
   // ===============================
-  (function autoSetLanguage() {
-    const path = window.location.pathname.toLowerCase();
-    const storedLang = localStorage.getItem('lang');
+  
 
-    let lang;
-
-    // 1️⃣ 先看網址（最優先，避免 SEO 頁面被覆蓋）
-    if (path.includes('index-en')) {
-      lang = 'en';
-    } else {
-      lang = 'zh';
-    }
-
-    // 2️⃣ 如果使用者「在同一頁主動切過語言」，才尊重 localStorage
-    if (storedLang && !path.includes('index-en')) {
-      lang = storedLang;
-    }
-
-    setLanguage(lang);
-  })();
-
-
+/* 
   document.querySelectorAll('[data-lang]').forEach(btn => {
     btn.addEventListener('click', e => {
       e.preventDefault();
       setLanguage(btn.dataset.lang);
     });
   });
-
+*/
   if (hamburger && mobileNav) {
     hamburger.addEventListener('click', () => {
       hamburger.classList.toggle('active');
