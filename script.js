@@ -49,8 +49,31 @@ document.addEventListener('DOMContentLoaded', () => {
   =============================== */
   const hamburger = document.querySelector('.hamburger');
   const mobileNav = document.querySelector('.mobile-nav');
+  // ===============================
+  // Auto Language Detection
+  // ===============================
+  (function autoSetLanguage() {
+    const path = window.location.pathname.toLowerCase();
+    const storedLang = localStorage.getItem('lang');
 
-  setLanguage(localStorage.getItem('lang') || 'zh');
+    let lang;
+
+    // 1️⃣ 先看網址（最優先，避免 SEO 頁面被覆蓋）
+    if (path.includes('index-en')) {
+      lang = 'en';
+    } else {
+      lang = 'zh';
+    }
+
+    // 2️⃣ 如果使用者「在同一頁主動切過語言」，才尊重 localStorage
+    if (storedLang && !path.includes('index-en')) {
+      lang = storedLang;
+    }
+
+    setLanguage(lang);
+  })();
+
+
   document.querySelectorAll('[data-lang]').forEach(btn => {
     btn.addEventListener('click', e => {
       e.preventDefault();
