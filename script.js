@@ -11,6 +11,38 @@
 console.log('script.js LOADED', Date.now());
 
 
+// ===============================
+// Simple JS Text Helper (NO i18n)
+// ===============================
+const TEXT = {
+  zh: {
+    emailInvalid: '請輸入正確的 Email 格式',
+    emailCheck: '請確認 Email 格式是否正確',
+    submitFailed: '送出失敗，請稍後再試或直接聯絡我們',
+    processing: '處理中...',
+    submitting: '送出中...',
+    submit: '送出'
+  },
+  en: {
+    emailInvalid: 'Please enter a valid email address.',
+    emailCheck: 'Please check that your email address is valid.',
+    submitFailed: 'Submission failed. Please try again later or contact us directly.',
+    processing: 'Processing...',
+    submitting: 'Submitting...',
+    submit: 'Submit'
+  }
+};
+
+// 偵測目前頁面語言（依檔名）
+function getPageLang() {
+  return location.pathname.includes('index-en') ? 'en' : 'zh';
+}
+
+// 取文字的唯一入口
+function t(key) {
+  const lang = getPageLang();
+  return TEXT[lang]?.[key] || TEXT.zh[key] || '';
+}
 
 
 
@@ -26,16 +58,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // ===============================
   // Auto Language Detection
   // ===============================
-  
 
-/* 
-  document.querySelectorAll('[data-lang]').forEach(btn => {
-    btn.addEventListener('click', e => {
-      e.preventDefault();
-      setLanguage(btn.dataset.lang);
+
+  /* 
+    document.querySelectorAll('[data-lang]').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        setLanguage(btn.dataset.lang);
+      });
     });
-  });
-*/
+  */
   if (hamburger && mobileNav) {
     hamburger.addEventListener('click', () => {
       hamburger.classList.toggle('active');
