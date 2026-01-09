@@ -197,7 +197,7 @@ header.scrolled {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding-left: -32px;
+  padding-left: -20 px;
 }
 
 .logo img {
@@ -315,8 +315,8 @@ header.scrolled {
 
 .hero .inner {
     z-index: 5;
-    max-width: 980px;
-    padding: 28px
+    max-width: none;
+    padding: 0px
 }
 
 .hero h1 {
