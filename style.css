@@ -970,3 +970,8 @@ textarea:focus {
     object-fit: cover;
     border-radius: 12px;
 }
+
+/* Header logo alignment tweak */
+header img[src*="logo"] {
+  margin-left: -64px;
+}
