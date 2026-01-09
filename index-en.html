@@ -222,6 +222,77 @@
             <p>Click “Book Now” below and we’ll get back to you shortly.</p>
             <a class="btn btn-primary" href="#reservation">Book Now</a>
         </section>
+        <!-- RESERVATION -->
+<section id="reservation" class="reservation" style="padding-top:36px;padding-bottom:84px">
+    <div class="container">
+        <h2>Book a Lesson</h2>
+
+        <div class="card-form fade-up" style="margin-top:12px">
+            <form id="reservationForm">
+                <!-- ======== Dynamic course blocks (multiple allowed) ======== -->
+                <div id="courseList">
+                    <!-- Default first course -->
+                </div>
+
+                <button type="button" id="addCourseBtn" class="btn btn-outline" style="margin-top:8px;">
+                    ＋ Add another lesson
+                </button>
+
+                <hr style="margin:28px 0; border:0; border-bottom:1px solid rgba(0,0,0,0.08);">
+
+                <!-- User information (keep original IDs for JS compatibility) -->
+                <label for="r_name">Name</label>
+                <input id="r_name" name="name" required>
+
+                <label for="language">Preferred Language</label>
+                <select name="language" id="language" required>
+                    <option value="">Please select</option>
+                    <option value="zh">Chinese</option>
+                    <option value="en">English</option>
+                    <option value="jp">Japanese</option>
+                </select>
+
+                <label for="r_email">Email</label>
+                <input id="r_email" type="email" name="email" required>
+
+                <label for="r_contactMethod">Preferred Contact Method</label>
+                <select id="r_contactMethod" name="contactMethod" required>
+                    <option value="">Please select</option>
+                    <option value="LINE">LINE</option>
+                    <option value="WeChat">WeChat</option>
+                    <option value="WhatsApp">WhatsApp</option>
+                </select>
+
+                <label for="r_contactID">Your Contact ID</label>
+                <input id="r_contactID" name="contactID" placeholder="Please enter your LINE / WeChat / WhatsApp ID" required>
+
+                <label for="r_people">Number of Participants</label>
+                <select id="r_people" name="people" required>
+                    <option value="">Please select</option>
+                    <option value="1">1 person</option>
+                    <option value="2">2 people</option>
+                    <option value="3">3 people</option>
+                    <option value="4">4 people</option>
+                </select>
+
+                <label for="r_remarks">Notes / Requests</label>
+                <textarea id="r_remarks" name="remarks" rows="4"
+                    placeholder="Please tell us about your skiing experience and any special requests"></textarea>
+
+                <div style="margin-top:12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+                    <button type="submit" class="btn-submit">Submit Reservation</button>
+                    <div id="loading" style="display:none;color:var(--muted)">Processing...</div>
+                </div>
+            </form>
+
+            <div id="thankyou" class="thankyou" aria-live="polite">
+                <h3>Thank you for your reservation!</h3>
+                <p>We have received your request and will contact you shortly via your preferred method.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
 
         <!-- FAQ / Contact / Footer 內容我可以在下一步一起幫你細修或微調語氣 -->
 

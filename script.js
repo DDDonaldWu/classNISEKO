@@ -352,3 +352,4 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   initReservationForm();
 });
+
