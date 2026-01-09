@@ -194,10 +194,15 @@ header.scrolled {
 
 /* logo */
 .logo {
-    font-weight: 700;
-    font-size: 20px;
-    letter-spacing: .3px;
-    color: var(--surface)
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: -32px;
+}
+
+.logo img {
+  height: 256px;   /* 你現在的設定 */
+  width: auto;
 }
 
 /* nav links (desktop) */
